@@ -1,4 +1,4 @@
-# Project Name #
+# Meal.next #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -16,29 +16,25 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > Meal.next is a mobile app for meal planning.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > With Meal.next meal planning is as simple as picking recipes. Meal.next presents thousands of recipes with high-resolution pictures, clear descriptions, ingredient lists, and step-by-step instructions. Meal.next generates shopping lists from user selected recipes and stores them for users as meal plans.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Recipe, ingredient, and meal planning apps are all over the place, but none of them bring together everything between recipe picking and meal prep.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Meal.next gives users all the meal planning tools they need in one place. Choose the recipes you want, Meal.next will take care of the rest.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "Meal.next is the best thing since butter, which was the best thing since bread. --Ben"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Getting started with Meal.next is easy. Just download the app, login, and start adding recipes. When your ready to run to the market, just open the app and your shopping list will be ready.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "Meal.next makes me feel like a kid again. I leap for joy. Literally leap. -- Jace"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Give up meal planning with pen and paper, multiple, disjointed apps, or memorized lists. Download Meal.next today!
