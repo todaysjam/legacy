@@ -37,6 +37,12 @@ class App extends React.Component {
   updateUserId(userId) { this.setState({ userId }); }
   updateSearchRecipes(searchRecipes) { this.setState({ searchRecipes }); }
 
+  componentDidMount() {
+    Exponent.Font.loadAsync({
+      HelveticaNeue: require('./assets/HelveticaNeue.ttf')
+    })
+  }
+
   renderScene(route, navigator) {
     return (
       <route.component
