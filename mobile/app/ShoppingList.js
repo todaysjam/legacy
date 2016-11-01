@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import LogoDisplay from './LogoDisplay';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
-import { Container, Content, List, ListItem, Text, CheckBox } from 'native-base';
-
-const width = Dimensions.get('window').width;
+import ShoppingListItem from './ShoppingListItem';
+import { Container, Content, List } from 'native-base';
 
 const compileList = (meals) => {
   const result = {};
@@ -26,7 +25,7 @@ const compileList = (meals) => {
   });
 
   Object.entries(result).forEach(([ingredient, amount]) => {
-    list.push([ingredient, amount.quantity, amount.measure]);
+    list.push([amount.quantity, amount.measure, ingredient]);
   });
   return list;
 };
@@ -36,15 +35,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-  },
-  table: {
-    width: width * 0.9,
-    marginBottom: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderColor: 'lightblue',
-    padding: 5,
-    marginTop: 10,
   },
   contentContainer: {
     alignItems: 'center',
@@ -64,39 +54,17 @@ export default class ShoppingList extends React.Component {
         <LogoDisplay />
         <ScrollView
           contentContainerStyle={styles.contentContainer}
-          alwaysBounceVertical
+          showsVerticalScrollIndicator={false}
         >
           <Container>
             <Content>
                 <List>
                   {this.shoppingList.map((item, i) => (
-                      <ListItem key={i} style={styles.table}>
-                        <CheckBox checked={false} />
-                        <Text>{item[1]} {item[2]} {item[0]}</Text>
-                      </ListItem>
+                      <ShoppingListItem key={i} item={item} />
                     ))}
                 </List>
             </Content>
           </Container>
-          {/*<View style={styles.table}>
-            <Column
-              data={this.shoppingList}
-              name="Ingredient"
-              index={0}
-            />
-            <Column
-              data={this.shoppingList}
-              name="Quantity"
-              index={1}
-              alignRight
-            />
-            <Column
-              data={this.shoppingList}
-              name="Unit"
-              index={2}
-              alignRight
-            />
-          </View>*/}
         </ScrollView>
       </View>
     );
