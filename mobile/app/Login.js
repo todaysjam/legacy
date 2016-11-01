@@ -11,13 +11,24 @@ import {
 } from 'react-native';
 import t from 'tcomb-form-native';
 import MealList from './MealList';
+import { Components } from 'exponent';
 
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    // backgroundColor: 'black',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'dodgerblue',
+  },
+  logo: {
+    marginTop: 40
+  },
+  brand: {
+    width: 300,
+    height: 92
   },
   container: {
     justifyContent: 'center',
@@ -25,48 +36,58 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 30,
     width: width * 0.9,
-    borderRadius: 5,
+    borderRadius: 15,
     flexDirection: 'column',
     // width: 150,
     // height: 300,
     padding: 20,
-    backgroundColor: 'rgba(255,255,255,.75)',
+    backgroundColor: 'rgba(248,248,255,.8)',
   },
   title: {
-    fontSize: 50,
-    fontFamily: 'Futura',
+    fontSize: 55,
+    fontFamily: 'Noteworthy-Bold',
     marginTop: 30,
     backgroundColor: 'transparent',
     alignSelf: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
     color: 'white',
     opacity: 1,
     textAlign: 'center',
     textShadowColor: 'black',
-    textShadowRadius: 2,
+    textShadowRadius: 1,
     textShadowOffset: {
-      width: 2,
+      width: 1.5,
       height: 2,
     },
   },
   buttonText: {
     fontSize: 18,
+    fontFamily: 'Futura-CondensedExtraBold',
     color: 'white',
     alignSelf: 'center',
   },
   button: {
     height: 36,
-    backgroundColor: 'green',
-    borderColor: 'green',
+    backgroundColor: 'dodgerblue',
+    borderColor: 'dodgerblue',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center',
   },
   backgroundImage: {
     flex: 1,
+    opacity: .95
   },
+  footer: {
+    marginTop: 40,
+    paddingTop: 60
+  },
+  footerText: {
+    color: 'white',
+    fontSize: 10
+  }
 });
 // ENV Variables
 const loginUrl = 'https://mealdotlegacy.herokuapp.com/api/user/authenticate';
@@ -144,7 +165,7 @@ export default class Login extends React.Component {
         this.gotoNext();
       })
       .catch(() => {
-        Alert.alert('DO YOU EVEN LYFT BRUH?');
+        Alert.alert('incorrect login information');
       })
       .done();
     }
@@ -152,17 +173,20 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <View style={styles.main}>
-        <Image
-          // if background image doesn't appear test url, site may have dropped uploaded image
-          source={{ uri: 'https://s21.postimg.org/azydn73pz/resized_background.jpg' }}
-          style={styles.backgroundImage}
-        >
-          <View style={styles.row}>
-            <Text style={styles.title}>Meal.next</Text>
+
+      <Components.LinearGradient 
+        colors={['#1E90FF', '#63b2ff']}
+        style={styles.main}>
+          <View style={styles.logo}>
+            <Image
+              // source={{uri: 'https://www.shopify.com/tools/logo-maker/show/YmRaSWk0YWVPenY4ZDh1NHAxMHBXdz09LS1GNUhZaDd2YTFMaHBHNmtGQUJqeWZBPT0=--2c33990e4f83acbff27c5ab8787c2f81e1187508.png'}}
+              source={require('../assets/brand.png')}
+              style={styles.brand}
+            >
+            </Image>
           </View>
           <View style={styles.container}>
-            <View style={styles.row}>
+            <View style={styles.form}>
               <Form
                 ref="form"
                 type={Person}
@@ -173,21 +197,24 @@ export default class Login extends React.Component {
               <TouchableHighlight
                 style={styles.button}
                 onPress={() => this.authUser(loginUrl)}
-                underlayColor="limegreen"
+                underlayColor="#0876e0"
               >
                 <Text style={styles.buttonText}>Login</Text>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button}
                 onPress={() => this.authUser(signupUrl)}
-                underlayColor="limegreen"
+                underlayColor="#0876e0"
               >
                 <Text style={styles.buttonText}>Signup</Text>
               </TouchableHighlight>
             </View>
           </View>
-        </Image>
-      </View>
+
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>Brought to you by Jamz&copy;</Text>
+          </View>
+      </Components.LinearGradient>
     );
   }
 }
