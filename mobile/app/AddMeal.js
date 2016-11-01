@@ -6,8 +6,8 @@ import LogoDisplay from './LogoDisplay';
 import InfoDisplay from './InfoDisplay';
 import HeadBuffer from './HeadBuffer';
 
-const recipeUrl = 'https://mealdotnext4.herokuapp.com/api/recipe/';
-const mealUrl = 'https://mealdotnext4.herokuapp.com/api/meal/';
+const recipeUrl = 'https://mealdotlegacy.herokuapp.com/api/recipe/';
+const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
 const styles = StyleSheet.create({
   container: {
