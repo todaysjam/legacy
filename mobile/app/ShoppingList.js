@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
 import LogoDisplay from './LogoDisplay';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
+import { Container, Content, List, ListItem, Text, CheckBox } from 'native-base';
 
 const width = Dimensions.get('window').width;
 
@@ -38,12 +39,10 @@ const styles = StyleSheet.create({
   },
   table: {
     width: width * 0.9,
-    marginBottom: 40,
+    marginBottom: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 2,
-    borderColor: 'black',
-    borderRadius: 5,
+    borderColor: 'lightblue',
     padding: 5,
     marginTop: 10,
   },
@@ -65,10 +64,21 @@ export default class ShoppingList extends React.Component {
         <LogoDisplay />
         <ScrollView
           contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
           alwaysBounceVertical
         >
-          <View style={styles.table}>
+          <Container>
+            <Content>
+                <List>
+                  {this.shoppingList.map((item, i) => (
+                      <ListItem key={i} style={styles.table}>
+                        <CheckBox checked={false} />
+                        <Text>{item[1]} {item[2]} {item[0]}</Text>
+                      </ListItem>
+                    ))}
+                </List>
+            </Content>
+          </Container>
+          {/*<View style={styles.table}>
             <Column
               data={this.shoppingList}
               name="Ingredient"
@@ -76,7 +86,7 @@ export default class ShoppingList extends React.Component {
             />
             <Column
               data={this.shoppingList}
-              name="Qty"
+              name="Quantity"
               index={1}
               alignRight
             />
@@ -86,7 +96,7 @@ export default class ShoppingList extends React.Component {
               index={2}
               alignRight
             />
-          </View>
+          </View>*/}
         </ScrollView>
       </View>
     );
