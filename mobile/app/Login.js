@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
   },
 });
 // ENV Variables
-const loginUrl = 'https://mealdotnext4.herokuapp.com/api/user/authenticate';
-const signupUrl = 'https://mealdotnext4.herokuapp.com/api/user';
+const loginUrl = 'https://mealdotlegacy.herokuapp.com/api/user/authenticate';
+const signupUrl = 'https://mealdotlegacy.herokuapp.com/api/user';
 const Form = t.form.Form;
 const Person = t.struct({
   username: t.String,

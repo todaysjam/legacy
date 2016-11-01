@@ -50,6 +50,6 @@
     "eslint-plugin-react": "^6.4.1"
   },
   "engines": {
-    "node": "4.2.6"
+    "node": "^4.2.6"
   }
 }
