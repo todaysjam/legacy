@@ -1,17 +1,13 @@
 import React from 'react';
 import { View, Dimensions, Text, StyleSheet } from 'react-native';
+import { Container, Content, Footer, FooterTab, Button, Icon, Header, Title } from 'native-base';
 
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   logo: {
-    width,
-    height: 44,
-    backgroundColor: 'green',
-    borderBottomWidth: 2,
-    borderColor: 'gray',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+    width:width,
+    marginBottom: 0
   },
   headline: {
     fontSize: 30,
@@ -23,9 +19,11 @@ const styles = StyleSheet.create({
 });
 
 const LogoDisplay = () => (
-  <View style={styles.logo}>
-    <Text style={styles.headline}>Meal.next</Text>
-  </View>
+  <Container style={styles.logo}>
+        <Header>
+          <Title>Header</Title>
+      </Header>
+  </Container>
 );
 
 export default LogoDisplay;

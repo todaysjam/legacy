@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   buffer: {
     width,
     height: 22,
-    backgroundColor: '#006400',
+    backgroundColor: '#1e90ff',
   },
 });
 

@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
   logo: {
     width,
     height: 44,
-    backgroundColor: 'green',
+    backgroundColor: '#1e90ff',
     borderBottomWidth: 2,
-    borderColor: 'gray',
+    borderColor: '#1e90ff',
     alignItems: 'center',
   },
   headline: {
