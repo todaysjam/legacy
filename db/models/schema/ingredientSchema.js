@@ -5,8 +5,8 @@ const IngredientSchema = new mongoose.Schema({
   quantity: Number,
   measure: String,
   food: String,
-  checked: {type: Boolean, default: false}
   weight: Number,
+  checked: {type: Boolean, default: false}
 });
 
 module.exports = IngredientSchema;
