@@ -37,6 +37,22 @@ class App extends React.Component {
   updateUserId(userId) { this.setState({ userId }); }
   updateSearchRecipes(searchRecipes) { this.setState({ searchRecipes }); }
 
+  //import the fonts for IOS system
+  componentDidMount() {
+    Exponent.Font.loadAsync({
+      HelveticaNeue: require('./assets/HelveticaNeue.ttf'),
+      // FontAwesome: require('./node_modules/@exponent/vector-icons/fonts/FontAwesome.ttf'),
+      // Entypo: require('./node_modules/@exponent/vector-icons/fonts/Entypo.ttf'),
+      // EvilIcons: require('./node_modules/@exponent/vector-icons/fonts/EvilIcons.ttf'),
+      // FontAwesome: require('./node_modules/@exponent/vector-icons/fonts/FontAwesome.ttf'),
+      // Foundation: require('./node_modules/@exponent/vector-icons/fonts/Foundation.ttf'),
+      Ionicons: require('./node_modules/@exponent/vector-icons/fonts/Ionicons.ttf'),
+      // MaterialIcons: require('./node_modules/@exponent/vector-icons/fonts/MaterialIcons.ttf'),
+      // Octicons: require('./node_modules/@exponent/vector-icons/fonts/Octicons.ttf'),
+      // Zocial: require('./node_modules/@exponent/vector-icons/fonts/Zocial.ttf')
+    })
+  }
+  
   renderScene(route, navigator) {
     return (
       <route.component

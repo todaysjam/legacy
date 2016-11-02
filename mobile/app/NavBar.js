@@ -5,7 +5,8 @@ import MealList from './MealList';
 import ShoppingList from './ShoppingList';
 import AddMeal from './AddMeal';
 
-import { Container, Content, Footer, FooterTab, Button, Icon, Header } from 'native-base';
+import { Container, Content, Footer, FooterTab, Button, Header } from 'native-base';
+import { Entypo, EvilIcons, FontAwesome, Foundation, Ionicons, MaterialIcons, Octicons, Zocial } from '@exponent/vector-icons';
 
 const width = Dimensions.get('window').width;
 
@@ -22,31 +23,21 @@ const moveTo = (navigator, component) => {
 const NavBar = (props) => {
   if (props.navigator.getCurrentRoutes().length > 1) {
     return (
-       <Container style={styles.nothing}>
-                  <Footer>
-                    <FooterTab>
-                        <Button
-                    icon="md-list-box"
-                    onPress={() => moveTo(props.navigator, MealList)} 
-                    >
-                      Food
-
-                  </Button>
-                  <Button
-                    icon="md-basket"
-                    onPress={() => moveTo(props.navigator, ShoppingList)}
-                    >
-                      Calories
-                  </Button>
-                  <Button 
-                    icon="md-add-circle"
-                    onPress={() => moveTo(props.navigator, AddMeal)}
-                    >
-                      AddMeal
-                  </Button>
-                    </FooterTab>
-                </Footer>
-            </Container>
+      <Container style={styles.nothing}>
+        <Footer>
+          <FooterTab>
+            <Button onPress={() => moveTo(props.navigator, MealList)}>
+              <Ionicons name="ios-heart" size={32} color="#000" />
+            </Button>
+            <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
+              <Ionicons name="ios-basket" size={32} color="green" />
+            </Button>
+            <Button onPress={() => moveTo(props.navigator, AddMeal)}>
+              <Ionicons name="ios-flower" size={32} color="green" />
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     );
   }
   return null;
