@@ -5,7 +5,8 @@ import Searchbar from './Searchbar';
 import LogoDisplay from './LogoDisplay';
 import InfoDisplay from './InfoDisplay';
 import HeadBuffer from './HeadBuffer';
-
+import AddMealButton from './AddMealButton'
+import Button from './Button'
 const recipeUrl = 'https://mealdotlegacy.herokuapp.com/api/recipe/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
@@ -17,9 +18,16 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingBottom: 200,
   },
-
+  searchItemBorder:{
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#1e90ff',
+    marginBottom: 5
+  },
+  break:{
+    marginBottom: 10
+  }
 });
 
 export default class AddMeal extends React.Component {
@@ -44,6 +52,7 @@ export default class AddMeal extends React.Component {
   }
 
   postMeal(recipeId) {
+    console.log('hello')
     fetch(mealUrl, {
       method: 'POST',
       headers: {
@@ -75,8 +84,9 @@ export default class AddMeal extends React.Component {
     return (
       <View style={styles.container}>
         <HeadBuffer />
-        <LogoDisplay />
-        <Searchbar enter={this.getData} />
+        <LogoDisplay style={styles.marginBottom} />
+        <Searchbar style={styles.search} enter={this.getData} />
+        <View style={styles.break}></View>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
@@ -84,11 +94,16 @@ export default class AddMeal extends React.Component {
 
         >
           {this.props.getSearchRecipes().map((meal, i) => (
-            <MealTile
-              recipe={meal}
-              showInfo={this.gotoNext}
-              key={i}
-            />
+            <View style={styles.searchItemBorder} key={i}>
+              <MealTile
+                recipe={meal}
+                showInfo={this.gotoNext}
+                              />
+              <Button
+                onclick={() => { this.postMeal(meal._id, this.mealId); }} // eslint-disable-line
+                text='Add'
+              />
+            </View>
           ))}
         </ScrollView>
       </View>
