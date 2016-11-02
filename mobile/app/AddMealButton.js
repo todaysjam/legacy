@@ -38,14 +38,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Buttony = ({ text, icon, onclick }) => { 
+const AddMealButton = ({ text, icon, onclick }) => { 
   return (
       <Container>
         <Content>
-          <Button primary>{this.props.name}</Button>
+          <Button success> Add Me! </Button>
         </Content>       
       </Container>
   ) 
 };
 
-export default Buttony;
+export default AddMealButton;

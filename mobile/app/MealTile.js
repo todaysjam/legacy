@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, Dimensions, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { Container, Content, Footer, FooterTab, Button, Icon, Header, Title } from 'native-base';
 
 const width = Dimensions.get('window').width;
 
@@ -53,21 +54,18 @@ const styles = StyleSheet.create({
 });
 
 const Tile = ({ recipe, mealId, showInfo }) => (
-  <TouchableHighlight
-    style={styles.tile}
-    onPress={() => showInfo(recipe, mealId)}
-  >
+  <View >
     <Image
       style={styles.picture}
       source={{ uri: recipe.image }}
-    >
+      >
       <View style={styles.textwrap}>
         <Text style={styles.headline}>
           {recipe.label}
         </Text>
       </View>
     </Image>
-  </TouchableHighlight>
+  </View>
 );
 
 export default Tile;
