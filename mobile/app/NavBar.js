@@ -16,7 +16,8 @@ const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   nothing: {
-    flex: 0
+    flex: 0,
+    backgroundColor: '#1e90ff'
   }
 });
 
@@ -24,28 +25,56 @@ const moveTo = (navigator, component) => {
   navigator.replace({ component });
 };
 
-const NavBar = (props) => {
-  if (props.navigator.getCurrentRoutes().length > 1) {
-    return (
-      <Container style={styles.nothing}>
-        <Footer theme={Theme}>
-          <FooterTab theme={Theme}>
-            <Button active={false} onPress={() => moveTo(props.navigator, MealList)}>
-              <Ionicons name="ios-heart"/>
-            </Button>
-            <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
-              <Ionicons name="ios-cart"/>
-            </Button>
-            <Button onPress={() => moveTo(props.navigator, AddMeal)}>
-              <Ionicons name="ios-flower"/>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
-    );
+// const NavBar = (props) => {
+//   if (props.navigator.getCurrentRoutes().length > 1) {
+//     return (
+//       <Container style={styles.nothing}>
+//         <Footer theme={Theme}>
+//           <FooterTab theme={Theme}>
+//             <Button active={false} onPress={() => moveTo(props.navigator, MealList)}>
+//               <Ionicons name="ios-heart"/>
+//             </Button>
+//             <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
+//               <Ionicons name="ios-cart"/>
+//             </Button>
+//             <Button onPress={() => moveTo(props.navigator, AddMeal)}>
+//               <Ionicons name="ios-flower"/>
+//             </Button>
+//           </FooterTab>
+//         </Footer>
+//       </Container>
+//     );
+//   }
+//   return null;
+// };
+
+// export default NavBar;
+
+export default class NavBar extends React.Component { 
+  moveTo(navigator, component) {
+    navigator.replace({ component });
   }
-  return null;
-};
 
-
-export default NavBar;
+  render() {
+    if (props.navigator.getCurrentRoutes().length > 1) {
+      return (
+        <Container style={styles.nothing}>
+          <Footer theme={Theme}>
+            <FooterTab theme={Theme}>
+              <Button active={false} onPress={this.moveTo.bind(this.props.navigator, MealList)}>
+                <Ionicons name="ios-heart"/>
+              </Button>
+              <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
+                <Ionicons name="ios-cart"/>
+              </Button>
+              <Button onPress={() => moveTo(props.navigator, AddMeal)}>
+                <Ionicons name="ios-flower"/>
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      );
+    }
+    return null;
+  }
+}
