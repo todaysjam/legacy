@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
-import { Container, Content, List, ListItem, Text, CheckBox } from 'native-base';
+import { Container, Content, List, ListItem, Text, CheckBox, AsyncStorage } from 'native-base';
 
 const width = Dimensions.get('window').width;
 
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
 export default class ShoppingListItem extends React.Component {
   constructor(props) {
     super(props);
+    this.saveCheck = this.saveCheck.bind(this)
     this.state = {
       checked: false
     }
@@ -28,9 +29,21 @@ export default class ShoppingListItem extends React.Component {
       <ListItem style={styles.table}>
         <CheckBox 
           checked={this.state.checked}
-          onPress={()=> this.setState({checked: !this.state.checked})}/>
+          onPress={this.saveCheck}/>
         <Text>{this.props.item[0]} {this.props.item[1]} {this.props.item[2]}</Text>
       </ListItem>
     );
+  }
+
+  // componentWillMount () {
+  //   // AsyncStorage.getItem(this.props.key).then((value) => {
+  //   //     this.setState({checked: value});
+  //   // }).done();
+  // }
+
+  saveCheck () {
+    console.log(this.props)
+    this.setState({checked: !this.state.checked})
+    // AsyncStorage.setItem(, this.state.checked);
   }
 }

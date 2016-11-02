@@ -67,7 +67,7 @@ export default class ShoppingList extends React.Component {
             <Content>
                 <List>
                   {this.shoppingList.map((item, i) => (
-                      <ShoppingListItem key={i} item={item} />
+                    <ShoppingListItem key={i} item={item} />
                     ))}
                 </List>
             </Content>

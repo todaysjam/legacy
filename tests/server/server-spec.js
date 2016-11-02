@@ -3,7 +3,7 @@
 const mocha = require('mocha');
 const request = require('supertest');
 const expect = require('chai').expect;
-// const db = require('../../server/config/connection.js');
+const db = require('../../server/config/connection.js');
 const server = require('../../server/server.js');
 const Recipe = require('../../db/models/recipeModel.js');
 
