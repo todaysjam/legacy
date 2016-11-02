@@ -184,7 +184,7 @@ export default class Login extends React.Component {
 
   async ComponentDidMount() {
     await Font.loadAsync({
-      'Courgette': require('../assets/fonts/Courgette-Regular.ttf')
+      'Courgette': require('../assets/Courgette-Regular.ttf')
     });
     this.setState({ fontLoaded: true });
   }
