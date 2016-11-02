@@ -37,7 +37,10 @@ export default class MealList extends React.Component {
       method: 'GET',
       headers: { 'x-access-token': this.props.getToken() },
     })
-    .then(res => res.json())
+    .then(res => {
+      console.log('meals', res.json()) 
+      res.json()
+    })
     .then((data) => {
       this.props.updateMealList(data.mealsObjs);
     }).done(() => {

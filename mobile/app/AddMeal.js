@@ -5,7 +5,6 @@ import Searchbar from './Searchbar';
 import LogoDisplay from './LogoDisplay';
 import InfoDisplay from './InfoDisplay';
 import HeadBuffer from './HeadBuffer';
-import AddMealButton from './AddMealButton'
 import Buttony from './Button'
 import { Container, Content, FooterTab, Button, Title } from 'native-base';
 
@@ -50,6 +49,7 @@ export default class AddMeal extends React.Component {
     })
     .then(res => res.json())
     .then((data) => {
+      console.log('searching food data', searchString)
       if (data) {
         this.props.updateSearchRecipes(data);
       }
@@ -57,7 +57,7 @@ export default class AddMeal extends React.Component {
   }
 
   postMeal(recipeId) {
-    console.log('hello')
+    console.log('recipeId', recipeId)
     fetch(mealUrl, {
       method: 'POST',
       headers: {
@@ -70,6 +70,10 @@ export default class AddMeal extends React.Component {
       }),
     })
     .then(() => {
+      console.log('adding meal')
+    })
+    .catch((err) => {
+      console.log(err)
     });
   }
 
