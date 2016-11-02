@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     // width: 150,
     // height: 300,
     padding: 20,
-    backgroundColor: 'rgba(248,248,255,.8)',
+    backgroundColor: 'rgba(255,255,255,.85)',
   },
   title: {
     fontSize: 55,
@@ -87,6 +87,9 @@ const styles = StyleSheet.create({
   footerText: {
     color: 'white',
     fontSize: 10
+  },
+  form: {
+    borderColor: 'red'
   }
 });
 // ENV Variables
@@ -100,10 +103,14 @@ const Person = t.struct({
 const options = {
   fields: {
     username: {
-      autoCapitalize: 'none'
+      auto: 'placeholders',
+      placeholder: 'Username',
+      autoCapitalize: 'none',
     },
     password: {
-      secureTextEntry: true
+      secureTextEntry: true,
+      auto: 'placeholders',
+      error: 'incorrect login information'
     }
   }
 };
@@ -188,6 +195,7 @@ export default class Login extends React.Component {
           <View style={styles.container}>
             <View style={styles.form}>
               <Form
+              style={styles.form}
                 ref="form"
                 type={Person}
                 options={options}
@@ -212,7 +220,7 @@ export default class Login extends React.Component {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Brought to you by Jamz&copy;</Text>
+            <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
           </View>
       </Components.LinearGradient>
     );
