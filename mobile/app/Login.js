@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import t from 'tcomb-form-native';
 import MealList from './MealList';
-import { Components } from 'exponent';
+import { Components, Font } from 'exponent';
 
 const width = Dimensions.get('window').width;
 
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     paddingTop: 60
   },
   footerText: {
+    ...Font.style('Courgette'),
     color: 'white',
     fontSize: 10
   },
@@ -128,6 +129,9 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.userInfo = null;
+    this.state = {
+      fontLoaded: false
+    }
   }
 
   gotoNext() {
@@ -178,6 +182,13 @@ export default class Login extends React.Component {
     }
   }
 
+  async ComponentDidMount() {
+    await Font.loadAsync({
+      'Courgette': require('../assets/fonts/Courgette-Regular.ttf')
+    });
+    this.setState({ fontLoaded: true });
+  }
+
 // tried to preload the image, this still stutters, but stutters consistenly, versus the other which can potentially be faster, or slower depending on async load in the off-thread
 // componentWillMount() {
 //   this.image = (<Image source={require('../assets/brand.png')} />);
@@ -225,7 +236,10 @@ export default class Login extends React.Component {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
+            {this.state.fontLoaded ? (
+                <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
+              ) : null
+            }
           </View>
       </Components.LinearGradient>
     );
