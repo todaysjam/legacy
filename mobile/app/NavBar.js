@@ -5,8 +5,12 @@ import MealList from './MealList';
 import ShoppingList from './ShoppingList';
 import AddMeal from './AddMeal';
 
-import { Container, Content, Footer, FooterTab, Button, Header } from 'native-base';
+import { Button, Container, Content, Footer, FooterTab, Header } from 'native-base';
 import { Entypo, EvilIcons, FontAwesome, Foundation, Ionicons, MaterialIcons, Octicons, Zocial } from '@exponent/vector-icons';
+//the css property of the components within Footer FooterTab can't be 
+//set by the props of each single item
+//they are all set throught a Theme file, which is the value of the props.theme of Footer, FooterTab
+import Theme from './Theme';
 
 const width = Dimensions.get('window').width;
 
@@ -17,32 +21,45 @@ const styles = StyleSheet.create({
   }
 });
 
-const moveTo = (navigator, component) => {
-  navigator.replace({ component });
-};
+export default class NavBar extends React.Component { 
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonState: [false, false, false]
+    };
+  } // end constructor
 
-const NavBar = (props) => {
-  if (props.navigator.getCurrentRoutes().length > 1) {
-    return (
-      <Container style={styles.nothing}>
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => moveTo(props.navigator, MealList)}>
-              <Ionicons name="ios-heart" size={32} color="white" />
-            </Button>
-            <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
-              <Ionicons name="ios-basket" size={32} color="white" />
-            </Button>
-            <Button onPress={() => moveTo(props.navigator, AddMeal)}>
-              <Ionicons name="ios-flower" size={32} color="white" />
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
-    );
+  moveTo(navigator, component, index) {
+    if (index === 0 ) {
+      this.setState({buttonState: [true, false, false]});
+    } else if (index === 1 ) {
+      this.setState({buttonState: [false, true, false]});
+    } else if (index === 2 ) {
+      this.setState({buttonState: [false, false, true]});
+    }
+    navigator.replace({ component });
   }
-  return null;
-};
 
-
-export default NavBar;
+  render() {
+    if (this.props.navigator.getCurrentRoutes().length > 1) {
+      return (
+        <Container style={styles.nothing}>
+          <Footer theme={Theme}>
+            <FooterTab theme={Theme}>
+              <Button active={this.state.buttonState[0]} onPress={this.moveTo.bind(this, this.props.navigator, MealList, 0)}>
+                <Ionicons name="ios-heart"/>
+              </Button>
+              <Button active={this.state.buttonState[1]} onPress={this.moveTo.bind(this, this.props.navigator, ShoppingList, 1)}>
+                <Ionicons name="ios-cart"/>
+              </Button>
+              <Button active={this.state.buttonState[2]} onPress={this.moveTo.bind(this, this.props.navigator, AddMeal, 2)}>
+                <Ionicons name="ios-flower"/>
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      );
+    }
+    return null;
+  }
+}
