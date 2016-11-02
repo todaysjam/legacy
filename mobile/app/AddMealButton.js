@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddMealButton = ({ text, icon, onclick }) => { 
+const AddMealButton = props => { 
   return (
       <Container>
         <Content>
-          <Button success> Add Me! </Button>
+          <Button onPress={() => props.postMeal(props.recipe._id)}success> Add Me! </Button>
         </Content>       
       </Container>
   ) 

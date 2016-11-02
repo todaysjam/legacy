@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@exponent/vector-icons';
-import { Container, Content, FooterTab, Button, Title } from 'native-base';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,14 +37,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const Buttony = ({ text, icon, onclick }) => { 
+const Button = ({ text, icon, onclick }) => { 
+  if(text !== undefined) {
+    return (
+      <TouchableHighlight
+        style={styles.container}
+        onPress={onclick}
+      >
+        <View
+          style={styles.container2}
+          elevation={3}
+        >
+          <Text style={styles.text}> {text} </Text>
+        </View>
+      </TouchableHighlight>
+    )
+  }
   return (
-      <Container>
-        <Content>
-          <Button primary>{this.props.name}</Button>
-        </Content>       
-      </Container>
+      <TouchableHighlight
+        onPress={onclick}
+      >
+       <Ionicons name={icon} size={39} color="white" onPress={onclick} /> 
+      </TouchableHighlight>
   ) 
 };
 
-export default Buttony;
+export default Button;

@@ -54,18 +54,21 @@ const styles = StyleSheet.create({
 });
 
 const Tile = ({ recipe, mealId, showInfo }) => (
-  <View >
+  <TouchableHighlight
+    style={styles.tile}
+    onPress={() => showInfo(recipe, mealId)}
+  >
     <Image
       style={styles.picture}
       source={{ uri: recipe.image }}
-      >
+    >
       <View style={styles.textwrap}>
         <Text style={styles.headline}>
           {recipe.label}
         </Text>
       </View>
     </Image>
-  </View>
+  </TouchableHighlight>
 );
 
 export default Tile;

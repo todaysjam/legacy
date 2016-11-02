@@ -6,6 +6,7 @@ import LogoDisplay from './LogoDisplay';
 import InfoDisplay from './InfoDisplay';
 import HeadBuffer from './HeadBuffer';
 import AddMealButton from './AddMealButton'
+import Button from './Button'
 const recipeUrl = 'https://mealdotlegacy.herokuapp.com/api/recipe/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
@@ -51,6 +52,7 @@ export default class AddMeal extends React.Component {
   }
 
   postMeal(recipeId) {
+    console.log('hello')
     fetch(mealUrl, {
       method: 'POST',
       headers: {
@@ -97,7 +99,10 @@ export default class AddMeal extends React.Component {
                 recipe={meal}
                 showInfo={this.gotoNext}
                               />
-              <AddMealButton postMeal={this.props.postMeal.bind(this)}/>
+              <Button
+                onclick={() => { this.postMeal(meal._id, this.mealId); }} // eslint-disable-line
+                text='Add'
+              />
             </View>
           ))}
         </ScrollView>
