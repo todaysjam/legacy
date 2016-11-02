@@ -42,8 +42,12 @@ export default class ShoppingListItem extends React.Component {
   // }
 
   saveCheck () {
-    console.log(this.props)
+    console.log(this.state.checked)
     this.setState({checked: !this.state.checked})
-    // AsyncStorage.setItem(, this.state.checked);
+    AsyncStorage.setItem('checked', JSON.stringify(this.state.checked))
+    // .then((obj) => if (obj) 
+    // if (,
+    //   (error) => console.log(error)
+    // );
   }
 }
