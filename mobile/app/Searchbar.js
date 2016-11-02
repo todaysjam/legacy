@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     marginBottom: 5
   },
+  Button: {
+    backgroundColor: '#1e90ff',
+    marginBottom: 5,
+  }
 });
 
 export default class Searchbar extends React.Component {
@@ -39,7 +43,15 @@ export default class Searchbar extends React.Component {
         </View>
         <Container >
           <Content>
-            <Button  block onPress={() => this.props.enter(this.state.text)} primary> Search </Button>
+            <Button  
+              style={styles.Button}
+              textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
+              rounded block 
+              onPress={
+                () => this.props.enter(this.state.text)
+              }> 
+              Search 
+            </Button>
           </Content>       
         </Container>
       </View>
