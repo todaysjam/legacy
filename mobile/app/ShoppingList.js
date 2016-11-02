@@ -19,13 +19,15 @@ const compileList = (meals) => {
         result[ingredient.food] = {
           quantity: ingredient.quantity,
           measure: ingredient.measure,
+          checked: ingredient.checked
         };
       }
     });
   });
 
   Object.entries(result).forEach(([ingredient, amount]) => {
-    list.push([amount.quantity, amount.measure, ingredient]);
+    console.log(amount.checked)
+    list.push([amount.quantity, amount.measure, ingredient, amount.checked]);
   });
   return list;
 };
