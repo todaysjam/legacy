@@ -43,6 +43,7 @@ export default class ShoppingListItem extends React.Component {
     return (
       <ListItem style={styles.table}>
         <CheckBox 
+          className=""
           checked={this.state.checked}
           onPress={this.setCheck}/>
         <Text>{this.props.item[0]} {this.props.item[1]} {this.props.item[2]}</Text>
