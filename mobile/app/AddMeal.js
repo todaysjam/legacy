@@ -71,6 +71,9 @@ export default class AddMeal extends React.Component {
     })
     .then(() => {
       console.log('adding meal')
+    })
+    .catch((err) => {
+      console.log(err)
     });
   }
 
