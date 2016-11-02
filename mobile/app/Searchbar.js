@@ -39,7 +39,7 @@ export default class Searchbar extends React.Component {
         </View>
         <Container >
           <Content>
-            <Button  block onPress={() => this.props.enter(this.state.text)} primary> Search </Button>
+            <Button  color='white' backGroundColor='#1e90ff' rounded block onPress={() => this.props.enter(this.state.text)} > Search </Button>
           </Content>       
         </Container>
       </View>
