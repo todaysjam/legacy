@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Text} from 'react-native';
 import MealTile from './MealTile';
 import Searchbar from './Searchbar';
 import LogoDisplay from './LogoDisplay';
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   searchItemBorder:{
     borderRadius: 8,
-    borderWidth: 2,
+    backgroundColor:'#1e90ff',
     borderColor: '#1e90ff',
     marginBottom: 5
   },
@@ -31,7 +31,18 @@ const styles = StyleSheet.create({
   },
   smallBreak: {
     marginTop: 5
+  },
+  Button: {
+    backgroundColor: 'white',
+    marginBottom: 5,
+  },
+  Title: {
+    color: '#1e90ff',
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize:24
   }
+
 });
 
 export default class AddMeal extends React.Component {
@@ -87,6 +98,7 @@ export default class AddMeal extends React.Component {
       <View style={styles.container}>
         <HeadBuffer />
         <LogoDisplay style={styles.marginBottom} />
+        <Text style={styles.Title}>Add a Meal!</Text>
         <Searchbar style={styles.search} enter={this.getData} />
         <View style={styles.break}></View>
         <ScrollView
@@ -100,7 +112,7 @@ export default class AddMeal extends React.Component {
               <MealTile
                 recipe={meal}
                 showInfo={this.gotoNext}
-                              />
+                />
              <Container style={styles.smallBreak}>
                   <Content>
                     <Button 
@@ -108,6 +120,8 @@ export default class AddMeal extends React.Component {
                       rounded
                       block
                       onPress={() => { this.postMeal(meal._id, this.mealId); }}
+                      style={styles.Button}
+                      textStyle={{color: '#1e90ff',fontWeight: 'bold', fontSize: 20}}
                       > Add
                     </Button>
                   </Content>

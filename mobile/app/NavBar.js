@@ -12,7 +12,8 @@ const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   nothing: {
-    flex: 0
+    flex: 0,
+    backgroundColor: '#1e90ff'
   }
 });
 
@@ -27,13 +28,13 @@ const NavBar = (props) => {
         <Footer>
           <FooterTab>
             <Button onPress={() => moveTo(props.navigator, MealList)}>
-              <Ionicons name="ios-heart" size={32} color="#000" />
+              <Ionicons name="ios-heart" size={32} color="white" />
             </Button>
             <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
-              <Ionicons name="ios-basket" size={32} color="green" />
+              <Ionicons name="ios-basket" size={32} color="white" />
             </Button>
             <Button onPress={() => moveTo(props.navigator, AddMeal)}>
-              <Ionicons name="ios-flower" size={32} color="green" />
+              <Ionicons name="ios-flower" size={32} color="white" />
             </Button>
           </FooterTab>
         </Footer>
