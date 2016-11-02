@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     opacity: .95
   },
   footer: {
-    marginTop: 40,
+    marginTop: 50,
     paddingTop: 60
   },
   footerText: {
@@ -177,6 +177,11 @@ export default class Login extends React.Component {
       .done();
     }
   }
+
+// tried to preload the image, this still stutters, but stutters consistenly, versus the other which can potentially be faster, or slower depending on async load in the off-thread
+// componentWillMount() {
+//   this.image = (<Image source={require('../assets/brand.png')} />);
+// }
 
   render() {
     return (
