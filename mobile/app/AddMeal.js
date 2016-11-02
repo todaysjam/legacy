@@ -65,7 +65,6 @@ export default class AddMeal extends React.Component {
       }),
     })
     .then(() => {
-      this.props.navigator.pop();
     });
   }
 
