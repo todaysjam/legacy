@@ -89,6 +89,7 @@ const InfoDisplay = props => (
           text="Back"
         />
       </View>
+    
 
       <View style={styles.table}>
         <Column

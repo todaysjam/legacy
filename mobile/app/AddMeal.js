@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   break:{
+    marginTop: 30
+  },
+  smallBreak: {
     marginTop: 5
   }
 });
@@ -100,7 +103,7 @@ export default class AddMeal extends React.Component {
                 recipe={meal}
                 showInfo={this.gotoNext}
                               />
-             <Container style={styles.break}>
+             <Container style={styles.smallBreak}>
                   <Content>
                     <Button 
                       Primary
