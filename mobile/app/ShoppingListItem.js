@@ -48,5 +48,5 @@ export default class ShoppingListItem extends React.Component {
         <Text>{this.props.item[0]} {this.props.item[1]} {this.props.item[2]}</Text>
       </ListItem>
     );
-  } 
+  }
 }
