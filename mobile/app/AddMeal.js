@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   break:{
-    marginBottom: 10
+    marginTop: 5
   }
 });
 
@@ -100,11 +100,12 @@ export default class AddMeal extends React.Component {
                 recipe={meal}
                 showInfo={this.gotoNext}
                               />
-             <Container>
+             <Container style={styles.break}>
                   <Content>
                     <Button 
                       Primary
-                      large
+                      rounded
+                      block
                       onPress={() => { this.postMeal(meal._id, this.mealId); }}
                       > Add
                     </Button>
