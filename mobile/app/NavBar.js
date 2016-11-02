@@ -5,15 +5,18 @@ import MealList from './MealList';
 import ShoppingList from './ShoppingList';
 import AddMeal from './AddMeal';
 
-import { Container, Content, Footer, FooterTab, Button, Header } from 'native-base';
+import { Button, Container, Content, Footer, FooterTab, Header } from 'native-base';
 import { Entypo, EvilIcons, FontAwesome, Foundation, Ionicons, MaterialIcons, Octicons, Zocial } from '@exponent/vector-icons';
+//the css property of the components within Footer FooterTab can't be 
+//set by the props of each single item
+//they are all set throught a Theme file, which is the value of the props.theme of Footer, FooterTab
+import Theme from './Theme';
 
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   nothing: {
-    flex: 0,
-    backgroundColor: '#1e90ff'
+    flex: 0
   }
 });
 
@@ -25,16 +28,16 @@ const NavBar = (props) => {
   if (props.navigator.getCurrentRoutes().length > 1) {
     return (
       <Container style={styles.nothing}>
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => moveTo(props.navigator, MealList)}>
-              <Ionicons name="ios-heart" size={32} color="white" />
+        <Footer theme={Theme}>
+          <FooterTab theme={Theme}>
+            <Button active={false} onPress={() => moveTo(props.navigator, MealList)}>
+              <Ionicons name="ios-heart"/>
             </Button>
             <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
-              <Ionicons name="ios-basket" size={32} color="white" />
+              <Ionicons name="ios-cart"/>
             </Button>
             <Button onPress={() => moveTo(props.navigator, AddMeal)}>
-              <Ionicons name="ios-flower" size={32} color="white" />
+              <Ionicons name="ios-flower"/>
             </Button>
           </FooterTab>
         </Footer>
