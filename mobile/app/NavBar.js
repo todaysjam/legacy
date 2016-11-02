@@ -5,14 +5,14 @@ import MealList from './MealList';
 import ShoppingList from './ShoppingList';
 import AddMeal from './AddMeal';
 
-import { Container, Content, Footer, FooterTab, Button, Icon } from 'native-base';
+import { Container, Content, Footer, FooterTab, Button, Icon, Header } from 'native-base';
 
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 0
-  },
+  nothing: {
+    flex: 0
+  }
 });
 
 const moveTo = (navigator, component) => {
@@ -22,30 +22,28 @@ const moveTo = (navigator, component) => {
 const NavBar = (props) => {
   if (props.navigator.getCurrentRoutes().length > 1) {
     return (
-       <Container style={styles.container}>
-                <Content />
-
-                <Footer >
+       <Container style={styles.nothing}>
+                  <Footer>
                     <FooterTab>
                         <Button
-                          icon="md-list-box"
-                          onPress={() => moveTo(props.navigator, MealList)} 
-                          >
-                            Food
+                    icon="md-list-box"
+                    onPress={() => moveTo(props.navigator, MealList)} 
+                    >
+                      Food
 
-                        </Button>
-                        <Button
-                          icon="md-basket"
-                          onPress={() => moveTo(props.navigator, ShoppingList)}
-                          >
-                            Calories
-                        </Button>
-                        <Button 
-                          icon="md-add-circle"
-                          onPress={() => moveTo(props.navigator, AddMeal)}
-                          >
-                            AddMeal
-                        </Button>
+                  </Button>
+                  <Button
+                    icon="md-basket"
+                    onPress={() => moveTo(props.navigator, ShoppingList)}
+                    >
+                      Calories
+                  </Button>
+                  <Button 
+                    icon="md-add-circle"
+                    onPress={() => moveTo(props.navigator, AddMeal)}
+                    >
+                      AddMeal
+                  </Button>
                     </FooterTab>
                 </Footer>
             </Container>
@@ -53,5 +51,6 @@ const NavBar = (props) => {
   }
   return null;
 };
+
 
 export default NavBar;
