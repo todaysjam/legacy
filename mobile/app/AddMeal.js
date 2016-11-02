@@ -6,7 +6,9 @@ import LogoDisplay from './LogoDisplay';
 import InfoDisplay from './InfoDisplay';
 import HeadBuffer from './HeadBuffer';
 import AddMealButton from './AddMealButton'
-import Button from './Button'
+import Buttony from './Button'
+import { Container, Content, FooterTab, Button, Title } from 'native-base';
+
 const recipeUrl = 'https://mealdotlegacy.herokuapp.com/api/recipe/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
@@ -26,7 +28,10 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   break:{
-    marginBottom: 10
+    marginTop: 30
+  },
+  smallBreak: {
+    marginTop: 5
   }
 });
 
@@ -65,7 +70,6 @@ export default class AddMeal extends React.Component {
       }),
     })
     .then(() => {
-      this.props.navigator.pop();
     });
   }
 
@@ -99,10 +103,18 @@ export default class AddMeal extends React.Component {
                 recipe={meal}
                 showInfo={this.gotoNext}
                               />
-              <Button
-                onclick={() => { this.postMeal(meal._id, this.mealId); }} // eslint-disable-line
-                text='Add'
-              />
+             <Container style={styles.smallBreak}>
+                  <Content>
+                    <Button 
+                      Primary
+                      rounded
+                      block
+                      onPress={() => { this.postMeal(meal._id, this.mealId); }}
+                      > Add
+                    </Button>
+                  </Content>
+                </Container>
+               
             </View>
           ))}
         </ScrollView>
