@@ -21,35 +21,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// const moveTo = (navigator, component) => {
-//   navigator.replace({ component });
-// };
-
-// const NavBar = (props) => {
-//   if (props.navigator.getCurrentRoutes().length > 1) {
-//     return (
-//       <Container style={styles.nothing}>
-//         <Footer theme={Theme}>
-//           <FooterTab theme={Theme}>
-//             <Button active={false} onPress={() => moveTo(props.navigator, MealList)}>
-//               <Ionicons name="ios-heart"/>
-//             </Button>
-//             <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
-//               <Ionicons name="ios-cart"/>
-//             </Button>
-//             <Button onPress={() => moveTo(props.navigator, AddMeal)}>
-//               <Ionicons name="ios-flower"/>
-//             </Button>
-//           </FooterTab>
-//         </Footer>
-//       </Container>
-//     );
-//   }
-//   return null;
-// };
-
-// export default NavBar;
-
 export default class NavBar extends React.Component { 
   constructor(props) {
     super(props);
@@ -59,7 +30,6 @@ export default class NavBar extends React.Component {
   } // end constructor
 
   moveTo(navigator, component, index) {
-    console.log(index);
     if (index === 0 ) {
       this.setState({buttonState: [true, false, false]});
     } else if (index === 1 ) {
@@ -67,18 +37,10 @@ export default class NavBar extends React.Component {
     } else if (index === 2 ) {
       this.setState({buttonState: [false, false, true]});
     }
-    // if (index === 0) {
-    //   this.setState({'buttonState', [true, false, false]});
-    // } else if (index === 1) {
-    //   this.setState({'buttonState', [false, true, false]});
-    // } else if (index === 2) {
-    //   this.setState({'buttonState', [false, false, true]});
-    // }
     navigator.replace({ component });
   }
 
   render() {
-    console.log('state: ', this.state);
     if (this.props.navigator.getCurrentRoutes().length > 1) {
       return (
         <Container style={styles.nothing}>
