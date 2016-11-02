@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import LogoDisplay from './LogoDisplay';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignItems: 'center',
+  },
+  Title: {
+    color: '#1e90ff',
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize:24
   }
 });
 
@@ -52,6 +58,7 @@ export default class ShoppingList extends React.Component {
       <View style={styles.container}>
         <HeadBuffer />
         <LogoDisplay />
+        <Text style={styles.Title}>Weekly Ingredients!</Text>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
