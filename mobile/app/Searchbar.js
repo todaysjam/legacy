@@ -39,7 +39,7 @@ export default class Searchbar extends React.Component {
         </View>
         <Container >
           <Content>
-            <Button onPress={() => this.props.enter(this.state.text)} primary> Search </Button>
+            <Button  block onPress={() => this.props.enter(this.state.text)} primary> Search </Button>
           </Content>       
         </Container>
       </View>
