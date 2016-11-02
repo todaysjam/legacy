@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView,Text } from 'react-native';
-import MealTile from './MealTile';
+import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
@@ -97,7 +97,7 @@ export default class MealList extends React.Component {
           {this.props.getMealList().map((meal, i) => (
                         <View style={styles.searchItemBorder} key={i}>
 
-            <MealTile
+            <LoggedMeal
               recipe={meal.recipe}
               showInfo={this.gotoNext}
               key={i}
