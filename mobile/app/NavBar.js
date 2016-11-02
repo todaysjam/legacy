@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
   }
 });
 
-const moveTo = (navigator, component) => {
-  navigator.replace({ component });
-};
+// const moveTo = (navigator, component) => {
+//   navigator.replace({ component });
+// };
 
 // const NavBar = (props) => {
 //   if (props.navigator.getCurrentRoutes().length > 1) {
@@ -51,23 +51,46 @@ const moveTo = (navigator, component) => {
 // export default NavBar;
 
 export default class NavBar extends React.Component { 
-  moveTo(navigator, component) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonState: [false, false, false]
+    };
+  } // end constructor
+
+  moveTo(navigator, component, index) {
+    console.log(index);
+    if (index === 0 ) {
+      this.setState({buttonState: [true, false, false]});
+    } else if (index === 1 ) {
+      this.setState({buttonState: [false, true, false]});
+    } else if (index === 2 ) {
+      this.setState({buttonState: [false, false, true]});
+    }
+    // if (index === 0) {
+    //   this.setState({'buttonState', [true, false, false]});
+    // } else if (index === 1) {
+    //   this.setState({'buttonState', [false, true, false]});
+    // } else if (index === 2) {
+    //   this.setState({'buttonState', [false, false, true]});
+    // }
     navigator.replace({ component });
   }
 
   render() {
-    if (props.navigator.getCurrentRoutes().length > 1) {
+    console.log('state: ', this.state);
+    if (this.props.navigator.getCurrentRoutes().length > 1) {
       return (
         <Container style={styles.nothing}>
           <Footer theme={Theme}>
             <FooterTab theme={Theme}>
-              <Button active={false} onPress={this.moveTo.bind(this.props.navigator, MealList)}>
+              <Button active={this.state.buttonState[0]} onPress={this.moveTo.bind(this, this.props.navigator, MealList, 0)}>
                 <Ionicons name="ios-heart"/>
               </Button>
-              <Button onPress={() => moveTo(props.navigator, ShoppingList)}>
+              <Button active={this.state.buttonState[1]} onPress={this.moveTo.bind(this, this.props.navigator, ShoppingList, 1)}>
                 <Ionicons name="ios-cart"/>
               </Button>
-              <Button onPress={() => moveTo(props.navigator, AddMeal)}>
+              <Button active={this.state.buttonState[2]} onPress={this.moveTo.bind(this, this.props.navigator, AddMeal, 2)}>
                 <Ionicons name="ios-flower"/>
               </Button>
             </FooterTab>
