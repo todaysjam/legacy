@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     paddingTop: 60
   },
   footerText: {
-    ...Font.style('Courgette'),
     color: 'white',
     fontSize: 10
   },
@@ -130,9 +129,10 @@ export default class Login extends React.Component {
     super(props);
     this.userInfo = null;
     this.state = {
-      fontLoaded: false
+      fontLoaded: false,
     }
   }
+
 
   gotoNext() {
     this.props.navigator.push({
@@ -182,12 +182,13 @@ export default class Login extends React.Component {
     }
   }
 
-  async ComponentDidMount() {
-    await Font.loadAsync({
-      'Courgette': require('../assets/Courgette-Regular.ttf')
-    });
-    this.setState({ fontLoaded: true });
-  }
+  // custom fonts are not importing correctly
+  // async ComponentDidMount() {
+  //   await Font.loadAsync({
+  //     'Courgette-Regular': require('../assets/Courgette-Regular.ttf'),
+  //   });
+  //   this.setState({ fontLoaded: true });
+  // }
 
 // tried to preload the image, this still stutters, but stutters consistenly, versus the other which can potentially be faster, or slower depending on async load in the off-thread
 // componentWillMount() {
@@ -236,10 +237,7 @@ export default class Login extends React.Component {
           </View>
 
           <View style={styles.footer}>
-            {this.state.fontLoaded ? (
-                <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
-              ) : null
-            }
+            <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
           </View>
       </Components.LinearGradient>
     );
