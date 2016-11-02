@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingBottom: 60,
+    paddingBottom: 200,
   },
+
 });
 
 export default class AddMeal extends React.Component {
@@ -80,6 +81,7 @@ export default class AddMeal extends React.Component {
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
           alwaysBounceVertical
+
         >
           {this.props.getSearchRecipes().map((meal, i) => (
             <MealTile

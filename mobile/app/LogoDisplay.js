@@ -7,7 +7,7 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   logo: {
     width:width,
-    marginBottom: 0,
+    flex: 0,
   },
   container: {
     flex: 1,
