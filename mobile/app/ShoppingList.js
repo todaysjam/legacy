@@ -60,6 +60,8 @@ export default class ShoppingList extends React.Component {
         <HeadBuffer />
         <LogoDisplay />
         <Text style={styles.Title}>Weekly Ingredients!</Text>
+                <Text>{global._cals}</Text>
+
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
