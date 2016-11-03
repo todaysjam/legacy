@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView,Text } from 'react-native';
+import { StyleSheet, View, ScrollView,Text, Dimensions } from 'react-native';
 import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
 
-
+var calor = 0;
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -32,6 +33,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
     fontSize:24
+  },
+  danger: {
+    backgroundColor: 'red'
   }
 });
 
@@ -41,20 +45,47 @@ export default class MealList extends React.Component {
     this.getData = this.getData.bind(this);
     this.postMeal = this.postMeal.bind(this);
     this.gotoNext = this.gotoNext.bind(this);
+    this.state = {
+      style: {
+        fontSize: 20,
+        textAlign: 'center'
+      }
+    }
   }
 
   componentWillMount() {
     var self = this
     this.getData(
       function(){
-        var calor = 0;
+        calor = 0;
         self.props.getMealList().forEach((meal) => {
           calor += meal.recipe.calories
         })
-        global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000') 
+        global._count = Math.round(calor)
+        global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')
+        if(calor > 14000){
+          console.log('toooooo muchhhhh')
+          self.setState({
+            style:{
+              backgroundColor: 'red',
+              borderRadius: 10,
+              fontSize: 20,
+              textAlign: 'center',
+              color: 'white'
+            },
+            view: {
+              backgroundColor: 'red',
+              borderRadius: 10,
+              width: width * .8
+            }
+          })
+        } else{
+          self.setState({
+            nothin: ''
+          })
+        }
       }
-    )
-    
+    ) 
   }
 
   getData(cb) {
@@ -98,7 +129,9 @@ export default class MealList extends React.Component {
         <HeadBuffer />
         <LogoDisplay />
         <Text style={styles.Title}>Weekly Meals!</Text>
-        <Text>{global._cals}</Text>
+        <View style={this.state.view}>
+          <Text style={this.state.style}>{global._cals}</Text>
+        </View>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
