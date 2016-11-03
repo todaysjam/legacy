@@ -12,11 +12,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1e90ff',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
   },
   picture: {
     height: 80,
@@ -29,8 +24,6 @@ const styles = StyleSheet.create({
   },
   textwrap: {
     flexDirection: 'column',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
     shadowColor: 'black',
   },
   headline: {
@@ -38,12 +31,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    opacity: 1,
+    width: width * .6
   },
   itemContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row',
   }
 });
 
@@ -58,8 +51,8 @@ const LoggedMeal = ({ recipe, mealId, showInfo }) => (
         source={{ uri: recipe.image }}
         >
       </Image>
-      <View style={styles.textwrap}>
-        <Text style={styles.headline} numberOfLines={5}>
+      <View >
+        <Text style={styles.headline}>
           {recipe.label}
         </Text>
         <Text style={styles.headline}>
