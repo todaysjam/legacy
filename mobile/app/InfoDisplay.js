@@ -11,7 +11,6 @@ import HeaderDisplay from './HeaderDisplay';
 import Button from './Button';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
-import Chart from 'react-native-chart';
 
 const width = Dimensions.get('window').width;
 const data = [
@@ -59,16 +58,6 @@ const styles = StyleSheet.create({
   calories: {
     fontSize: 20,
   },
-    container2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    chart: {
-        width: 200,
-        height: 200,
-    },
 });
 
 /* eslint-disable no-param-reassign */
@@ -159,14 +148,6 @@ const InfoDisplay = props => (
           alignRight
         />
       </View>
-       <View style={styles.container2}>
-                <Chart
-                    style={styles.chart}
-                    data={data}
-                    type="pie"
-                    showDataPoint={true}
-                 />
-            </View>
     </ScrollView>
   </View>
 );
