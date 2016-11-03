@@ -4,6 +4,7 @@ import { Container, Content, Footer, FooterTab, Button, Icon, Header, Title } fr
 import Swipeout from 'react-native-swipeout';
 
 const width = Dimensions.get('window').width;
+const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
 const styles = StyleSheet.create({
   tile: {
@@ -15,13 +16,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#1e90ff',
   },
   picture: {
-    height: 80,
+    height: 75,
     width: 80,
-    opacity: 0.85,
+    opacity: 1,
     borderRadius: 5,
-    marginRight: 40,
-    justifyContent: 'flex-start',
-
+    marginRight: 7,
+    marginTop: 3
   },
   textwrap: {
     flexDirection: 'column',
@@ -41,39 +41,63 @@ const styles = StyleSheet.create({
   }
 });
 
-const swipeoutBtns = [
-  {
-    text: 'Button'
+export default class LoggedMeal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flag: false
+    };
   }
-];
 
+  postMeal(mealId, token) {
+    fetch(mealUrl + mealId, {
+      method: 'DELETE',
+      headers: { 'x-access-token': token },
+    })
+    .then(() => {
+      this.props.updateMeals();
+    })
+  }
 
-const LoggedMeal = ({ recipe, mealId, showInfo }) => (
-  <Swipeout right={swipeoutBtns}>
-    <TouchableHighlight
-      style={styles.tile}
-      onPress={() => showInfo(recipe, mealId )}
-    >
-      <View style={styles.itemContainer}>
-        <Image
-          style={styles.picture}
-          source={{ uri: recipe.image }}
-          >
-        </Image>
-        <View >
-          <Text style={styles.headline}>
-            {recipe.label}
-          </Text>
-          <Text style={styles.headline}>
-            {Math.round(recipe.calories) + ' cal'}
-          </Text>
-          <Text style={styles.headline}>
-            {Math.round(recipe.totalWeight) + ' g'}
-          </Text>
-        </View>
-      </View>
-    </TouchableHighlight>
-  </Swipeout>
-);
+  render() {
+    const swipeoutBtns = [
+      {
+        text: 'Delete',
+        backgroundColor: 'red',
+        underlayColor: 'transparent',
+        color: 'white',
+        onPress: () => {
+          this.postMeal(this.props.mealId, this.props.token);
+        }
+      }
+    ];
 
-export default LoggedMeal;
+    return (
+      <Swipeout right={swipeoutBtns} autoClose={true} >
+        <TouchableHighlight
+          style={styles.tile}
+          onPress={() => this.props.showInfo(this.props.recipe, this.props.mealId)}
+        >
+          <View style={styles.itemContainer}>
+            <Image
+              style={styles.picture}
+              source={{ uri: this.props.recipe.image }}
+              >
+            </Image>
+            <View >
+              <Text style={styles.headline}>
+                {this.props.recipe.label}
+              </Text>
+              <Text style={styles.headline}>
+                {Math.round(this.props.recipe.calories) + ' cal'}
+              </Text>
+              <Text style={styles.headline}>
+                {Math.round(this.props.recipe.totalWeight) + ' g'}
+              </Text>
+            </View>
+          </View>
+        </TouchableHighlight>
+      </Swipeout>
+    );
+  }
+}

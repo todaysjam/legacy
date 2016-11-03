@@ -93,7 +93,6 @@ const InfoDisplay = props => (
         <Button
           onclick={() => { 
             props.postMeal(props.recipe._id, props.mealId);
-            props.getData()
            }} // eslint-disable-line
           text={props.text}
         />
