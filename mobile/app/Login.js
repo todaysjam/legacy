@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import t from 'tcomb-form-native';
 import MealList from './MealList';
-import { Components } from 'exponent';
+import { Components, Font } from 'exponent';
 
 const width = Dimensions.get('window').width;
 
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     // width: 150,
     // height: 300,
     padding: 20,
-    backgroundColor: 'rgba(248,248,255,.8)',
+    backgroundColor: 'rgba(255,255,255,.85)',
   },
   title: {
     fontSize: 55,
@@ -81,12 +81,15 @@ const styles = StyleSheet.create({
     opacity: .95
   },
   footer: {
-    marginTop: 40,
+    marginTop: 50,
     paddingTop: 60
   },
   footerText: {
     color: 'white',
     fontSize: 10
+  },
+  form: {
+    borderColor: 'red'
   }
 });
 // ENV Variables
@@ -100,10 +103,14 @@ const Person = t.struct({
 const options = {
   fields: {
     username: {
-      autoCapitalize: 'none'
+      auto: 'placeholders',
+      placeholder: 'Username',
+      autoCapitalize: 'none',
     },
     password: {
-      secureTextEntry: true
+      secureTextEntry: true,
+      auto: 'placeholders',
+      error: 'incorrect login information'
     }
   }
 };
@@ -121,7 +128,11 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.userInfo = null;
+    this.state = {
+      fontLoaded: false,
+    }
   }
+
 
   gotoNext() {
     this.props.navigator.push({
@@ -171,6 +182,19 @@ export default class Login extends React.Component {
     }
   }
 
+  // custom fonts are not importing correctly
+  // async ComponentDidMount() {
+  //   await Font.loadAsync({
+  //     'Courgette-Regular': require('../assets/Courgette-Regular.ttf'),
+  //   });
+  //   this.setState({ fontLoaded: true });
+  // }
+
+// tried to preload the image, this still stutters, but stutters consistenly, versus the other which can potentially be faster, or slower depending on async load in the off-thread
+// componentWillMount() {
+//   this.image = (<Image source={require('../assets/brand.png')} />);
+// }
+
   render() {
     return (
 
@@ -188,6 +212,7 @@ export default class Login extends React.Component {
           <View style={styles.container}>
             <View style={styles.form}>
               <Form
+              style={styles.form}
                 ref="form"
                 type={Person}
                 options={options}
@@ -212,7 +237,7 @@ export default class Login extends React.Component {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Brought to you by Jamz&copy;</Text>
+            <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
           </View>
       </Components.LinearGradient>
     );
