@@ -46,7 +46,7 @@ export default {
       return this.inverseTextColor;
   },
   get btnTextSize () {
-      return (Platform.OS==='ios') ? this.fontSizeBase* 3 :
+      return (Platform.OS==='ios') ? this.fontSizeBase* 1.1 :
       this.fontSizeBase-1;
   },
   get btnTextSizeLarge () {
