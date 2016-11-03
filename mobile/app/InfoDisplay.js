@@ -100,7 +100,12 @@ const InfoDisplay = props => (
         style={styles.picture}
         source={{ uri: props.recipe.image }}
       />
-      {console.log(compileNutrition(props.recipe.digest))}
+      {compileNutrition(props.recipe.digest.filter ((item) => {
+        if (item.label === 'Fat') {
+          console.log('item', item)
+        }
+      }))}
+
       <View style={styles.buttonContainer}>
         <Button
           onclick={() => { 
