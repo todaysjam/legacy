@@ -99,6 +99,7 @@ export default class AddMeal extends React.Component {
         <HeadBuffer />
         <LogoDisplay style={styles.marginBottom} />
         <Text style={styles.Title}>Add a Meal!</Text>
+        <Text>{global._cals}</Text>
         <Searchbar style={styles.search} enter={this.getData} />
         <View style={styles.break}></View>
         <ScrollView

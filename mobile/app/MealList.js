@@ -47,12 +47,13 @@ export default class MealList extends React.Component {
     var self = this
     this.getData(
       function(){
-      var calor = 0;
-      self.props.getMealList().forEach((meal) => {
-        calor += meal.recipe.calories
-      })
-      global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')  
-    })
+        var calor = 0;
+        self.props.getMealList().forEach((meal) => {
+          calor += meal.recipe.calories
+        })
+        global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000') 
+      }
+    )
     
   }
 
