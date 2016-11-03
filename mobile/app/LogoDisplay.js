@@ -30,7 +30,7 @@ const LogoDisplay = () => (
   <Container style={styles.logo}>
     <Header style={styles.headline}>
       <Button transparent>
-        <Ionicons name='ios-menu' size={32}/>
+        <Ionicons name='ios-menu' size={32} color='#F8F8F8'/>
       </Button>   
       <Title style={styles.container}>
         <Image
