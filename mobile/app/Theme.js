@@ -128,7 +128,7 @@ export default {
 
 
   // Icon
-  iconFamily: 'Ionicons',
+  iconFamily: 'Entypo',
   iconFontSize: (Platform.OS === 'ios' ) ? 30 : 28,
   iconMargin: 7,
 
