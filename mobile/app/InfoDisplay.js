@@ -11,6 +11,7 @@ import HeaderDisplay from './HeaderDisplay';
 import Button from './Button';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
+import Chart from 'react-native-chart';
 
 const width = Dimensions.get('window').width;
 
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   scroller: {
     marginBottom: 50,
   },
+<<<<<<< 7bce114c09d0fa5cb81ab1a1a34d03602ebfcd81
   caloriesB: {
     fontSize: 20,
     fontWeight: 'bold'
@@ -54,6 +56,12 @@ const styles = StyleSheet.create({
   calories: {
     fontSize: 20,
   }
+=======
+  chart: {
+      width: 200,
+      height: 200,
+  },
+>>>>>>> Set up Macro pie chart
 });
 
 /* eslint-disable no-param-reassign */
@@ -79,6 +87,12 @@ const compileNutrition = (data) => {
   return result;
 };
 /* eslint-enable no-param-reassign */
+//423
+const data = [
+    [0, 148.08104399999996], //35%
+    [148.08104399999996, 40.361999999999995], //9.5%
+    [40.361999999999995, 235.76718799999998] //55
+];
 
 const InfoDisplay = props => (
   <View style={styles.container}>
@@ -89,6 +103,7 @@ const InfoDisplay = props => (
         style={styles.picture}
         source={{ uri: props.recipe.image }}
       />
+      {console.log(compileNutrition(props.recipe.digest))}
       <View style={styles.buttonContainer}>
         <Button
           onclick={() => { 
@@ -146,8 +161,18 @@ const InfoDisplay = props => (
           alignRight
         />
       </View>
+      <View style={styles.container}>
+          <Chart
+              style={styles.chart}
+              data={data}
+              type="pie"
+              showDataPoint={true}
+           />
+      </View>
 
     </ScrollView>
+
+
   </View>
 );
 
