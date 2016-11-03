@@ -24,8 +24,7 @@ export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonState: [true, false, false],
-      test: 'test'
+      buttonState: [true, false, false]
     };
   } // end constructor
 
