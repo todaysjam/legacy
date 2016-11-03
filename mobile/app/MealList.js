@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   },
   searchItemBorder:{
     borderRadius: 8,
-    backgroundColor: '#1e90ff',
     padding: 5,
     marginBottom: 5,
   },

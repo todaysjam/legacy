@@ -7,17 +7,11 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   tile: {
     width: width * 0.9,
-    height: 90,
+    height: 100,
     borderRadius: 5,
-    marginTop: 8,
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    borderRightWidth: 3,
-    borderBottomWidth: 3,
-    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1e90ff',
   },
   picture: {
     height: 80,
@@ -30,28 +24,19 @@ const styles = StyleSheet.create({
   },
   textwrap: {
     flexDirection: 'column',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
     shadowColor: 'black',
   },
   headline: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 20,
+    flexWrap: 'wrap',    
+    fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    opacity: 1,
-    textAlign: 'center',
-    textShadowColor: 'black',
-    textShadowRadius: 1,
-    textShadowOffset: {
-      width: .25,
-      height: .25,
-    },
+    width: width * .6
   },
   itemContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
   }
 });
 
@@ -66,7 +51,7 @@ const LoggedMeal = ({ recipe, mealId, showInfo }) => (
         source={{ uri: recipe.image }}
         >
       </Image>
-      <View style={styles.textwrap}>
+      <View >
         <Text style={styles.headline}>
           {recipe.label}
         </Text>

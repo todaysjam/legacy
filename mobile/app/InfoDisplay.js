@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   StyleSheet,
+  Text
 } from 'react-native';
 import HeaderDisplay from './HeaderDisplay';
 import Button from './Button';
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: '#1e90ff',
     borderRadius: 5,
     padding: 5,
     marginTop: 10,
@@ -46,24 +47,33 @@ const styles = StyleSheet.create({
   scroller: {
     marginBottom: 50,
   },
+  caloriesB: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  calories: {
+    fontSize: 20,
+  }
 });
 
 /* eslint-disable no-param-reassign */
 const compileNutrition = (data) => {
   const result = [];
-  data.forEach((item) => {
-    result.push(item);
-    if (item.sub) {
-      item.sub.forEach((subItem) => {
-        subItem.label = ` ${subItem.label}`;
-        result.push(subItem);
-      });
+  data.forEach((item, i) => {
+    if(i < 6){
+      result.push(item);
+      if (item.sub) {
+        item.sub.forEach((subItem) => {
+          subItem.label = ` ${subItem.label}`;
+          result.push(subItem);
+        });
+      }
     }
   });
   result.forEach((item) => {
-    const totalUnit = Number(Number(item.total).toFixed(2)).toString() + item.unit;
+    const totalUnit = Math.round(Number(Number(item.total).toFixed(2)).toString()) + item.unit;
     item.totalUnit = totalUnit;
-    const dailyPercent = `${Number(Number(item.daily).toFixed(1)).toString()}%`;
+    const dailyPercent = `${Math.round(Number(Number(item.daily).toFixed(1)).toString())}%`;
     item.dailyPercent = dailyPercent;
   });
   return result;
@@ -89,12 +99,16 @@ const InfoDisplay = props => (
           text="Back"
         />
       </View>
-    
+      
+      <View style={styles.table}>
+        <Text style={styles.caloriesB}>Calories:</Text>
+        <Text style={styles.calories}>{Math.round(props.recipe.calories)}</Text>
+      </View>
 
       <View style={styles.table}>
         <Column
           data={props.recipe.ingredients}
-          name="Ingredient"
+          name="Ingredients"
           index="food"
         />
         <Column
@@ -114,7 +128,7 @@ const InfoDisplay = props => (
       <View style={styles.table}>
         <Column
           data={compileNutrition(props.recipe.digest)}
-          name="Nutrient"
+          name="Nutrition"
           index="label"
         />
         <Column
@@ -125,7 +139,7 @@ const InfoDisplay = props => (
         />
         <Column
           data={compileNutrition(props.recipe.digest)}
-          name="Daily"
+          name="Daily%"
           index="dailyPercent"
           alignRight
         />
