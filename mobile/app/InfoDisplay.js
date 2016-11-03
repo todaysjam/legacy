@@ -48,20 +48,17 @@ const styles = StyleSheet.create({
   scroller: {
     marginBottom: 50,
   },
-<<<<<<< 7bce114c09d0fa5cb81ab1a1a34d03602ebfcd81
   caloriesB: {
     fontSize: 20,
     fontWeight: 'bold'
   },
   calories: {
     fontSize: 20,
-  }
-=======
+  },
   chart: {
       width: 200,
       height: 200,
   },
->>>>>>> Set up Macro pie chart
 });
 
 /* eslint-disable no-param-reassign */
@@ -171,9 +168,9 @@ const InfoDisplay = props => (
       </View>
 
     </ScrollView>
-
-
   </View>
 );
 
 export default InfoDisplay;
+
+
