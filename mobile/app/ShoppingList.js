@@ -19,13 +19,14 @@ const compileList = (meals) => {
         result[ingredient.food] = {
           quantity: ingredient.quantity,
           measure: ingredient.measure,
+          checked: ingredient._id
         };
       }
     });
   });
 
   Object.entries(result).forEach(([ingredient, amount]) => {
-    list.push([amount.quantity, amount.measure, ingredient]);
+    list.push([amount.quantity, amount.measure, ingredient, amount.checked]);
   });
   return list;
 };
@@ -67,7 +68,7 @@ export default class ShoppingList extends React.Component {
             <Content>
                 <List>
                   {this.shoppingList.map((item, i) => (
-                      <ShoppingListItem key={i} item={item} />
+                    <ShoppingListItem key={i} item={item} />
                     ))}
                 </List>
             </Content>
