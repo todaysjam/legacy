@@ -51,11 +51,11 @@ export default class NavBar extends React.Component {
                 <Icon name="heart"/>
               </Button>
               <Button active={this.state.buttonState[1]} onPress={this.moveTo.bind(this, this.props.navigator, ShoppingList, 1)}>
-                <Text>grocery</Text>
+                grocery
                 <Icon name="shopping-cart"/>
               </Button>
               <Button active={this.state.buttonState[2]} onPress={this.moveTo.bind(this, this.props.navigator, AddMeal, 2)}>
-                <Text>recipes</Text>
+                recipes
                 <Icon name="bowl"/>
               </Button>
             </FooterTab>
