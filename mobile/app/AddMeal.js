@@ -99,7 +99,6 @@ export default class AddMeal extends React.Component {
         <HeadBuffer />
         <LogoDisplay style={styles.marginBottom} />
         <Text style={styles.Title}>Add a Meal!</Text>
-        <Text>{global._cals}</Text>
         <Searchbar style={styles.search} enter={this.getData} />
         <View style={styles.break}></View>
         <ScrollView
@@ -114,7 +113,7 @@ export default class AddMeal extends React.Component {
                 recipe={meal}
                 showInfo={this.gotoNext}
                 />
-             <Container style={styles.smallBreak}>
+                <Container style={styles.smallBreak}>
                   <Content>
                     <Button 
                       Primary

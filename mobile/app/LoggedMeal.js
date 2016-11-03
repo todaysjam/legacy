@@ -52,7 +52,7 @@ const LoggedMeal = ({ recipe, mealId, showInfo }) => (
   <Swipeout right={swipeoutBtns}>
     <TouchableHighlight
       style={styles.tile}
-      onPress={() => showInfo(recipe, mealId)}
+      onPress={() => showInfo(recipe, mealId )}
     >
       <View style={styles.itemContainer}>
         <Image
