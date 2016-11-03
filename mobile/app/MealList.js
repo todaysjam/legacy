@@ -64,10 +64,6 @@ const styles = StyleSheet.create({
   },
 });
 
-var directToitself = function(navigator) {
-  navigator.push({ MealList });
-} 
-
 export default class MealList extends React.Component {
   constructor(props) {
     super(props);
@@ -84,7 +80,6 @@ export default class MealList extends React.Component {
 
   componentWillMount() {
     var self = this;
-    console.log('before rerender');
     this.getData(this.CalorieCounter.bind(this));
   }
 

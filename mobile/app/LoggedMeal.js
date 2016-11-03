@@ -44,9 +44,6 @@ const styles = StyleSheet.create({
 export default class LoggedMeal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      flag: false
-    };
   }
 
   postMeal(mealId, token) {
