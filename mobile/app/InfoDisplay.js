@@ -91,7 +91,10 @@ const InfoDisplay = props => (
       />
       <View style={styles.buttonContainer}>
         <Button
-          onclick={() => { props.postMeal(props.recipe._id, props.mealId); }} // eslint-disable-line
+          onclick={() => { 
+            props.postMeal(props.recipe._id, props.mealId);
+            props.getData()
+           }} // eslint-disable-line
           text={props.text}
         />
         <Button
