@@ -20,30 +20,30 @@ export default class ShoppingListItem extends React.Component {
     super(props);
     this.setCheck = this.setCheck.bind(this)
     this.state = {
-      checked: false
+      checked: 'false'
     }
   }
+
   componentDidMount() {
-    AsyncStorage.getItem(this.props.item[3]).then( (value) => {
-      console.log('value', value)
-      this.setState({checked: value})
-      console.log('state', this.state.checked)
-    })
+    AsyncStorage.getItem(this.props.item[3], (err, value) => {
+      if (value !== null) {
+        this.setState({checked: value});
+      }
+    });
   }
 
   setCheck () {
-    AsyncStorage.setItem(this.props.item[3], JSON.stringify(!this.state.checked))
-    .then(console.log(!this.state.checked))
-    .then(console.log(AsyncStorage.getItem(this.props.item[3])))
-    .then(this.setState({checked: !this.state.checked}))
-    .then(console.log(this.state.checked))
+    var value = !JSON.parse(this.state.checked);
+    AsyncStorage.setItem(this.props.item[3], JSON.stringify(value), () => {
+      this.setState({checked: value});
+    });
   }
 
   render() {
     return (
       <ListItem style={styles.table}>
         <CheckBox 
-          checked={this.state.checked}
+          checked={JSON.parse(this.state.checked)}
           onPress={this.setCheck}/>
         <Text>{this.props.item[0]} {this.props.item[1]} {this.props.item[2]}</Text>
       </ListItem>
