@@ -91,6 +91,15 @@ const data = [
     [40.361999999999995, 235.76718799999998] //55
 ];
 
+const getMacro = (props, macro) => {
+  compileNutrition(props.recipe.digest.filter ((item) => {
+    if (item.label === macro) {
+      console.log('item', item)
+    }
+  }))
+
+}
+
 const InfoDisplay = props => (
   <View style={styles.container}>
     <HeadBuffer />
@@ -100,11 +109,7 @@ const InfoDisplay = props => (
         style={styles.picture}
         source={{ uri: props.recipe.image }}
       />
-      {compileNutrition(props.recipe.digest.filter ((item) => {
-        if (item.label === 'Fat') {
-          console.log('item', item)
-        }
-      }))}
+      
 
       <View style={styles.buttonContainer}>
         <Button
