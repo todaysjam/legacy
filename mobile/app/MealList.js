@@ -5,9 +5,9 @@ import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
 
+
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,7 +44,16 @@ export default class MealList extends React.Component {
   }
 
   componentWillMount() {
-    this.getData();
+    var self = this
+    this.getData(
+      function(){
+      var calor = 0;
+      self.props.getMealList().forEach((meal) => {
+        calor += meal.recipe.calories
+      })
+      global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')  
+    })
+    
   }
 
   getData(cb) {
@@ -88,23 +97,23 @@ export default class MealList extends React.Component {
         <HeadBuffer />
         <LogoDisplay />
         <Text style={styles.Title}>Weekly Meals!</Text>
+        <Text>{global._cals}</Text>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
           alwaysBounceVertical
         >
           {this.props.getMealList().map((meal, i) => (
-                        <View style={styles.searchItemBorder} key={i}>
-
-            <LoggedMeal
-              recipe={meal.recipe}
-              showInfo={this.gotoNext}
-              key={i}
-              mealId={meal._id} // eslint-disable-line no-underscore-dangle
-              style={styles.Button}
-              textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
-            />
-          </View>
+            <View style={styles.searchItemBorder} key={i}>
+              <LoggedMeal
+                recipe={meal.recipe}
+                showInfo={this.gotoNext}
+                key={i}
+                mealId={meal._id} // eslint-disable-line no-underscore-dangle
+                style={styles.Button}
+                textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
+              />
+            </View>
           ))}
         </ScrollView>
       </View>
