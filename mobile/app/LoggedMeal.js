@@ -15,13 +15,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#1e90ff',
   },
   picture: {
-    height: 80,
+    height: 75,
     width: 80,
-    opacity: 0.85,
+    opacity: 1,
     borderRadius: 5,
-    marginRight: 40,
-    justifyContent: 'flex-start',
-
+    marginRight: 7,
+    marginTop: 3
   },
   textwrap: {
     flexDirection: 'column',
@@ -43,13 +42,19 @@ const styles = StyleSheet.create({
 
 const swipeoutBtns = [
   {
-    text: 'Button'
+    text: 'Delete',
+    backgroundColor: 'red',
+    underlayColor: 'transparent',
+    color: 'white',
+    onPress: function() {
+      console.log('wired');
+    }
   }
 ];
 
 
 const LoggedMeal = ({ recipe, mealId, showInfo }) => (
-  <Swipeout right={swipeoutBtns}>
+  <Swipeout right={swipeoutBtns} autoClose={true}>
     <TouchableHighlight
       style={styles.tile}
       onPress={() => showInfo(recipe, mealId )}
