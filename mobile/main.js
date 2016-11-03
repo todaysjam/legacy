@@ -41,15 +41,14 @@ class App extends React.Component {
   componentDidMount() {
     Exponent.Font.loadAsync({
       HelveticaNeue: require('./assets/HelveticaNeue.ttf'),
-      // FontAwesome: require('./node_modules/@exponent/vector-icons/fonts/FontAwesome.ttf'),
-      // Entypo: require('./node_modules/@exponent/vector-icons/fonts/Entypo.ttf'),
-      // EvilIcons: require('./node_modules/@exponent/vector-icons/fonts/EvilIcons.ttf'),
-      // FontAwesome: require('./node_modules/@exponent/vector-icons/fonts/FontAwesome.ttf'),
-      // Foundation: require('./node_modules/@exponent/vector-icons/fonts/Foundation.ttf'),
-      Ionicons: require('./node_modules/@exponent/vector-icons/fonts/Ionicons.ttf'),
-      // MaterialIcons: require('./node_modules/@exponent/vector-icons/fonts/MaterialIcons.ttf'),
-      // Octicons: require('./node_modules/@exponent/vector-icons/fonts/Octicons.ttf'),
-      // Zocial: require('./node_modules/@exponent/vector-icons/fonts/Zocial.ttf')
+      Entypo: require('./node_modules/react-native-vector-icons/Fonts/Entypo.ttf'),
+      // EvilIcons: require('./node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf'),
+      // FontAwesome: require('./node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf'),
+      // Foundation: require('./node_modules/react-native-vector-icons/Fonts/Foundation.ttf'),
+      Ionicons: require('./node_modules/react-native-vector-icons/Fonts/Ionicons.ttf'),
+      // MaterialIcons: require('./node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf'),
+      // Octicons: require('./node_modules/react-native-vector-icons/Fonts/Octicons.ttf'),
+      // Zocial: require('./node_modules/react-native-vector-icons/Fonts/Zocial.ttf')
     })
   }
   

@@ -46,7 +46,7 @@ export default {
       return this.inverseTextColor;
   },
   get btnTextSize () {
-      return (Platform.OS==='ios') ? this.fontSizeBase* 1.1 :
+      return (Platform.OS==='ios') ? this.fontSizeBase* 3 :
       this.fontSizeBase-1;
   },
   get btnTextSizeLarge () {
@@ -128,7 +128,7 @@ export default {
 
 
   // Icon
-  iconFamily: 'Ionicons',
+  iconFamily: 'Entypo',
   iconFontSize: (Platform.OS === 'ios' ) ? 30 : 28,
   iconMargin: 7,
 
