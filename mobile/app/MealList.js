@@ -18,33 +18,17 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginTop: 15,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    paddingBottom: 60,
   },
   searchItemBorder:{
-    borderRadius: 8,
     padding: 5,
-    marginBottom: 5,
-  },
-  Button: {
-    backgroundColor: '#1e90ff',
+    marginBottom: 5, 
   },
   Title: {
     color: '#1e90ff',
     fontWeight: 'bold',
     marginTop: 5,
     fontSize:24
-  },
-  danger: {
-    backgroundColor: 'red'
-  },
-  container1: {
-    width: width * .8,
-    height: 50,
-    shadowColor: 'black',
-    shadowRadius: 2,
-    shadowOpacity: 0.85,
   },
   text: {
     fontSize: 16,
@@ -61,8 +45,11 @@ export default class MealList extends React.Component {
     this.gotoNext = this.gotoNext.bind(this);
     this.state = {
       view: {
-        backgroundColor: '#1e90ff',
+        backgroundColor: 'white',
         borderRadius: 20,
+      },
+      container1: {
+        shadowColor: 'white',
       },
     }
   }
@@ -85,6 +72,13 @@ export default class MealList extends React.Component {
         view: {
           backgroundColor: 'red',
           borderRadius: 20
+        },
+        container1: {
+          width: width * .8,
+          height: 50,
+          shadowColor: 'black',
+          shadowRadius: 2,
+          shadowOpacity: 0.85
         }
       })
     } else{
@@ -92,6 +86,13 @@ export default class MealList extends React.Component {
         view: {
           backgroundColor: '#1e90ff',
           borderRadius: 20
+        },
+        container1: {
+          width: width * .8,
+          height: 50,
+          shadowColor: 'black',
+          shadowRadius: 2,
+          shadowOpacity: 0.85
         }
       })
     }
@@ -149,7 +150,7 @@ export default class MealList extends React.Component {
         <LogoDisplay />
         <Text style={styles.Title}>Weekly Meals!</Text>
         <View
-          style={styles.container1}
+          style={this.state.container1}
           >
           <View
             style={this.state.view}
@@ -172,7 +173,6 @@ export default class MealList extends React.Component {
                 updateMeals={this.updateMeals.bind(this)}
                 key={i}
                 mealId={meal._id} // eslint-disable-line no-underscore-dangle
-                style={styles.Button}
                 textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
               />
             </View>

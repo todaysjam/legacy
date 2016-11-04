@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
   tile: {
     width: width * 0.9,
     height: 100,
-    borderRadius: 5,
+    borderRadius: 8,
+    borderColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1e90ff',
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
   headline: {
     flexWrap: 'wrap',    
     fontSize: 14,
-    backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
     width: width * .6
   },
