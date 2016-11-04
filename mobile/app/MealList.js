@@ -77,9 +77,10 @@ export default class MealList extends React.Component {
       }
     }
   }
+
   componentWillMount() {
     var self = this;
-    this.getData(this.CalorieCounter.bind(this))
+    this.getData(this.CalorieCounter.bind(this));
   }
 
   CalorieCounter(){
@@ -136,9 +137,6 @@ export default class MealList extends React.Component {
         this.props.navigator.pop();
         this.CalorieCounter();
         });
-      this.setState({
-        refresh: 'true'
-      })
     });
   }
 
@@ -148,11 +146,16 @@ export default class MealList extends React.Component {
       passProps: {
         recipe,
         mealId,
-        getData: this.CalorieCounter.bind(this),
         postMeal: this.postMeal.bind(this),
         text: 'Remove',
       },
     });
+  }
+
+  updateMeals() {
+    this.getData(() => {
+      this.CalorieCounter();
+    })
   }
 
   render() {
@@ -181,6 +184,8 @@ export default class MealList extends React.Component {
               <LoggedMeal
                 recipe={meal.recipe}
                 showInfo={this.gotoNext}
+                token={this.props.getToken()}
+                updateMeals={this.updateMeals.bind(this)}
                 key={i}
                 mealId={meal._id} // eslint-disable-line no-underscore-dangle
                 style={styles.Button}
