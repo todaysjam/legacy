@@ -37,6 +37,15 @@ const styles = StyleSheet.create({
   click: { fontSize: 30 },
   table: {
     width: width * 0.9,
+    flexDirection: 'column',
+    borderWidth: 2,
+    borderColor: '#1e90ff',
+    borderRadius: 5,
+    padding: 5,
+    marginTop: 10,
+  },
+  nutrition: {
+    width: width * 0.9,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 2,
@@ -48,6 +57,10 @@ const styles = StyleSheet.create({
   scroller: {
     marginBottom: 50,
   },
+  calorieRow: {
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
   caloriesText: {
     fontSize: 20,
     fontWeight: 'bold'
@@ -55,25 +68,32 @@ const styles = StyleSheet.create({
   calories: {
     fontSize: 20,
   },
-  nutrients: {
-    fontSize: 16
-  },
   protein: {
-    color: '#993300',
+    color: '#ff6666'
+  },
+  proteinText: {
+    color: '#ff6666',
     fontWeight: 'bold'
   },
   fat: {
-    color: '#999966',
+    color: '#669900'
+  },
+  fatText: {
+    color: '#669900',
     fontWeight: 'bold'
   },
   carbs: {
-    color: '#DAA520',
-    fontWeight: 'bold'
+    color: '#ff9933'
+  },
+  carbsText: {
+    color: '#ff9933',
+    fontWeight: 'bold',
   },
   chart: {
       width: width * 0.7,
       height: 250,
       padding: 10,
+      paddingRight: 25
   },
 });
 
@@ -115,10 +135,12 @@ export default class InfoDisplay extends React.Component {
           <Image
             style={styles.picture}
             source={{ uri: this.props.recipe.image }}
-          />
+          /> 
           <View style={styles.buttonContainer}>
             <Button
-              onclick={() => { this.props.postMeal(this.props.recipe._id, this.props.mealId); }} // eslint-disable-line
+              onclick={() => { 
+                this.props.postMeal(this.props.recipe._id, this.props.mealId);
+               }} // eslint-disable-line
               text={this.props.text}
             />
             <Button
@@ -128,35 +150,23 @@ export default class InfoDisplay extends React.Component {
           </View>
           
           <View style={styles.table}>
-            <Text style={styles.caloriesText}>Calories:</Text>
-            <Text style={styles.fat}>Fat:</Text>
-            <Text style={styles.carbs}>Carbs:</Text>
-            <Text style={styles.protein}>Protein:</Text>
-            <Text style={styles.calories}>{Math.round(this.props.recipe.calories)}</Text>
-            <Text style={styles.nutrients}>{Math.round(this.props.nutrients[0][1])}g</Text>
-            <Text style={styles.nutrients}>{Math.round(this.props.nutrients[1][1])}g</Text>
-            <Text style={styles.nutrients}>{Math.round(this.props.nutrients[2][1])}g</Text>
+            <View style={styles.calorieRow}>
+              <Text style={styles.caloriesText}>Calories:</Text>
+              <Text style={styles.calories}>{Math.round(this.props.recipe.calories)}</Text>
+            </View>
+            <View style={styles.calorieRow}>
+              <Text style={styles.fatText}>Fat:</Text>
+              <Text style={styles.fat}>{Math.round(this.props.nutrients[0][1])}g</Text>
+            </View>
+            <View style={styles.calorieRow}>
+              <Text style={styles.carbsText}>Carbs:</Text>
+              <Text style={styles.carbs}>{Math.round(this.props.nutrients[1][1])}g</Text>
+            </View>
+            <View style={styles.calorieRow}>
+              <Text style={styles.proteinText}>Protein:</Text>
+              <Text style={styles.protein}>{Math.round(this.props.nutrients[2][1])}g</Text>
+            </View>
           </View>
-
-<<<<<<< 0e3b9b00c384e8bc9c30c4a181f729afeae8ef4d
-      <View style={styles.buttonContainer}>
-        <Button
-          onclick={() => { 
-            props.postMeal(props.recipe._id, props.mealId);
-           }} // eslint-disable-line
-          text={props.text}
-        />
-        <Button
-          onclick={() => { props.navigator.pop(); }}
-          text="Back"
-        />
-      </View>
-      
-      <View style={styles.table}>
-        <Text style={styles.caloriesB}>Calories:</Text>
-        <Text style={styles.calories}>{Math.round(props.recipe.calories)}</Text>
-      </View>
-=======
           <View style={styles.container}>
               <Chart
                   style={styles.chart}
@@ -168,15 +178,13 @@ export default class InfoDisplay extends React.Component {
                   type="pie"
                   showDataPoint={false}
                   showXAxisLabels={false}
-                  showYAxisLabels={false}
-                  hideHorizontalGridLines={true}
-                  hideVerticalGridLines={true}
                   sliceColors={['#669900', '#ff9933', '#ff6666']}
+                  axisLineWidth={0}
+                  axisLabelColor={'#fff'}
               />
           </View>
           
->>>>>>> Set up graph and begin styling
-          <View style={styles.table}>
+          <View style={styles.nutrition}>
             <Column
               data={this.compileNutrition(this.props.recipe.digest)}
               name="Nutrition"
@@ -196,7 +204,7 @@ export default class InfoDisplay extends React.Component {
             />
           </View>
 
-          <View style={styles.table}>
+          <View style={styles.nutrition}>
             <Column
               data={this.props.recipe.ingredients}
               name="Ingredients"

@@ -67,7 +67,6 @@ export default class MealList extends React.Component {
     global._count = Math.round(calor)
     global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')
     if(calor > 14000){
-      console.log('toooooo muchhhhh')
       this.setState({
         view: {
           backgroundColor: 'red',
@@ -76,9 +75,6 @@ export default class MealList extends React.Component {
         container1: {
           width: width * .8,
           height: 50,
-          shadowColor: 'black',
-          shadowRadius: 2,
-          shadowOpacity: 0.85
         }
       })
     } else{
@@ -90,9 +86,6 @@ export default class MealList extends React.Component {
         container1: {
           width: width * .8,
           height: 50,
-          shadowColor: 'black',
-          shadowRadius: 2,
-          shadowOpacity: 0.85
         }
       })
     }
