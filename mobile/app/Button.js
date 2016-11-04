@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@exponent/vector-icons';
@@ -60,7 +59,7 @@ const Button = ({ text, icon, onclick }) => {
       >
        <Ionicons name={icon} size={39} color="white" onPress={onclick} /> 
       </TouchableHighlight>
-  ) 
+  )
 };
 
 export default Button;

@@ -5,7 +5,9 @@ import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
 import Button from './Button';
-import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator'
+import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator';
+// import CustomedDrawer from './CustomedDrawer';
+// import Drawer from 'react-native-drawer';
 
 var calor = 0;
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
@@ -35,6 +37,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     textAlign: 'center',
+  },
+  drawerStyles: {
+    shadowColor: '#000000', 
+    shadowOpacity: 0.8, shadowRadius: 3
   }
 });
 
@@ -52,7 +58,8 @@ export default class MealList extends React.Component {
       container1: {
         shadowColor: 'white',
       },
-      animating: true
+      animating: true,
+      showDrawer: false,
     }
   }
 
@@ -154,11 +161,35 @@ export default class MealList extends React.Component {
     })
   }
 
+  menuClicked() {
+    this.setState({showDrawer: !this.state.showDrawer});
+    console.log('menuClicked', this.state.showDrawer);
+  }
+
+  // {
+  //   <Drawer
+  //         ref="navigation"
+  //         type="displace"
+  //         content={<Text>meals</Text>}
+  //         tapToClose={true}
+  //         open={this.state.showDrawer}
+  //         openDrawerOffset={0.2}
+  //         panCloseMask={0.2}
+  //         negotiatePan
+  //         style={styles.drawerStyles}
+  //         tweenHandler={(ratio) => ({
+  //           main: { opacity: Math.max(0.54, 1 - ratio) },
+  //         })}
+  //         >
+  //         <Text>haha</Text>
+  //       </Drawer>
+  // }
+
   render() {
     return (
       <View style={styles.container}>
         <HeadBuffer />
-        <LogoDisplay />
+        <LogoDisplay menuClicked={this.menuClicked.bind(this)}/>
         <Text style={styles.Title}>Weekly Meals!</Text>
         <ActivityIndicator
           animating={this.state.animating}
