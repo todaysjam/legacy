@@ -83,10 +83,12 @@ export default class AddMeal extends React.Component {
   }
 
   gotoNext(recipe) {
+    const nutrients = recipe.digest.map(nutrient => [nutrient.label, nutrient.total])
     this.props.navigator.push({
       component: InfoDisplay,
       passProps: {
         recipe,
+        nutrients,
         postMeal: this.postMeal,
         text: 'Add',
       },
