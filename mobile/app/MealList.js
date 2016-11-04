@@ -58,17 +58,18 @@ export default class MealList extends React.Component {
 
   componentWillMount() {
     var self = this;
+    if(!this.state.animating){
+      this.setToggleTimeout()
+    }
     this.getData(this.CalorieCounter.bind(this));
   }
 
-   componentWillUnmount() {
-    clearTimeout(this._timer);
+  componentWillUnmount() {
+    
   }
 
   setToggleTimeout() {
-    this._timer = setTimeout(() => {
-      this.setState({animating: !this.state.animating});
-    });
+    this.setState({animating: !this.state.animating});
   }
 
   CalorieCounter(){
@@ -101,7 +102,9 @@ export default class MealList extends React.Component {
         }
       })
     }
-    this.setToggleTimeout();
+    if(this.state.animating){
+      this.setToggleTimeout();
+    }
   }
 
   getData(cb) {
