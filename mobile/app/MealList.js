@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: 15,
     alignItems: 'center',
+    paddingBottom: 60
   },
   searchItemBorder:{
     padding: 5,
