@@ -18,17 +18,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginTop: 15,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    paddingBottom: 60,
   },
   searchItemBorder:{
-    borderRadius: 8,
     padding: 5,
-    marginBottom: 5,
-  },
-  Button: {
-    backgroundColor: '#1e90ff',
+    marginBottom: 5, 
   },
   Title: {
     color: '#1e90ff',
@@ -36,32 +30,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize:24
   },
-  danger: {
-    backgroundColor: 'red'
-  },
-  container1: {
-    width: width * .8,
-    height: 50,
-    backgroundColor: 'white',
-    borderWidth: 3,
-    borderColor: 'white',
-    borderRadius: 5,
-    shadowColor: 'black',
-    shadowRadius: 2,
-    shadowOpacity: 0.85,
-  },
-  container2: {
-    backgroundColor: '#1e90ff',
-    borderRadius: 5,
-  },
   text: {
-    justifyContent: 'center',
     fontSize: 16,
-    backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
-    borderRadius: 5,
-    textAlign: 'center'
-  },
+    textAlign: 'center',
+  }
 });
 
 export default class MealList extends React.Component {
@@ -71,10 +44,13 @@ export default class MealList extends React.Component {
     this.postMeal = this.postMeal.bind(this);
     this.gotoNext = this.gotoNext.bind(this);
     this.state = {
-      style: {
-        fontSize: 20,
-        textAlign: 'center'
-      }
+      view: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+      },
+      container1: {
+        shadowColor: 'white',
+      },
     }
   }
 
@@ -93,22 +69,31 @@ export default class MealList extends React.Component {
     if(calor > 14000){
       console.log('toooooo muchhhhh')
       this.setState({
-        style:{
-          backgroundColor: 'red',
-          borderRadius: 10,
-          fontSize: 20,
-          textAlign: 'center',
-          color: 'white'
-        },
         view: {
           backgroundColor: 'red',
-          borderRadius: 20,
-          width: width * .8
+          borderRadius: 20
+        },
+        container1: {
+          width: width * .8,
+          height: 50,
+          shadowColor: 'black',
+          shadowRadius: 2,
+          shadowOpacity: 0.85
         }
       })
     } else{
       this.setState({
-        nothin: ''
+        view: {
+          backgroundColor: '#1e90ff',
+          borderRadius: 20
+        },
+        container1: {
+          width: width * .8,
+          height: 50,
+          shadowColor: 'black',
+          shadowRadius: 2,
+          shadowOpacity: 0.85
+        }
       })
     }
   }
@@ -165,10 +150,10 @@ export default class MealList extends React.Component {
         <LogoDisplay />
         <Text style={styles.Title}>Weekly Meals!</Text>
         <View
-          style={styles.container1}
-        >
+          style={this.state.container1}
+          >
           <View
-            style={styles.container2}
+            style={this.state.view}
             elevation={3}
             >
               <Text style={styles.text}> {global._cals} </Text>
@@ -188,7 +173,6 @@ export default class MealList extends React.Component {
                 updateMeals={this.updateMeals.bind(this)}
                 key={i}
                 mealId={meal._id} // eslint-disable-line no-underscore-dangle
-                style={styles.Button}
                 textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
               />
             </View>
