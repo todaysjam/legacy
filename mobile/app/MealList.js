@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView,Text, Dimensions, } from 'react-native';
+import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator} from 'react-native';
 import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
 import Button from './Button';
-
+import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator'
 
 var calor = 0;
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
@@ -52,12 +52,23 @@ export default class MealList extends React.Component {
       container1: {
         shadowColor: 'white',
       },
+      animating: true
     }
   }
 
   componentWillMount() {
     var self = this;
     this.getData(this.CalorieCounter.bind(this));
+  }
+
+   componentWillUnmount() {
+    clearTimeout(this._timer);
+  }
+
+  setToggleTimeout() {
+    this._timer = setTimeout(() => {
+      this.setState({animating: !this.state.animating});
+    });
   }
 
   CalorieCounter(){
@@ -90,6 +101,7 @@ export default class MealList extends React.Component {
         }
       })
     }
+    this.setToggleTimeout();
   }
 
   getData(cb) {
@@ -145,6 +157,10 @@ export default class MealList extends React.Component {
         <HeadBuffer />
         <LogoDisplay />
         <Text style={styles.Title}>Weekly Meals!</Text>
+        <ActivityIndicator
+          animating={this.state.animating}
+          size="large"
+          />
         <View
           style={this.state.container1}
           >
