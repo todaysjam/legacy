@@ -92,8 +92,7 @@ const styles = StyleSheet.create({
   chart: {
       width: width * 0.7,
       height: 250,
-      padding: 10,
-      paddingRight: 25
+      padding: 10
   },
 });
 
