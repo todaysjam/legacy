@@ -38,6 +38,7 @@
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
     "react-native": "^0.36.0",
+    "react-native-chart": "^1.0.8-beta",
     "react-native-scrollable-tab-view": "^0.6.0",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
