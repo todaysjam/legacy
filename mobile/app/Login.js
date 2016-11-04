@@ -15,6 +15,7 @@ import MealList from './MealList';
 import { Components, Font } from 'exponent';
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   main: {
@@ -28,8 +29,8 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   brand: {
-    width: 300,
-    height: 92
+    width: width * .87,
+    height: height * .15
   },
   KBAVcontainer: {
     flex: 1,
@@ -207,7 +208,7 @@ export default class Login extends React.Component {
     return (
 
       <Components.LinearGradient 
-        colors={['#1E90FF', '#63b2ff']}
+        colors={['#1E90FF', '#399af9', '#63b2ff']}
         style={styles.main}>
           <KeyboardAvoidingView behavior={this.state.behavior} style={styles.KBAVcontainer}>
             <View style={styles.logo}>
