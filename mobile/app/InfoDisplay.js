@@ -14,6 +14,7 @@ import HeadBuffer from './HeadBuffer';
 import Chart from 'react-native-chart';
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -90,10 +91,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   chart: {
-      width: width * 0.7,
-      height: 250,
-      padding: 10,
-      paddingRight: 25
+    width: width * 0.7,
+    height: height * 0.35,
+    justifyContent: 'center',
+    padding: 10,
+    marginRight: 25,
+    paddingRight: 25
   },
 });
 
