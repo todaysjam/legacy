@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Alert,
   Dimensions,
+  KeyboardAvoidingView
 } from 'react-native';
 import t from 'tcomb-form-native';
 import MealList from './MealList';
@@ -29,6 +30,12 @@ const styles = StyleSheet.create({
   brand: {
     width: 300,
     height: 92
+  },
+  KBAVcontainer: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   container: {
     justifyContent: 'center',
@@ -129,6 +136,7 @@ export default class Login extends React.Component {
     super(props);
     this.userInfo = null;
     this.state = {
+      behavior: 'padding',
       fontLoaded: false,
     }
   }
@@ -201,40 +209,42 @@ export default class Login extends React.Component {
       <Components.LinearGradient 
         colors={['#1E90FF', '#63b2ff']}
         style={styles.main}>
-          <View style={styles.logo}>
-            <Image
-              // source={{uri: 'https://www.shopify.com/tools/logo-maker/show/YmRaSWk0YWVPenY4ZDh1NHAxMHBXdz09LS1GNUhZaDd2YTFMaHBHNmtGQUJqeWZBPT0=--2c33990e4f83acbff27c5ab8787c2f81e1187508.png'}}
-              source={require('../assets/brand.png')}
-              style={styles.brand}
-            >
-            </Image>
-          </View>
-          <View style={styles.container}>
-            <View style={styles.form}>
-              <Form
-              style={styles.form}
-                ref="form"
-                type={Person}
-                options={options}
-              />
-            </View>
-            <View style={styles.row}>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={() => this.authUser(loginUrl)}
-                underlayColor="#0876e0"
+          <KeyboardAvoidingView behavior={this.state.behavior} style={styles.KBAVcontainer}>
+            <View style={styles.logo}>
+              <Image
+                // source={{uri: 'https://www.shopify.com/tools/logo-maker/show/YmRaSWk0YWVPenY4ZDh1NHAxMHBXdz09LS1GNUhZaDd2YTFMaHBHNmtGQUJqeWZBPT0=--2c33990e4f83acbff27c5ab8787c2f81e1187508.png'}}
+                source={require('../assets/brand.png')}
+                style={styles.brand}
               >
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={() => this.authUser(signupUrl)}
-                underlayColor="#0876e0"
-              >
-                <Text style={styles.buttonText}>Signup</Text>
-              </TouchableHighlight>
+              </Image>
             </View>
-          </View>
+            <View style={styles.container}>
+              <View style={styles.form}>
+                <Form
+                style={styles.form}
+                  ref="form"
+                  type={Person}
+                  options={options}
+                />
+              </View>
+              <View style={styles.row}>
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={() => this.authUser(loginUrl)}
+                  underlayColor="#0876e0"
+                >
+                  <Text style={styles.buttonText}>Login</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={() => this.authUser(signupUrl)}
+                  underlayColor="#0876e0"
+                >
+                  <Text style={styles.buttonText}>Signup</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
 
           <View style={styles.footer}>
             <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
