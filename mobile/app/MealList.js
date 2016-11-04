@@ -126,10 +126,12 @@ export default class MealList extends React.Component {
   }
 
   gotoNext(recipe, mealId, getData) {
+    const nutrients = recipe.digest.map(nutrient => [nutrient.label, nutrient.total])
     this.props.navigator.push({
       component: InfoDisplay,
       passProps: {
         recipe,
+        nutrients,
         mealId,
         postMeal: this.postMeal.bind(this),
         text: 'Remove',

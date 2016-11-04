@@ -48,25 +48,38 @@ const styles = StyleSheet.create({
   scroller: {
     marginBottom: 50,
   },
-  caloriesB: {
+  caloriesText: {
     fontSize: 20,
     fontWeight: 'bold'
   },
   calories: {
     fontSize: 20,
   },
+  nutrients: {
+    fontSize: 16
+  },
+  protein: {
+    color: '#993300',
+    fontWeight: 'bold'
+  },
+  fat: {
+    color: '#999966',
+    fontWeight: 'bold'
+  },
+  carbs: {
+    color: '#DAA520',
+    fontWeight: 'bold'
+  },
   chart: {
-      width: width * 0.75,
-      height: 300,
+      width: width * 0.7,
+      height: 250,
+      padding: 10,
   },
 });
 
 export default class InfoDisplay extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   data: []  
-    // }
   }
 
   /* eslint-disable no-param-reassign */
@@ -91,22 +104,8 @@ export default class InfoDisplay extends React.Component {
     });
     return result;
   }
+
 /* eslint-enable no-param-reassign */
-
-  getMacro (macro) {
-    this.compileNutrition(this.props.recipe.digest
-      .filter(item => item.label === macro)
-      .map(nutrient => nutrient.total)
-    )
-  }
-
-  // componentDidMount() {
-  //   const fat = Math.round(this.getMacro('Fat'))
-  //   const carbs = Math.round(this.getMacro('Carbs'))
-  //   const protein = Math.round(this.getMacro('Protein'))
-  //   this.setState({data: [[0, fat], [fat, carbs], [carbs, protein]]});
-  // }
-
   render() {
     return (
       <View style={styles.container}>
@@ -129,10 +128,17 @@ export default class InfoDisplay extends React.Component {
           </View>
           
           <View style={styles.table}>
-            <Text style={styles.caloriesB}>Calories:</Text>
+            <Text style={styles.caloriesText}>Calories:</Text>
+            <Text style={styles.fat}>Fat:</Text>
+            <Text style={styles.carbs}>Carbs:</Text>
+            <Text style={styles.protein}>Protein:</Text>
             <Text style={styles.calories}>{Math.round(this.props.recipe.calories)}</Text>
+            <Text style={styles.nutrients}>{Math.round(this.props.nutrients[0][1])}g</Text>
+            <Text style={styles.nutrients}>{Math.round(this.props.nutrients[1][1])}g</Text>
+            <Text style={styles.nutrients}>{Math.round(this.props.nutrients[2][1])}g</Text>
           </View>
 
+<<<<<<< 0e3b9b00c384e8bc9c30c4a181f729afeae8ef4d
       <View style={styles.buttonContainer}>
         <Button
           onclick={() => { 
@@ -150,26 +156,26 @@ export default class InfoDisplay extends React.Component {
         <Text style={styles.caloriesB}>Calories:</Text>
         <Text style={styles.calories}>{Math.round(props.recipe.calories)}</Text>
       </View>
-          <View style={styles.table}>
-            <Column
-              data={this.props.recipe.ingredients}
-              name="Ingredients"
-              index="food"
-            />
-            <Column
-              data={this.props.recipe.ingredients}
-              name="Qty"
-              index="quantity"
-              alignRight
-            />
-            <Column
-              data={this.props.recipe.ingredients}
-              name="Unit"
-              index="measure"
-              alignRight
-            />
+=======
+          <View style={styles.container}>
+              <Chart
+                  style={styles.chart}
+                  data={[
+                    [0, this.props.nutrients[0][1]],
+                    [this.props.nutrients[0][1], this.props.nutrients[1][1]],
+                    [this.props.nutrients[1][1], this.props.nutrients[2][1]]
+                  ]}
+                  type="pie"
+                  showDataPoint={false}
+                  showXAxisLabels={false}
+                  showYAxisLabels={false}
+                  hideHorizontalGridLines={true}
+                  hideVerticalGridLines={true}
+                  sliceColors={['#669900', '#ff9933', '#ff6666']}
+              />
           </View>
-
+          
+>>>>>>> Set up graph and begin styling
           <View style={styles.table}>
             <Column
               data={this.compileNutrition(this.props.recipe.digest)}
@@ -190,18 +196,24 @@ export default class InfoDisplay extends React.Component {
             />
           </View>
 
-          <View style={styles.container}>
-              <Chart
-                  style={styles.chart}
-                  // data={this.state.data}
-                  data={[
-                    [0, this.getMacro('Fat')],
-                    [this.getMacro('Fat'), this.getMacro('Carbs')],
-                    [this.getMacro('Carbs'), this.getMacro('Protein')]
-                  ]}
-                  type="pie"
-                  showDataPoint={true}
-               />
+          <View style={styles.table}>
+            <Column
+              data={this.props.recipe.ingredients}
+              name="Ingredients"
+              index="food"
+            />
+            <Column
+              data={this.props.recipe.ingredients}
+              name="Qty"
+              index="quantity"
+              alignRight
+            />
+            <Column
+              data={this.props.recipe.ingredients}
+              name="Unit"
+              index="measure"
+              alignRight
+            />
           </View>
 
         </ScrollView>
