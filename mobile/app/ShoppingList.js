@@ -102,7 +102,7 @@ export default class ShoppingList extends React.Component {
         openDrawerOffset={() => width *.5}
         closedDrawerOffset={() => 0}
         panOpenMask={0}
-        panCloseMask={0.2}
+        panCloseMask={0.5}
         negotiatePan
         >
           <View style={styles.container}>
