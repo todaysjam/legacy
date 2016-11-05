@@ -1,10 +1,13 @@
-import Exponent from 'exponent';
+// import packages
 import React from 'react';
 import { Navigator } from 'react-native';
+import Exponent from 'exponent';
 
+// import components
 import NavBar from './app/NavBar';
 import Login from './app/Login';
 
+// main App
 class App extends React.Component {
   constructor(props) {
     super(props);
