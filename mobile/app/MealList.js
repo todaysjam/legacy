@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator } from 'react-native';
 import { Container, Content, Button } from 'native-base';
+import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator, Platform } from 'react-native';
+
 import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
@@ -98,7 +99,8 @@ export default class MealList extends React.Component {
           borderRadius: 20,
           width: width * .8,
           height: 50,
-          borderRadius: 20,
+          //for ios phone, overflow needs to be set as 'hidden'
+          overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
         },
       })
     } else{
@@ -108,7 +110,8 @@ export default class MealList extends React.Component {
           borderRadius: 20,
           width: width * .8,
           height: 50,
-          borderRadius: 20,
+          //
+          overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
         },
       })
     }
