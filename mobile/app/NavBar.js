@@ -29,6 +29,7 @@ export default class NavBar extends React.Component {
   } // end constructor
 
   moveTo(navigator, component, index) {
+    console.log('component: ', component);
     if (index === 0 ) {
       this.setState({buttonState: [true, false, false]});
     } else if (index === 1 ) {
@@ -36,6 +37,7 @@ export default class NavBar extends React.Component {
     } else if (index === 2 ) {
       this.setState({buttonState: [false, false, true]});
     }
+    console.log('I am here!!!');
     navigator.replace({ component });
   }
 

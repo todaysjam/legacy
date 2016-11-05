@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Dimensions, Text, StyleSheet, Image } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Header, Title } from 'native-base';
 
-import { Entypo, EvilIcons, FontAwesome, Foundation, Ionicons, MaterialIcons, Octicons, Zocial } from '@exponent/vector-icons';
+import { Ionicons } from '@exponent/vector-icons';
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const LogoDisplay = () => (
+const LogoDisplay = (props) => (
   <Container style={styles.logo}>
     <Header style={styles.headline}>
       <Button transparent>
