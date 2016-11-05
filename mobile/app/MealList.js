@@ -77,10 +77,6 @@ export default class MealList extends React.Component {
     this.getData(this.CalorieCounter.bind(this));
   }
 
-  componentWillUnmount() {
-    
-  }
-
   setToggleTimeout() {
     this.setState({animating: !this.state.animating});
   }
@@ -91,8 +87,8 @@ export default class MealList extends React.Component {
       calor += meal.recipe.calories
     })
     global._count = Math.round(calor)
-    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')
-    if(calor > 14000){
+    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._globalCaloriesCount || 14000));
+    if(calor > (global._globalCaloriesCount || 14000)){
       this.setState({
         view: {
           backgroundColor: 'red',
@@ -135,7 +131,6 @@ export default class MealList extends React.Component {
       headers: { 'x-access-token': this.props.getToken() },
     })
     .then(() => {
-      console.log('sheng wants to console log here')
       this.getData(() => {
         this.props.navigator.pop();
         this.CalorieCounter();
@@ -178,7 +173,7 @@ export default class MealList extends React.Component {
         ref="drawer"
         type="overlay"
         content={
-          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
+          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} updateCalories={this.CalorieCounter.bind(this)}/>
         }
         //need to think what is the best way to close it;
         acceptTap={true}
