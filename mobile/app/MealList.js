@@ -136,7 +136,6 @@ export default class MealList extends React.Component {
       headers: { 'x-access-token': this.props.getToken() },
     })
     .then(() => {
-      console.log('sheng wants to console log here')
       this.getData(() => {
         this.props.navigator.pop();
         this.CalorieCounter();
@@ -146,15 +145,11 @@ export default class MealList extends React.Component {
 
   clearMeals() {
     fetch(userUrl + 'clearMeals/' + this.props.getUserId(), {
-      method: 'GET',
+      method: 'PUT',
       headers: { 'x-access-token': this.props.getToken() },
     }).then((res) => {
-      console.log(res);
+      console.log('clearMeals res', res);
       this.getData(() => {
-        console.log('I am here');
-        if(this.props.navigator.getCurrentRoutes().length > 2) {
-          this.props.navigator.pop();
-        }
         this.CalorieCounter();
       });
     });
@@ -203,11 +198,9 @@ export default class MealList extends React.Component {
         captureGestures={true}
         style={styles.drawer}
         onOpen={() => {
-          console.log('onopen')
           this.setState({drawerOpen: true})
         }}
         onClose={() => {
-          console.log('onclose')
           this.setState({drawerOpen: false})
         }}
         
