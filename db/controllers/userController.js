@@ -70,7 +70,10 @@ exports.authenticateUser = (req, res) => {
     });
 };
 
-exports.clearUserMeals = (userId) => User.findByIdAndUpdate({ _id: userId }, { $set: { mealIds: [] } }, { new: true});
+exports.clearUserMeals = (req, res) => {
+  User.findByIdAndUpdate({ _id: req.params.id }, { $set: { mealIds: [] } }, { new: true})
+  .then(() => res.status(200).send('All Meals cleared'));
+};
 
 /*
 Helper functions mainly used by the mealController
