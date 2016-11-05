@@ -90,8 +90,8 @@ export default class MealList extends React.Component {
       calor += meal.recipe.calories
     })
     global._count = Math.round(calor)
-    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')
-    if(calor > 14000){
+    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._globalCalorieCount || 14000));
+    if(calor > (global._globalCalorieCount || 14000)){
       this.setState({
         view: {
           backgroundColor: 'red',
