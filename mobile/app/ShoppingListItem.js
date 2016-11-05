@@ -1,22 +1,13 @@
 import React from 'react';
+
+// import packages
 import { StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { Container, Content, List, ListItem, Text, CheckBox } from 'native-base';
 
 // establish constants
 const width = Dimensions.get('window').width;
 
-// stylesheet
-const styles = StyleSheet.create({
-  table: {
-    width: width * 0.9,
-    marginBottom: 4,
-    flexDirection: 'row',
-    borderColor: 'lightblue',
-    padding: 5,
-    marginTop: 10,
-  }
-}); // end styles
-
+// ShoppingListItem Component
 export default class ShoppingListItem extends React.Component {
   constructor(props) {
     super(props);
@@ -51,4 +42,16 @@ export default class ShoppingListItem extends React.Component {
       </ListItem>
     );
   } // end render
-} // end ShoppingListItem
+} // end ShoppingListItem Component
+
+// stylesheet
+const styles = StyleSheet.create({
+  table: {
+    width: width * 0.9,
+    marginBottom: 4,
+    flexDirection: 'row',
+    borderColor: 'lightblue',
+    padding: 5,
+    marginTop: 10,
+  }
+}); // end styles
