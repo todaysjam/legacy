@@ -16,13 +16,10 @@ export default class ToggleAnimatingActivityIndicator extends Component {
     this.state = {
       animating: true,
     };
-  }
+  } // end of constructor
 
-  componentDidMount() {
-  }
   componentDidRender(){
-        this.setToggleTimeout();
-
+    this.setToggleTimeout();
   }
 
   componentWillUnmount() {
@@ -42,5 +39,5 @@ export default class ToggleAnimatingActivityIndicator extends Component {
         size="large"
       />
     );
-  }
+  } // end of component ToggleAnimatingActivityIndicator definition and export
 }

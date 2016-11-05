@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Image, Dimensions, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Header, Title } from 'native-base';
 
+// constants definition
 const width = Dimensions.get('window').width;
 
+// stylesheet definition
 const styles = StyleSheet.create({
   tile: {
     width: width * 0.9,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
       height: 2,
     },
   },
-});
+}); // end of stylesheet definition
 
 const Tile = ({ recipe, mealId, showInfo }) => (
   <TouchableHighlight
@@ -69,6 +71,6 @@ const Tile = ({ recipe, mealId, showInfo }) => (
       </View>
     </Image>
   </TouchableHighlight>
-);
+);  // end of tile Component definition
 
 export default Tile;

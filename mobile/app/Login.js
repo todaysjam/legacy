@@ -14,9 +14,11 @@ import t from 'tcomb-form-native';
 import MealList from './MealList';
 import { Components, Font } from 'exponent';
 
+// constants definition
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
+// stylesheet definition
 const styles = StyleSheet.create({
   main: {
     flex: 1,
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
   form: {
     borderColor: 'red'
   }
-});
+}); // end of stylesheet definition
 // ENV Variables
 const loginUrl = 'https://mealdotlegacy.herokuapp.com/api/user/authenticate';
 const signupUrl = 'https://mealdotlegacy.herokuapp.com/api/user';
@@ -123,7 +125,6 @@ const options = {
   }
 };
 
-
 const onValueChange = async (item, selectedValue) => {
   try {
     await AsyncStorage.setItem(item, selectedValue);
@@ -132,6 +133,7 @@ const onValueChange = async (item, selectedValue) => {
   }
 };
 
+// define and export Login Component
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -140,26 +142,18 @@ export default class Login extends React.Component {
       behavior: 'padding',
       fontLoaded: false,
     }
-  }
+  } // end of constructor
 
-
+  // define the next rendered view when user is login
   gotoNext() {
     this.props.navigator.push({
       component: MealList,
       passProps: {
       },
     });
-  }
+  } // end of function definftion: gotoNext
 
-  // login() {
-  //   AsyncStorage.getItem('userId', (err, result) => {
-  //     this.setState( { userId: result });
-  //   });
-  //   AsyncStorage.getItem('token', (err, result) => {
-  //     this.setState( { token: result });
-  //   });
-  // }
-
+  // function definition: user authorization
   authUser(url) {
     console.log('I AM HERE');
     const value = this.refs.form.getValue();
@@ -190,24 +184,10 @@ export default class Login extends React.Component {
       })
       .done();
     }
-  }
-
-  // custom fonts are not importing correctly
-  // async ComponentDidMount() {
-  //   await Font.loadAsync({
-  //     'Courgette-Regular': require('../assets/Courgette-Regular.ttf'),
-  //   });
-  //   this.setState({ fontLoaded: true });
-  // }
-
-// tried to preload the image, this still stutters, but stutters consistenly, versus the other which can potentially be faster, or slower depending on async load in the off-thread
-// componentWillMount() {
-//   this.image = (<Image source={require('../assets/brand.png')} />);
-// }
+  } // end of function defintion: authUser
 
   render() {
     return (
-
       <Components.LinearGradient 
         colors={['#1E90FF', '#399af9', '#63b2ff']}
         style={styles.main}>
@@ -253,5 +233,5 @@ export default class Login extends React.Component {
           </View>
       </Components.LinearGradient>
     );
-  }
+  } // end of function definiton: render
 }

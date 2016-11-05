@@ -6,6 +6,7 @@ import Swipeout from 'react-native-swipeout';
 const width = Dimensions.get('window').width;
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
+// stylesheet definition
 const styles = StyleSheet.create({
   tile: {
     width: width * 0.9,
@@ -39,13 +40,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
   }
-});
+}); //end of styles definition
 
 export default class LoggedMeal extends React.Component {
   constructor(props) {
     super(props);
-  }
+  } //end of constructor
 
+  //define a function to fire the ajax request to delete a meal from the mealList of a user
   postMeal(mealId, token) {
     fetch(mealUrl + mealId, {
       method: 'DELETE',
@@ -54,9 +56,10 @@ export default class LoggedMeal extends React.Component {
     .then(() => {
       this.props.updateMeals();
     })
-  }
+  } //end of function: PostMeal
 
   render() {
+    // define the clickable button shown when an entry of meal is swiped
     const swipeoutBtns = [
       {
         text: 'Delete',
@@ -67,7 +70,7 @@ export default class LoggedMeal extends React.Component {
           this.postMeal(this.props.mealId, this.props.token);
         }
       }
-    ];
+    ]; // end of clickable button defintion 
 
     return (
       <Swipeout right={swipeoutBtns} autoClose={true} >
@@ -96,5 +99,5 @@ export default class LoggedMeal extends React.Component {
         </TouchableHighlight>
       </Swipeout>
     );
-  }
+  } //end of function: render
 }
