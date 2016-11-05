@@ -66,9 +66,9 @@ export default class MealList extends React.Component {
       //Drawer Related States
       drawerOpen: false,
       drawerDisabled: false,
+      animating: true
     }
   }
-
   componentWillMount() {
     var self = this;
     if(!this.state.animating){
@@ -96,23 +96,19 @@ export default class MealList extends React.Component {
       this.setState({
         view: {
           backgroundColor: 'red',
-          borderRadius: 20
-        },
-        container1: {
+          borderRadius: 20,
           width: width * .8,
           height: 50,
-        }
+        },
       })
     } else{
       this.setState({
         view: {
           backgroundColor: '#1e90ff',
-          borderRadius: 20
-        },
-        container1: {
+          borderRadius: 20,
           width: width * .8,
           height: 50,
-        }
+        },
       })
     }
     if(this.state.animating){
