@@ -1,10 +1,14 @@
 import React from 'react';
+
+// import packages
 import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { Button, Container, Content, Footer, FooterTab, Icon, Header } from 'native-base';
+
+// import components
 import MealList from './MealList';
 import ShoppingList from './ShoppingList';
 import AddMeal from './AddMeal';
 
-import { Button, Container, Content, Footer, FooterTab, Icon, Header } from 'native-base';
 //the css property of the components within Footer FooterTab can't be 
 //set by the props of each single item
 //they are all set throught a Theme file, which is the value of the props.theme of Footer, FooterTab
@@ -12,14 +16,6 @@ import Theme from './Theme';
 
 // establish constants
 const width = Dimensions.get('window').width;
-
-// stylesheet
-const styles = StyleSheet.create({
-  nothing: {
-    flex: 0,
-    backgroundColor: '#1e90ff'
-  }
-}); //end styles
 
 export default class NavBar extends React.Component { 
   constructor(props) {
@@ -67,3 +63,11 @@ export default class NavBar extends React.Component {
     return null;
   } // end render
 } // end NavBar
+
+// stylesheet
+const styles = StyleSheet.create({
+  nothing: {
+    flex: 0,
+    backgroundColor: '#1e90ff'
+  }
+}); //end styles
