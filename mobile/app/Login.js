@@ -1,31 +1,159 @@
 import React from 'react';
-import {
-  AsyncStorage,
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  TouchableHighlight,
-  Alert,
-  Dimensions,
-  KeyboardAvoidingView
-} from 'react-native';
+
+// import packages
+import { AsyncStorage, StyleSheet, Text, Image, View, TouchableHighlight, Alert, Dimensions, KeyboardAvoidingView } from 'react-native';
 import t from 'tcomb-form-native';
-import MealList from './MealList';
 import { Components, Font } from 'exponent';
 
-// constants definition
+// import components
+import MealList from './MealList';
+
+// establish constants
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+const loginUrl = 'https://mealdotlegacy.herokuapp.com/api/user/authenticate';
+const signupUrl = 'https://mealdotlegacy.herokuapp.com/api/user';
 
-// stylesheet definition
+// T-Form Options/Setup
+const Form = t.form.Form;
+const Person = t.struct({
+  username: t.String,
+  password: t.String,
+});
+const options = {
+  fields: {
+    username: {
+      auto: 'placeholders',
+      placeholder: 'Username',
+      autoCapitalize: 'none',
+    },
+    password: {
+      secureTextEntry: true,
+      auto: 'placeholders',
+      error: 'incorrect login information'
+    }
+  }
+};
+
+// async storage to set token
+const onValueChange = async (item, selectedValue) => {
+  try {
+    await AsyncStorage.setItem(item, selectedValue);
+  } catch (error) {
+    console.log(`AsyncStorage error: ${error.message}`);
+  }
+}; // end onValueChange
+
+// Login Component
+export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.userInfo = null;
+    this.state = {
+      behavior: 'padding',
+      fontLoaded: false,
+    }
+  } // end constructor
+
+  // define the next rendered view when user is login
+  gotoNext() {
+    this.props.navigator.push({
+      component: MealList,
+      passProps: {
+      },
+    });
+  } // end of function definftion: gotoNext
+
+  // function definition: user authorization
+  authUser(url) {
+    console.log('I AM HERE');
+    const value = this.refs.form.getValue();
+    if (value) {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: value.username,
+          password: value.password,
+        }),
+      })
+      .then(response => response.json())
+      .then((responseData) => {
+        const token = responseData.token;
+        const userId = responseData.userId;
+        onValueChange('token', token);
+        onValueChange('userId', userId);
+        this.props.updateToken(token);
+        this.props.updateUserId(userId);
+        this.gotoNext();
+      })
+      .catch(() => {
+        Alert.alert('incorrect login information');
+      })
+      .done();
+    }
+  } // end authUser
+
+  render() {
+    return (
+      <Components.LinearGradient 
+        colors={['#1E90FF', '#399af9', '#63b2ff']}
+        style={styles.main}>
+          <KeyboardAvoidingView behavior={this.state.behavior} style={styles.KBAVcontainer}>
+            <View style={styles.logo}>
+              <Image
+                // source={{uri: 'https://www.shopify.com/tools/logo-maker/show/YmRaSWk0YWVPenY4ZDh1NHAxMHBXdz09LS1GNUhZaDd2YTFMaHBHNmtGQUJqeWZBPT0=--2c33990e4f83acbff27c5ab8787c2f81e1187508.png'}}
+                source={require('../assets/brand.png')}
+                style={styles.brand}
+              >
+              </Image>
+            </View>
+            <View style={styles.container}>
+              <View style={styles.form}>
+                <Form
+                style={styles.form}
+                  ref="form"
+                  type={Person}
+                  options={options}
+                />
+              </View>
+              <View style={styles.row}>
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={() => this.authUser(loginUrl)}
+                  underlayColor="#0876e0"
+                >
+                  <Text style={styles.buttonText}>Login</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={() => this.authUser(signupUrl)}
+                  underlayColor="#0876e0"
+                >
+                  <Text style={styles.buttonText}>Signup</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
+          </View>
+      </Components.LinearGradient>
+    );
+  } // end render
+} // end Login Component
+
+// stylesheet
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'dodgerblue',
   },
   logo: {
     marginTop: 40
@@ -42,14 +170,11 @@ const styles = StyleSheet.create({
   },
   container: {
     justifyContent: 'center',
-    // alignItems: 'center',
     alignSelf: 'center',
     marginTop: 30,
     width: width * 0.9,
     borderRadius: 15,
     flexDirection: 'column',
-    // width: 150,
-    // height: 300,
     padding: 20,
     backgroundColor: 'rgba(255,255,255,.85)',
   },
@@ -101,137 +226,4 @@ const styles = StyleSheet.create({
   form: {
     borderColor: 'red'
   }
-}); // end of stylesheet definition
-// ENV Variables
-const loginUrl = 'https://mealdotlegacy.herokuapp.com/api/user/authenticate';
-const signupUrl = 'https://mealdotlegacy.herokuapp.com/api/user';
-const Form = t.form.Form;
-const Person = t.struct({
-  username: t.String,
-  password: t.String,
-});
-const options = {
-  fields: {
-    username: {
-      auto: 'placeholders',
-      placeholder: 'Username',
-      autoCapitalize: 'none',
-    },
-    password: {
-      secureTextEntry: true,
-      auto: 'placeholders',
-      error: 'incorrect login information'
-    }
-  }
-};
-
-const onValueChange = async (item, selectedValue) => {
-  try {
-    await AsyncStorage.setItem(item, selectedValue);
-  } catch (error) {
-    console.log(`AsyncStorage error: ${error.message}`);
-  }
-};
-
-// define and export Login Component
-export default class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.userInfo = null;
-    this.state = {
-      behavior: 'padding',
-      fontLoaded: false,
-    }
-  } // end of constructor
-
-  // define the next rendered view when user is login
-  gotoNext() {
-    this.props.navigator.push({
-      component: MealList,
-      passProps: {
-      },
-    });
-  } // end of function definftion: gotoNext
-
-  // function definition: user authorization
-  authUser(url) {
-    console.log('I AM HERE');
-    const value = this.refs.form.getValue();
-    if (value) {
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: value.username,
-          password: value.password,
-        }),
-      })
-      .then(response => response.json())
-      .then((responseData) => {
-        const token = responseData.token;
-        const userId = responseData.userId;
-        onValueChange('token', token);
-        onValueChange('userId', userId);
-        this.props.updateToken(token);
-        this.props.updateUserId(userId);
-        this.gotoNext();
-      })
-      .catch(() => {
-        Alert.alert('incorrect login information');
-      })
-      .done();
-    }
-  } // end of function defintion: authUser
-
-  render() {
-    return (
-      <Components.LinearGradient 
-        colors={['#1E90FF', '#399af9', '#63b2ff']}
-        style={styles.main}>
-          <KeyboardAvoidingView behavior={this.state.behavior} style={styles.KBAVcontainer}>
-            <View style={styles.logo}>
-              <Image
-                // source={{uri: 'https://www.shopify.com/tools/logo-maker/show/YmRaSWk0YWVPenY4ZDh1NHAxMHBXdz09LS1GNUhZaDd2YTFMaHBHNmtGQUJqeWZBPT0=--2c33990e4f83acbff27c5ab8787c2f81e1187508.png'}}
-                source={require('../assets/brand.png')}
-                style={styles.brand}
-              >
-              </Image>
-            </View>
-            <View style={styles.container}>
-              <View style={styles.form}>
-                <Form
-                style={styles.form}
-                  ref="form"
-                  type={Person}
-                  options={options}
-                />
-              </View>
-              <View style={styles.row}>
-                <TouchableHighlight
-                  style={styles.button}
-                  onPress={() => this.authUser(loginUrl)}
-                  underlayColor="#0876e0"
-                >
-                  <Text style={styles.buttonText}>Login</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  style={styles.button}
-                  onPress={() => this.authUser(signupUrl)}
-                  underlayColor="#0876e0"
-                >
-                  <Text style={styles.buttonText}>Signup</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          </KeyboardAvoidingView>
-
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Brought to you by Jamz&trade;</Text>
-          </View>
-      </Components.LinearGradient>
-    );
-  } // end of function definiton: render
-}
+}); // end styles
