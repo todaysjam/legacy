@@ -1,11 +1,15 @@
 import React from 'react';
+
+// import packages
 import { StyleSheet, View, ScrollView, Text, Dimensions } from 'react-native';
+import { Container, Content, List } from 'native-base';
+import Drawer from 'react-native-drawer';
+
+// import components
 import LogoDisplay from './LogoDisplay';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
 import ShoppingListItem from './ShoppingListItem';
-import { Container, Content, List } from 'native-base';
-import Drawer from 'react-native-drawer';
 import ControlPanel from './ControlPanel';
 
 // establish constants
@@ -37,28 +41,7 @@ const compileList = (meals) => {
   return list;
 }; // end compileList
 
-// stylesheet
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  contentContainer: {
-    alignItems: 'center',
-  },
-  Title: {
-    color: '#1e90ff',
-    fontWeight: 'bold',
-    marginTop: 5,
-    fontSize:24
-  },
-  drawer: {
-    shadowColor: '#000000', 
-    shadowOpacity: 0.3, 
-    shadowRadius: 15
-  }
-}); // end styles
-
+// ShoppingList Component
 export default class ShoppingList extends React.Component {
   constructor(props) {
     super(props);
@@ -106,27 +89,51 @@ export default class ShoppingList extends React.Component {
         panOpenMask={0}
         panCloseMask={0.5}
         negotiatePan
+      >
+
+      <View style={styles.container}>
+        <HeadBuffer />
+        <LogoDisplay openDrawer={this.openDrawer.bind(this)}/>
+        <Text style={styles.Title}>Weekly Ingredients!</Text>
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          showsVerticalScrollIndicator={false}
         >
-          <View style={styles.container}>
-            <HeadBuffer />
-            <LogoDisplay openDrawer={this.openDrawer.bind(this)}/>
-            <Text style={styles.Title}>Weekly Ingredients!</Text>
-            <ScrollView
-              contentContainerStyle={styles.contentContainer}
-              showsVerticalScrollIndicator={false}
-            >
-              <Container>
-                <Content>
-                    <List>
-                      {this.shoppingList.map((item, i) => (
-                        <ShoppingListItem key={i} item={item} />
-                        ))}
-                    </List>
-                </Content>
-              </Container>
-            </ScrollView>
-          </View>
-        </Drawer>
-      );
+          <Container>
+            <Content>
+                <List>
+                  {this.shoppingList.map((item, i) => (
+                    <ShoppingListItem key={i} item={item} />
+                    ))}
+                </List>
+            </Content>
+          </Container>
+        </ScrollView>
+      </View>
+      
+      </Drawer>
+    );
+  } // end render
+} // end ShoppingList Component
+
+// stylesheet
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  contentContainer: {
+    alignItems: 'center',
+  },
+  Title: {
+    color: '#1e90ff',
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize:24
+  },
+  drawer: {
+    shadowColor: '#000000', 
+    shadowOpacity: 0.3, 
+    shadowRadius: 15
   }
-}
+}); // end styles
