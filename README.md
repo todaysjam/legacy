@@ -1,6 +1,6 @@
 # Project Name
 
-> Meal planner, nutrition tracker, and calorie counter all in one!
+> Meal & Shopping List planner, nutrition tracker, and calorie counter all in one!
 
 ## Team
 
@@ -20,16 +20,13 @@
 
 ## Usage
 
-> Some usage instructions
-> Api documentation in separate document
+> API documentation in separate document
 
 ## Requirements
 
-- Node 4.5.x or higher
+- Node ^4.5.0
 - Exponent
 - XCode
-
-## Development
 
 ### Installing Dependencies
 
@@ -38,13 +35,6 @@ From within the root directory:
 1. npm install in root directory
 2. npm install in mobile directory
 3. navigate to mobile/node_modules/react-native-swipeout/index.js and follow these instructions: "https://github.com/dancormier/react-native-swipeout/pull/111/files" to reflect react-native ^0.27 changes
-
-### Tasks
-
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 
 ## Contributing
 
