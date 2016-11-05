@@ -80,6 +80,8 @@ exports.deleteUserMeal = (userId, mealId) => User.findOne({ _id: userId })
     })
     .then(updatedUser => updatedUser);
 
+exports.deleteAllUserMeals = (userId) => User.findByIdAndUpdate({ _id: userId }, { $set: { mealIds: [] } }, { new: true});
+
 exports.addUserMeal = (userId, mealId) => User.findOne({ _id: userId })
     .then((foundUser) => {
       foundUser.mealIds.push(mealId);
