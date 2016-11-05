@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Dimensions, Text, StyleSheet } from 'react-native';
 
+// establish constants
 const width = Dimensions.get('window').width;
 
+// stylesheet
 const styles = StyleSheet.create({
   logo: {
     width,
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white',
   },
-});
+}); //end styles
 
 const HeaderDisplay = ({ recipe }) => (
   <View style={styles.logo}>
@@ -27,6 +29,6 @@ const HeaderDisplay = ({ recipe }) => (
       {recipe.label}
     </Text>
   </View>
-);
+); // end HeaderDisplay
 
 export default HeaderDisplay;

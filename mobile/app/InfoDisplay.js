@@ -13,9 +13,11 @@ import Column from './Column';
 import HeadBuffer from './HeadBuffer';
 import Chart from 'react-native-chart';
 
+// establish constants
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
+// stylesheet
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
@@ -98,14 +100,15 @@ const styles = StyleSheet.create({
     marginRight: 25,
     paddingRight: 25
   },
-});
+}); //end styles
 
 export default class InfoDisplay extends React.Component {
   constructor(props) {
     super(props);
-  }
+  } // end constructor
 
   /* eslint-disable no-param-reassign */
+  // grabs nutrition data and compiles into human friendly format
   compileNutrition(data) {
     const result = [];
     data.forEach((item, i) => {
@@ -126,7 +129,7 @@ export default class InfoDisplay extends React.Component {
       item.dailyPercent = dailyPercent;
     });
     return result;
-  }
+  } // end compileNutrition
 
 /* eslint-enable no-param-reassign */
   render() {
@@ -230,8 +233,5 @@ export default class InfoDisplay extends React.Component {
         </ScrollView>
       </View>
     );
-  }
-}
-
-
-
+  } // end render
+} // end InfoDisplay
