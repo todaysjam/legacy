@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 const LogoDisplay = (props) => (
   <Container style={styles.logo}>
     <Header style={styles.headline}>
-      <Button transparent>
+      <Button transparent onPress={props.openDrawer}>
         <Ionicons name='ios-body' size={32} color='#F8F8F8'/>
       </Button>   
       <Title style={styles.container}>

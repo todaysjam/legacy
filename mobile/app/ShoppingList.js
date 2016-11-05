@@ -101,13 +101,13 @@ export default class ShoppingList extends React.Component {
         disabled={this.state.drawerDisabled}
         openDrawerOffset={() => width *.5}
         closedDrawerOffset={() => 0}
-        panOpenMask={0.2}
+        panOpenMask={0}
         panCloseMask={0.2}
         negotiatePan
         >
           <View style={styles.container}>
             <HeadBuffer />
-            <LogoDisplay />
+            <LogoDisplay openDrawer={this.openDrawer.bind(this)}/>
             <Text style={styles.Title}>Weekly Ingredients!</Text>
             <ScrollView
               contentContainerStyle={styles.contentContainer}
