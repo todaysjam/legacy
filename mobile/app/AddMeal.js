@@ -110,13 +110,16 @@ export default class AddMeal extends React.Component {
         disabled={this.state.drawerDisabled}
         openDrawerOffset={() => width *.5}
         closedDrawerOffset={() => 0}
-        panOpenMask={0.2}
-        panCloseMask={0.2}
+        panOpenMask={0}
+        panCloseMask={0.5}
         negotiatePan
         >
           <View style={styles.container}>
             <HeadBuffer />
-            <LogoDisplay style={styles.marginBottom} />
+            <LogoDisplay 
+              style={styles.marginBottom} 
+              openDrawer={this.openDrawer.bind(this)} 
+            />
             <Text style={styles.Title}>Add a Meal!</Text>
             <Searchbar style={styles.search} enter={this.getData} />
             <View style={styles.break}></View>
