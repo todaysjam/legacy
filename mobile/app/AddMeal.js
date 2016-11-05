@@ -90,7 +90,7 @@ export default class AddMeal extends React.Component {
         ref="drawer"
         type="overlay"
         content={
-          <ControlPanel userId={this.props.userId} closeDrawer={this.closeDrawer.bind(this)} />
+          <ControlPanel userId={this.props.userId} closeDrawer={this.closeDrawer.bind(this)} updateCalories={this.props.updateCalories}/>
         }
         acceptTap={true}
         tapToClose={true}
