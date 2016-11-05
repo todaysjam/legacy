@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator} from 'react-native';
+import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator } from 'react-native';
+import { Container, Content, Button } from 'native-base';
 import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
-import Button from './Button';
 import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator'
 
 //Drawer Related Import
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: 15,
     alignItems: 'center',
-    paddingBottom: 60
+    paddingBottom: 10
   },
   searchItemBorder:{
     padding: 5,
@@ -44,7 +44,16 @@ const styles = StyleSheet.create({
   drawer: {
     shadowColor: '#000000', 
     shadowOpacity: 0.3, 
-    shadowRadius: 15,
+    shadowRadius: 15
+  },
+  clearBtn: {
+    width: width * .9,
+    backgroundColor: 'red'
+  },
+  clearBtnText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 });
 
@@ -54,6 +63,7 @@ export default class MealList extends React.Component {
     this.getData = this.getData.bind(this);
     this.postMeal = this.postMeal.bind(this);
     this.gotoNext = this.gotoNext.bind(this);
+    this.clearMeals = this.clearMeals.bind(this);
     this.state = {
       animating: true,
       //Drawer Related States
@@ -68,10 +78,6 @@ export default class MealList extends React.Component {
       this.setToggleTimeout()
     }
     this.getData(this.CalorieCounter.bind(this));
-  }
-
-  componentWillUnmount() {
-    
   }
 
   setToggleTimeout() {
@@ -137,6 +143,22 @@ export default class MealList extends React.Component {
         });
     });
   }
+
+  clearMeals() {
+    fetch(userUrl + 'clearMeals/' + this.props.getUserId(), {
+      method: 'GET',
+      headers: { 'x-access-token': this.props.getToken() },
+    }).then((res) => {
+      console.log(res);
+      this.getData(() => {
+        console.log('I am here');
+        if(this.props.navigator.getCurrentRoutes().length > 2) {
+          this.props.navigator.pop();
+        }
+        this.CalorieCounter();
+      });
+    });
+  }     
 
   gotoNext(recipe, mealId, getData) {
     const nutrients = recipe.digest.map(nutrient => [nutrient.label, nutrient.total])
@@ -215,7 +237,6 @@ export default class MealList extends React.Component {
             <ScrollView
               contentContainerStyle={styles.contentContainer}
               showsVerticalScrollIndicator={false}
-              alwaysBounceVertical
             >
               {this.props.getMealList().map((meal, i) => (
                 <View style={styles.searchItemBorder} key={i}>
@@ -230,6 +251,13 @@ export default class MealList extends React.Component {
                   />
                 </View>
               ))}
+              <Container>
+                <Content>
+                  <Button rounded large onPress={this.clearMeals} style={styles.clearBtn}>
+                     <Text style={styles.clearBtnText}>Clear All</Text>
+                  </Button>
+                </Content>
+              </Container>
             </ScrollView>
           </View>
       </Drawer>
