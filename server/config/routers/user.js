@@ -12,4 +12,8 @@ router.route('/')
 router.route('/authenticate')
   .post(userController.authenticateUser);
 
+router.route('/clearMeals/:id')
+  .get(isAuthenticated, userController.clearUserMeals);
+
+
 module.exports = router;

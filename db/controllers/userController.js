@@ -70,6 +70,8 @@ exports.authenticateUser = (req, res) => {
     });
 };
 
+exports.clearUserMeals = (userId) => User.findByIdAndUpdate({ _id: userId }, { $set: { mealIds: [] } }, { new: true});
+
 /*
 Helper functions mainly used by the mealController
 */
@@ -80,7 +82,6 @@ exports.deleteUserMeal = (userId, mealId) => User.findOne({ _id: userId })
     })
     .then(updatedUser => updatedUser);
 
-exports.deleteAllUserMeals = (userId) => User.findByIdAndUpdate({ _id: userId }, { $set: { mealIds: [] } }, { new: true});
 
 exports.addUserMeal = (userId, mealId) => User.findOne({ _id: userId })
     .then((foundUser) => {
