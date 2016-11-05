@@ -1,13 +1,16 @@
 import React from 'react';
+
+// import packages
 import { StyleSheet, View, ScrollView, Text, Dimensions} from 'react-native';
+import { Container, Content, Button } from 'native-base';
+import Drawer from 'react-native-drawer';
+
+// import components
 import MealTile from './MealTile';
 import Searchbar from './Searchbar';
 import LogoDisplay from './LogoDisplay';
 import InfoDisplay from './InfoDisplay';
 import HeadBuffer from './HeadBuffer';
-import Buttony from './Button'
-import { Container, Content, FooterTab, Button, Title } from 'native-base';
-import Drawer from 'react-native-drawer';
 import ControlPanel from './ControlPanel';
 
 // establish constants
@@ -15,46 +18,7 @@ const width = Dimensions.get('window').width;
 const recipeUrl = 'https://mealdotlegacy.herokuapp.com/api/recipe/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
-// stylesheet
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  contentContainer: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  searchItemBorder:{
-    borderRadius: 8,
-    backgroundColor:'#1e90ff',
-    borderColor: '#1e90ff',
-    marginBottom: 5
-  },
-  break:{
-    marginTop: 30
-  },
-  smallBreak: {
-    marginTop: 5
-  },
-  Button: {
-    backgroundColor: 'white',
-    marginBottom: 5,
-  },
-  Title: {
-    color: '#1e90ff',
-    fontWeight: 'bold',
-    marginTop: 5,
-    fontSize:24
-  },
-  drawer: {
-    shadowColor: '#000000', 
-    shadowOpacity: 0.3, 
-    shadowRadius: 15
-  }
-
-}); // end styles
-
+// AddMeal Component
 export default class AddMeal extends React.Component {
   constructor(props) {
     super(props);
@@ -66,7 +30,6 @@ export default class AddMeal extends React.Component {
       drawerDisabled: false,
     }
   } // end constructor
-
 
   closeDrawer() {
     this.refs.drawer.close()
@@ -88,7 +51,7 @@ export default class AddMeal extends React.Component {
         this.props.updateSearchRecipes(data);
       }
     }).done();
-  } // getData 
+  } // end getData 
 
   // update individual users meal list
   postMeal(recipeId) {
@@ -192,3 +155,41 @@ export default class AddMeal extends React.Component {
   } // end render
 } // end addMeal Component
 
+// stylesheet
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  contentContainer: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  searchItemBorder:{
+    borderRadius: 8,
+    backgroundColor:'#1e90ff',
+    borderColor: '#1e90ff',
+    marginBottom: 5
+  },
+  break:{
+    marginTop: 30
+  },
+  smallBreak: {
+    marginTop: 5
+  },
+  Button: {
+    backgroundColor: 'white',
+    marginBottom: 5,
+  },
+  Title: {
+    color: '#1e90ff',
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize:24
+  },
+  drawer: {
+    shadowColor: '#000000', 
+    shadowOpacity: 0.3, 
+    shadowRadius: 15
+  }
+}); // end styles
