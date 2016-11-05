@@ -1,30 +1,13 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Dimensions,
-} from 'react-native';
+
+// import packages
+import { View, StyleSheet, TextInput, Dimensions } from 'react-native';
 import { Container, Content, FooterTab, Button, Title } from 'native-base';
 
 // establish constants
 const width = Dimensions.get('window').width;
 
-// stylesheet
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    borderBottomWidth: 2,
-    borderColor: 'gray',
-    width: width * 0.9,
-    marginBottom: 5
-  },
-  Button: {
-    backgroundColor: '#1e90ff',
-    marginBottom: 5,
-  }
-}); //end styles
-
+// Searchbar Component
 export default class Searchbar extends React.Component {
   constructor(props) {
     super(props);
@@ -58,4 +41,19 @@ export default class Searchbar extends React.Component {
       </View>
     );
   } // end render
-} // end Searchbar
+} // end Searchbar Component
+
+// stylesheet
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderColor: 'gray',
+    width: width * 0.9,
+    marginBottom: 5
+  },
+  Button: {
+    backgroundColor: '#1e90ff',
+    marginBottom: 5,
+  }
+}); //end styles
