@@ -10,10 +10,12 @@ import { Container, Content, FooterTab, Button, Title } from 'native-base';
 import Drawer from 'react-native-drawer';
 import ControlPanel from './ControlPanel';
 
+// establish constants
 const width = Dimensions.get('window').width;
 const recipeUrl = 'https://mealdotlegacy.herokuapp.com/api/recipe/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 
+// stylesheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     shadowRadius: 15
   }
 
-});
+}); // end styles
 
 export default class AddMeal extends React.Component {
   constructor(props) {
@@ -63,16 +65,18 @@ export default class AddMeal extends React.Component {
       drawerOpen: false,
       drawerDisabled: false,
     }
-  }
+  } // end constructor
 
 
   closeDrawer() {
     this.refs.drawer.close()
-  }
+  } // end closeDrawer
 
   openDrawer() {
     this.refs.drawer.open()
-  }
+  } // end openDrawer
+
+  // gets meal data to populate in meal list screen
   getData(searchString) {
     fetch(recipeUrl + searchString, {
       method: 'GET',
@@ -84,8 +88,9 @@ export default class AddMeal extends React.Component {
         this.props.updateSearchRecipes(data);
       }
     }).done();
-  }
+  } // getData 
 
+  // update individual users meal list
   postMeal(recipeId) {
     fetch(mealUrl, {
       method: 'POST',
@@ -100,8 +105,9 @@ export default class AddMeal extends React.Component {
     })
     .then(() => {
     })
-  }
+  } // end postMeal
 
+  // establish next navigation route
   gotoNext(recipe) {
     const nutrients = recipe.digest.map(nutrient => [nutrient.label, nutrient.total])
     this.props.navigator.push({
@@ -113,7 +119,7 @@ export default class AddMeal extends React.Component {
         text: 'Add',
       },
     });
-  }
+  } // end gotoNext
 
   render() {
     return (
@@ -123,7 +129,6 @@ export default class AddMeal extends React.Component {
         content={
           <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
         }
-        //need to think what is the best way to close it;
         acceptTap={true}
         tapToClose={true}
         captureGestures={true}
@@ -184,6 +189,6 @@ export default class AddMeal extends React.Component {
           </View>
         </Drawer>
     );
-  }
-}
+  } // end render
+} // end addMeal Component
 
