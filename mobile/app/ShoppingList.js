@@ -7,9 +7,11 @@ import ShoppingListItem from './ShoppingListItem';
 import { Container, Content, List } from 'native-base';
 import Drawer from 'react-native-drawer';
 import ControlPanel from './ControlPanel';
+
+// establish constants
 const width = Dimensions.get('window').width;
 
-
+// grabs recipe info and displays in user friendly format
 const compileList = (meals) => {
   const result = {};
   const list = [];
@@ -33,9 +35,9 @@ const compileList = (meals) => {
     list.push([amount.quantity, amount.measure, ingredient, amount.checked]);
   });
   return list;
-};
+}; // end compileList
 
-
+// stylesheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3, 
     shadowRadius: 15
   }
-});
+}); // end styles
 
 export default class ShoppingList extends React.Component {
   constructor(props) {
@@ -65,15 +67,16 @@ export default class ShoppingList extends React.Component {
       drawerOpen: false,
       drawerDisabled: false,
     }
-  }
+  } // end constructor
 
   closeDrawer() {
     this.refs.drawer.close()
-  }
+  } // end closeDrawer
 
   openDrawer() {
     this.refs.drawer.open()
-  }
+  } // end openDrawer
+
   render() {
     return (
       <Drawer
@@ -82,7 +85,6 @@ export default class ShoppingList extends React.Component {
         content={
           <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
         }
-        //need to think what is the best way to close it;
         acceptTap={true}
         tapToClose={true}
         captureGestures={true}
@@ -128,4 +130,3 @@ export default class ShoppingList extends React.Component {
       );
   }
 }
-
