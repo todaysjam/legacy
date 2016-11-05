@@ -1,4 +1,4 @@
-# Project Name
+# Meal.next
 
 > Meal & Shopping List planner, nutrition tracker, and calorie counter all in one!
 
