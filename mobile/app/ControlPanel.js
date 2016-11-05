@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+
+// import packages
 import { PropTypes, ScrollView, StyleSheet, Text, TextInput, Dimensions, View } from 'react-native'
-const width = Dimensions.get('window').width;
 import { Button, Radio, Container, Content } from 'native-base'
 
+// establish constants
+const width = Dimensions.get('window').width;
+
+// ControlPanel Component
 export default class ControlPanel extends Component {
-  // static propTypes = {
-  //   closeDrawer: PropTypes.func.isRequired
-  // };
   constructor(props) {
     super(props);
     this.Calculate = this.Calculate.bind(this);
@@ -22,33 +24,37 @@ export default class ControlPanel extends Component {
       maleR: true,
       femaleR: false
     }
-  }
+  } // end constructor
 
   onMaleSelect(){
     this.setState({
       femaleR:  false,
       maleR: true
     })
-  }
+  } // end onMaleSelect
 
   onFemaleSelect(){
     this.setState({
       femaleR: true,
       maleR: false
     })
-  }
+  } // end onFemaleSelect
 
+  // for calculating BMR
   Calculate(){
     console.log(this.state.weight, this.state.feet, this.state.inches, this.state.age )
     var BMR = Math.floor((655.1 + ( 4.35 * Number(this.state.weight) ) + ( 4.7 * Number(this.state.feet) * 12 + Number(this.state.inches) ) - ( 4.7 * Number(this.state.age) ) ) * 7)
     console.log(BMR)
     this.setState({calories: BMR})
-  }
+  } // end Calculate
+
+  // for setting/updating recommended weekly calories consumption
   changeGlobalCalories() {
     global._globalCaloriesCount = parseInt(this.state.calories);
     this.props.updateCalories();
     console.log('global calories: ', global._globalCaloriesCount);
-  }
+  } // end changeGlobalCalories
+
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -128,9 +134,10 @@ export default class ControlPanel extends Component {
         </View>
       </ScrollView>
     )
-  }
-}
+  } //end render
+} // end ControlPanel Component
 
+// stylesheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -145,4 +152,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
   }
-})
+}) // end styles
