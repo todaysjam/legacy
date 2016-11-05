@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+// stylesheet
 const styles = StyleSheet.create({
   columnLeft: {
 
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
-});
+}); // end styles
 
 const Column = ({ data, name, index, alignRight }) => (
   <View style={alignRight ? styles.columnRight : styles.columnLeft}>
@@ -32,6 +33,6 @@ const Column = ({ data, name, index, alignRight }) => (
       </Text>
     ))}
   </View>
-);
+); // end Column
 
 export default Column;
