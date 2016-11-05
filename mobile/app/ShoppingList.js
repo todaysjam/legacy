@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, Dimensions } from 'react-native';
 import LogoDisplay from './LogoDisplay';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
 import ShoppingListItem from './ShoppingListItem';
 import { Container, Content, List } from 'native-base';
+import Drawer from 'react-native-drawer';
+import ControlPanel from './ControlPanel';
+const width = Dimensions.get('window').width;
+
 
 const compileList = (meals) => {
   const result = {};
@@ -45,6 +49,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
     fontSize:24
+  },
+  drawer: {
+    shadowColor: '#000000', 
+    shadowOpacity: 0.3, 
+    shadowRadius: 15
   }
 });
 
@@ -52,30 +61,71 @@ export default class ShoppingList extends React.Component {
   constructor(props) {
     super(props);
     this.shoppingList = compileList(this.props.getMealList());
+    this.state={
+      drawerOpen: false,
+      drawerDisabled: false,
+    }
   }
 
+  closeDrawer() {
+    this.refs.drawer.close()
+  }
+
+  openDrawer() {
+    this.refs.drawer.open()
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <HeadBuffer />
-        <LogoDisplay />
-        <Text style={styles.Title}>Weekly Ingredients!</Text>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
+      <Drawer
+        ref="drawer"
+        type="overlay"
+        content={
+          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
+        }
+        //need to think what is the best way to close it;
+        acceptTap={true}
+        tapToClose={true}
+        captureGestures={true}
+        style={styles.drawer}
+        onOpen={() => {
+          console.log('onopen')
+          this.setState({drawerOpen: true})
+        }}
+        onClose={() => {
+          console.log('onclose')
+          this.setState({drawerOpen: false})
+        }}
+        
+        tweenDuration={100}
+        panThreshold={0.08}
+        disabled={this.state.drawerDisabled}
+        openDrawerOffset={() => width *.5}
+        closedDrawerOffset={() => 0}
+        panOpenMask={0.2}
+        panCloseMask={0.2}
+        negotiatePan
         >
-          <Container>
-            <Content>
-                <List>
-                  {this.shoppingList.map((item, i) => (
-                    <ShoppingListItem key={i} item={item} />
-                    ))}
-                </List>
-            </Content>
-          </Container>
-        </ScrollView>
-      </View>
-    );
+          <View style={styles.container}>
+            <HeadBuffer />
+            <LogoDisplay />
+            <Text style={styles.Title}>Weekly Ingredients!</Text>
+            <ScrollView
+              contentContainerStyle={styles.contentContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              <Container>
+                <Content>
+                    <List>
+                      {this.shoppingList.map((item, i) => (
+                        <ShoppingListItem key={i} item={item} />
+                        ))}
+                    </List>
+                </Content>
+              </Container>
+            </ScrollView>
+          </View>
+        </Drawer>
+      );
   }
 }
 

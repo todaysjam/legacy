@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   drawer: {
     shadowColor: '#000000', 
     shadowOpacity: 0.3, 
-    shadowRadius: 15
+    shadowRadius: 15,
   }
 });
 
@@ -66,9 +66,9 @@ export default class MealList extends React.Component {
       //Drawer Related States
       drawerOpen: false,
       drawerDisabled: false,
+      animating: true
     }
   }
-
   componentWillMount() {
     var self = this;
     if(!this.state.animating){
@@ -96,23 +96,19 @@ export default class MealList extends React.Component {
       this.setState({
         view: {
           backgroundColor: 'red',
-          borderRadius: 20
-        },
-        container1: {
+          borderRadius: 20,
           width: width * .8,
           height: 50,
-        }
+        },
       })
     } else{
       this.setState({
         view: {
           backgroundColor: '#1e90ff',
-          borderRadius: 20
-        },
-        container1: {
+          borderRadius: 20,
           width: width * .8,
           height: 50,
-        }
+        },
       })
     }
     if(this.state.animating){
@@ -180,7 +176,7 @@ export default class MealList extends React.Component {
     return (
       <Drawer
         ref="drawer"
-        type="displace"
+        type="overlay"
         content={
           <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
         }
@@ -201,7 +197,7 @@ export default class MealList extends React.Component {
         tweenDuration={100}
         panThreshold={0.08}
         disabled={this.state.drawerDisabled}
-        openDrawerOffset={() => 150}
+        openDrawerOffset={() => width *.5}
         closedDrawerOffset={() => 0}
         panOpenMask={0.2}
         panCloseMask={0.2}
