@@ -5,10 +5,12 @@ import {
   TextInput,
   Dimensions,
 } from 'react-native';
-import Buttony from './Button'
-const width = Dimensions.get('window').width;
 import { Container, Content, FooterTab, Button, Title } from 'native-base';
 
+// establish constants
+const width = Dimensions.get('window').width;
+
+// stylesheet
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -21,13 +23,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#1e90ff',
     marginBottom: 5,
   }
-});
+}); //end styles
 
 export default class Searchbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
-  }
+  } // end constructor
 
   render() {
     return (
@@ -38,7 +40,6 @@ export default class Searchbar extends React.Component {
             underlineColorAndroid="transparent"
             onChangeText={text => this.setState({ text })}
             placeholder="Search..."
-            // value={this.state.text}
           />
         </View>
         <Container >
@@ -56,5 +57,5 @@ export default class Searchbar extends React.Component {
         </Container>
       </View>
     );
-  }
-}
+  } // end render
+} // end Searchbar
