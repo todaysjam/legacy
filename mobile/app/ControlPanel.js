@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // import packages
 import { PropTypes, ScrollView, StyleSheet, Text, TextInput, Dimensions, View } from 'react-native'
@@ -8,7 +8,7 @@ import { Button, Radio, Container, Content } from 'native-base'
 const width = Dimensions.get('window').width;
 
 // ControlPanel Component
-export default class ControlPanel extends Component {
+export default class ControlPanel extends React.Component {
   constructor(props) {
     super(props);
     this.Calculate = this.Calculate.bind(this);
