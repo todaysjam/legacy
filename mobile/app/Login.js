@@ -177,7 +177,6 @@ export default class Login extends React.Component {
       })
       .then(response => response.json())
       .then((responseData) => {
-        console.log('Sheng: ', responseData);
         const token = responseData.token;
         const userId = responseData.userId;
         onValueChange('token', token);
