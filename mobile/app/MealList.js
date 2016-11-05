@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator } from 'react-native';
 import { Container, Content, Button } from 'native-base';
+import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator, Platform } from 'react-native';
+
 import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
@@ -90,15 +91,16 @@ export default class MealList extends React.Component {
       calor += meal.recipe.calories
     })
     global._count = Math.round(calor)
-    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/14000')
-    if(calor > 14000){
+    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._globalCaloriesCount || 14000));
+    if(calor > (global._globalCaloriesCount || 14000)){
       this.setState({
         view: {
           backgroundColor: 'red',
           borderRadius: 20,
           width: width * .8,
           height: 50,
-          borderRadius: 20,
+          //for ios phone, overflow needs to be set as 'hidden'
+          overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
         },
       })
     } else{
@@ -108,7 +110,8 @@ export default class MealList extends React.Component {
           borderRadius: 20,
           width: width * .8,
           height: 50,
-          borderRadius: 20,
+          //
+          overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
         },
       })
     }
@@ -190,7 +193,7 @@ export default class MealList extends React.Component {
         ref="drawer"
         type="overlay"
         content={
-          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
+          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} updateCalories={this.CalorieCounter.bind(this)}/>
         }
         //need to think what is the best way to close it;
         acceptTap={true}
