@@ -1,11 +1,32 @@
 import React from 'react';
+
+// import packages
 import { View, Image, Dimensions, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Icon, Header, Title } from 'native-base';
 
-// constants definition
+// establish constants
 const width = Dimensions.get('window').width;
 
-// stylesheet definition
+// tile Component
+const Tile = ({ recipe, mealId, showInfo }) => (
+  <TouchableHighlight
+    style={styles.tile}
+    onPress={() => showInfo(recipe, mealId)}
+  >
+    <Image
+      style={styles.picture}
+      source={{ uri: recipe.image }}
+    >
+      <View style={styles.textwrap}>
+        <Text style={styles.headline}>
+          {recipe.label}
+        </Text>
+      </View>
+    </Image>
+  </TouchableHighlight>
+);  // end Tile Component
+
+// stylesheet
 const styles = StyleSheet.create({
   tile: {
     width: width * 0.9,
@@ -53,24 +74,6 @@ const styles = StyleSheet.create({
       height: 2,
     },
   },
-}); // end of stylesheet definition
-
-const Tile = ({ recipe, mealId, showInfo }) => (
-  <TouchableHighlight
-    style={styles.tile}
-    onPress={() => showInfo(recipe, mealId)}
-  >
-    <Image
-      style={styles.picture}
-      source={{ uri: recipe.image }}
-    >
-      <View style={styles.textwrap}>
-        <Text style={styles.headline}>
-          {recipe.label}
-        </Text>
-      </View>
-    </Image>
-  </TouchableHighlight>
-);  // end of tile Component definition
+}); // end styles
 
 export default Tile;
