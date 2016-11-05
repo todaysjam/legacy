@@ -3,8 +3,11 @@ import { View, Dimensions, Text, StyleSheet, Image } from 'react-native';
 import { Container, Content, Footer, FooterTab, Button, Header, Title } from 'native-base';
 
 import { Ionicons } from '@exponent/vector-icons';
+
+// constants definition
 const width = Dimensions.get('window').width;
 
+// stylesheet definition
 const styles = StyleSheet.create({
   logo: {
     width:width,
@@ -24,7 +27,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 46
   }
-});
+}); // end of stylesheet definition
 
 const LogoDisplay = (props) => (
   <Container style={styles.logo}>
@@ -41,6 +44,6 @@ const LogoDisplay = (props) => (
       </Title>
     </Header>
   </Container>
-);
+);  // end of LogoDisplay component definition
 
 export default LogoDisplay;

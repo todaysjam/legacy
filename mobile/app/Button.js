@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@exponent/vector-icons';
 
+// stylesheet definition
 const styles = StyleSheet.create({
   container: {
     width: 105,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     color: 'white',
     borderRadius: 5,
   },
-});
+}); // end styles
 
 const Button = ({ text, icon, onclick }) => { 
   if(text !== undefined) {
