@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes, ScrollView, StyleSheet, Text, TextInput, Dimensions, View } from 'react-native'
 const width = Dimensions.get('window').width;
-import { Button } from 'native-base';
-import { Button, Radio, List, ListItem, Container, Content } from 'native-base'
+import { Button, Radio, Container, Content } from 'native-base'
 
 export default class ControlPanel extends Component {
   // static propTypes = {
@@ -10,115 +9,119 @@ export default class ControlPanel extends Component {
   // };
   constructor(props) {
     super(props);
-    this.onGenderSelect = this.onGenderSelect.bind(this);
     this.Calculate = this.Calculate.bind(this);
+    this.onFemaleSelect = this.onFemaleSelect.bind(this);
+    this.onMaleSelect = this.onMaleSelect.bind(this);
     this.state={
-      text: '',
+      calories: '',
       age: '',
       weight: '',
       feet: '',
-      Inches: '',
-      gender: 'male'
+      inches: '',
+      gender: 'male',
+      maleR: true,
+      femaleR: false
     }
   }
-  onGenderSelect(e){
+
+  onMaleSelect(){
     this.setState({
-      gender: e.currentTarget.value
+      femaleR:  false,
+      maleR: true
     })
   }
-  Calculate(){
 
-<<<<<<< 823a9e65c15dad06e49689b9dcb7885236f15233
+  onFemaleSelect(){
+    this.setState({
+      femaleR: true,
+      maleR: false
+    })
+  }
+
+  Calculate(){
+    console.log(this.state.weight, this.state.feet, this.state.inches, this.state.age )
+    var BMR = Math.floor((655.1 + ( 4.35 * Number(this.state.weight) ) + ( 4.7 * Number(this.state.feet) * 12 + Number(this.state.inches) ) - ( 4.7 * Number(this.state.age) ) ) * 7)
+    console.log(BMR)
+    this.setState({calories: BMR})
+  }
   changeGlobalCalories() {
-    global._globalCaloriesCount = parseInt(this.state.text);
+    global._globalCaloriesCount = parseInt(this.state.calories);
     this.props.updateCalories();
     console.log('global calories: ', global._globalCaloriesCount);
   }
-
-=======
-  }
->>>>>>> drawer adds
   render() {
     return (
       <ScrollView style={styles.container}>
         <Text>Enter Your Calorie Info</Text>
          <TextInput
         placeholder='Enter Age'    
-        style={{height: 40, width: width * .4, color: 'black', marginLeft: 5}}
+        style={{height: 40, width: width * .4, color: 'black'}}
         placeholderTextColor='gray'
         underlineColorAndroid='gray'
+        onChangeText={age => this.setState({age: age})}
         />
          <TextInput
         placeholder='Enter Weight'    
-        style={{height: 40, width: width * .4, color: 'black', marginLeft: 5}}
+        style={{height: 40, width: width * .4, color: 'black'}}
         onChangeText={text => this.setState({ text: text })}
         placeholderTextColor='gray'
         underlineColorAndroid='gray'
+        onChangeText={weight => this.setState({weight: weight})}
         />
         <Text> Enter Height</Text>
         <TextInput
         placeholder='Feet'    
-        style={{height: 40, width: width * .2, color: 'black', marginLeft: 5}}
+        style={{height: 40, width: width * .2, color: 'black'}}
         textStyle={{fontSize: 12}}
         placeholderTextColor='gray'
         underlineColorAndroid='gray'
+        onChangeText={feet => this.setState({feet: feet})}
         />
         <TextInput
         placeholder='Inches'    
-        style={{height: 40, width: width * .2, color: 'black', marginLeft: 5}}
+        style={{height: 40, width: width * .2, color: 'black'}}
         textStyle={{fontSize: 12}}
         placeholderTextColor='gray'
         underlineColorAndroid='gray'
+        onChangeText={inches => this.setState({inches: inches})}
         />
-        <Text>Gender</Text>
         <Container>
-          <Content>
-          <List>
-            <ListItem>
-              <Radio
-                selected={true}
-                value='male'
-                onPress={this.onGenderSelect}
-              />
-              <Text>Male</Text>
-            </ListItem>
-            <ListItem>
-              <Radio
-              selected={false}
-              value='female'
-              onPress={this.onGenderSelect}
-              />
-              <Text>Female</Text>
-            </ListItem>
-          </List>
+          <Content style={{marginLeft: 5}}>
+            <Text>Male</Text>
+            <Radio
+              selected={this.state.maleR}
+              onPress={this.onMaleSelect}
+            />
+            <Text>Female</Text>
+            <Radio
+            selected={this.state.femaleR}
+            onPress={this.onFemaleSelect}
+            />
           </Content>
         </Container>
         <View>
           <Button
-            style={{ width: width * .4, height: 20, backgroundColor: 'gray'}}
+            style={{ width: width * .4, height: 30, backgroundColor: 'gray', marginTop: 10}}
             textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
             rounded  
-            onPress={() => this.props.enter(this.state.text)}
+            onPress={() => this.Calculate()}
             >
             Calculate
           </Button>
           <Text style={{marginTop: 20}}>Reccomended Calories</Text>
           <TextInput
             placeholder='Ex:14000'    
-            style={{height: 40, width: width * .4, color: 'black', marginLeft: 5}}
+            style={{height: 40, width: width * .4, color: 'black'}}
+            onChangeText={calories => this.setState({calories: calories})}
             placeholderTextColor='gray'
             underlineColorAndroid='gray'
+            value = {this.state.calories.toString()}
             />
           <Button
             style={{ width: width * .4, height: 30}}
             textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
-<<<<<<< 823a9e65c15dad06e49689b9dcb7885236f15233
-            rounded block 
             onPress={() => this.changeGlobalCalories()}
-=======
             rounded  
-            onPress={() => this.props.enter(this.state.text)}
->>>>>>> drawer adds
             >
             Submit
           </Button>
@@ -136,6 +139,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     opacity: .9,
+    paddingLeft: 5
   },
   button: {
     backgroundColor: 'white',
