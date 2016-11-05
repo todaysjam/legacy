@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+> Meal planner, nutrition tracker, and calorie counter all in one!
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Sherman Chen
+  - __Scrum Master__: Tim Garibaldi
+  - __Development Team Members__: Jeff Christian, Sheng Yang
 
 ## Table of Contents
 
@@ -28,8 +28,6 @@
 - Node 4.5.x or higher
 - Exponent
 - XCode
-- npm
-- at least 3 GHz octa-core CPU and a Geforce 6000 XL
 
 ## Development
 
@@ -39,6 +37,7 @@ From within the root directory:
 
 1. npm install in root directory
 2. npm install in mobile directory
+3. navigate to mobile/node_modules/react-native-swipeout/index.js and follow these instructions: "https://github.com/dancormier/react-native-swipeout/pull/111/files" to reflect react-native ^0.27 changes
 
 ### Tasks
 
