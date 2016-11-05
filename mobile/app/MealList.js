@@ -87,8 +87,8 @@ export default class MealList extends React.Component {
       calor += meal.recipe.calories
     })
     global._count = Math.round(calor)
-    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._globalCalorieCount || 14000));
-    if(calor > (global._globalCalorieCount || 14000)){
+    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._globalCaloriesCount || 14000));
+    if(calor > (global._globalCaloriesCount || 14000)){
       this.setState({
         view: {
           backgroundColor: 'red',
@@ -173,7 +173,7 @@ export default class MealList extends React.Component {
         ref="drawer"
         type="overlay"
         content={
-          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
+          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} updateCalories={this.CalorieCounter.bind(this)}/>
         }
         //need to think what is the best way to close it;
         acceptTap={true}
