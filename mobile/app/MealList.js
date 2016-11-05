@@ -17,7 +17,7 @@ import ControlPanel from './ControlPanel';
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 const width = Dimensions.get('window').width;
-var calor = 0;
+let calor = 0;
 
 // MealList Component
 export default class MealList extends React.Component {
