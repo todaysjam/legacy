@@ -40,6 +40,7 @@ export default class MealList extends React.Component {
     this.setState({animating: !this.state.animating});
   } // end setToggleTimeout
 
+  // displays calories, switches to red if over recommended calories
   CalorieCounter(){
     var calor = 0;
     this.props.getMealList().forEach((meal) => {
@@ -75,6 +76,7 @@ export default class MealList extends React.Component {
     }
   } // end CalorieCounter
 
+  // populates users individual meal list view with saved meals/recipes
   getData(cb) {
     fetch(userUrl + this.props.getUserId(), {
       method: 'GET',
@@ -88,6 +90,7 @@ export default class MealList extends React.Component {
     });
   } // end getData
 
+  // for deletion when entered into an individual meal
   postMeal(recipeId, mealId) {
     fetch(mealUrl + mealId, {
       method: 'DELETE',
@@ -101,6 +104,7 @@ export default class MealList extends React.Component {
     });
   } // end postMeal
 
+  // deletes all meals
   clearMeals() {
     fetch(userUrl + 'clearMeals/' + this.props.getUserId(), {
       method: 'PUT',
@@ -113,6 +117,7 @@ export default class MealList extends React.Component {
     });
   } // end clearMeals 
 
+  // for navigation
   gotoNext(recipe, mealId, getData) {
     const nutrients = recipe.digest.map(nutrient => [nutrient.label, nutrient.total])
     this.props.navigator.push({
