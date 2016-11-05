@@ -1,63 +1,25 @@
 import React from 'react';
-import { Container, Content, Button } from 'native-base';
-import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator, Platform } from 'react-native';
 
+// import packages
+import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { Container, Content, Button } from 'native-base';
+import Drawer from 'react-native-drawer';
+
+// import components
 import LoggedMeal from './LoggedMeal';
 import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
 import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator'
-
-//Drawer Related Import
-import Drawer from 'react-native-drawer';
 import ControlPanel from './ControlPanel';
 
-var calor = 0;
+// establish constants
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
 const mealUrl = 'https://mealdotlegacy.herokuapp.com/api/meal/';
 const width = Dimensions.get('window').width;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  contentContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-    paddingBottom: 10
-  },
-  searchItemBorder:{
-    padding: 5,
-    marginBottom: 5, 
-  },
-  Title: {
-    color: '#1e90ff',
-    fontWeight: 'bold',
-    marginTop: 5,
-    fontSize:24
-  },
-  text: {
-    fontSize: 16,
-    color: 'white',
-    textAlign: 'center',
-  }, 
-  //Drawer Related Styles
-  drawer: {
-    shadowColor: '#000000', 
-    shadowOpacity: 0.3, 
-    shadowRadius: 15
-  },
-  clearBtn: {
-    width: width * .9,
-    backgroundColor: 'red'
-  },
-  clearBtnText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold'
-  }
-});
+var calor = 0;
 
+// MealList Component
 export default class MealList extends React.Component {
   constructor(props) {
     super(props);
@@ -72,18 +34,11 @@ export default class MealList extends React.Component {
       drawerDisabled: false,
       animating: true
     }
-  }
-  componentWillMount() {
-    var self = this;
-    if(!this.state.animating){
-      this.setToggleTimeout()
-    }
-    this.getData(this.CalorieCounter.bind(this));
-  }
+  } // end constructor
 
   setToggleTimeout() {
     this.setState({animating: !this.state.animating});
-  }
+  } // end setToggleTimeout
 
   CalorieCounter(){
     var calor = 0;
@@ -118,7 +73,7 @@ export default class MealList extends React.Component {
     if(this.state.animating){
       this.setToggleTimeout();
     }
-  }
+  } // end CalorieCounter
 
   getData(cb) {
     fetch(userUrl + this.props.getUserId(), {
@@ -131,7 +86,7 @@ export default class MealList extends React.Component {
     }).done(() => {
       if (cb) { cb(); }
     });
-  }
+  } // end getData
 
   postMeal(recipeId, mealId) {
     fetch(mealUrl + mealId, {
@@ -144,7 +99,7 @@ export default class MealList extends React.Component {
         this.CalorieCounter();
         });
     });
-  }
+  } // end postMeal
 
   clearMeals() {
     fetch(userUrl + 'clearMeals/' + this.props.getUserId(), {
@@ -156,7 +111,7 @@ export default class MealList extends React.Component {
         this.CalorieCounter();
       });
     });
-  }     
+  } // end clearMeals 
 
   gotoNext(recipe, mealId, getData) {
     const nutrients = recipe.digest.map(nutrient => [nutrient.label, nutrient.total])
@@ -170,22 +125,29 @@ export default class MealList extends React.Component {
         text: 'Remove',
       },
     });
-  }
+  } // end gotoNext
 
   updateMeals() {
     this.getData(() => {
       this.CalorieCounter();
     })
-  }
+  } // end updateMeals
 
-  //Drawer Related Functions
   closeDrawer() {
     this.refs.drawer.close()
-  }
+  } // end closeDrawer
 
   openDrawer() {
     this.refs.drawer.open()
-  }
+  } // end openDrawer
+
+  componentWillMount() {
+    var self = this;
+    if(!this.state.animating){
+      this.setToggleTimeout()
+    }
+    this.getData(this.CalorieCounter.bind(this));
+  } // end componentWillMount
 
   render() {
     return (
@@ -247,6 +209,7 @@ export default class MealList extends React.Component {
                   />
                 </View>
               ))}
+
               <Container>
                 <Content>
                   <Button rounded large onPress={this.clearMeals} style={styles.clearBtn}>
@@ -254,9 +217,53 @@ export default class MealList extends React.Component {
                   </Button>
                 </Content>
               </Container>
+
             </ScrollView>
           </View>
       </Drawer>
     );
+  } // end render
+} // end MealList Component
+
+// stylesheet
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  contentContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+    paddingBottom: 10
+  },
+  searchItemBorder:{
+    padding: 5,
+    marginBottom: 5, 
+  },
+  Title: {
+    color: '#1e90ff',
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize:24
+  },
+  text: {
+    fontSize: 16,
+    color: 'white',
+    textAlign: 'center',
+  }, 
+  //Drawer Related Styles
+  drawer: {
+    shadowColor: '#000000', 
+    shadowOpacity: 0.3, 
+    shadowRadius: 15
+  },
+  clearBtn: {
+    width: width * .9,
+    backgroundColor: 'red'
+  },
+  clearBtnText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold'
   }
-}
+}); // end styles
