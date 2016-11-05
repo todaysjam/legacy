@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes, ScrollView, StyleSheet, Text, TextInput, Dimensions, View } from 'react-native'
 const width = Dimensions.get('window').width;
-import { Button } from 'native-base'
+import { Button } from 'native-base';
 
 export default class ControlPanel extends Component {
   // static propTypes = {
@@ -14,6 +14,12 @@ export default class ControlPanel extends Component {
     }
   }
 
+  changeGlobalCalories() {
+    global._globalCaloriesCount = parseInt(this.state.text);
+    this.props.updateCalories();
+    console.log('global calories: ', global._globalCaloriesCount);
+  }
+
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -21,6 +27,7 @@ export default class ControlPanel extends Component {
         <TextInput
         placeholder='Ex: 14000'    
         style={{height: 40, width: width * .4, color: 'black', marginLeft: 5}}
+        onChangeText={text => this.setState({ text: text })}
         placeholderTextColor='gray'
         underlineColorAndroid='gray'
         />
@@ -29,7 +36,7 @@ export default class ControlPanel extends Component {
             style={{ width: width * .4}}
             textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
             rounded block 
-            onPress={() => this.props.enter(this.state.text)}
+            onPress={() => this.changeGlobalCalories()}
             >
             Submit
           </Button>
