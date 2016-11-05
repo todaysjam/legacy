@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import packages
-import { PropTypes, ScrollView, StyleSheet, Text, TextInput, Dimensions, View } from 'react-native'
+import { PropTypes, ScrollView, StyleSheet, Text, TextInput, Dimensions, View, AsyncStorage } from 'react-native'
 import { Button, Radio, Container, Content } from 'native-base'
 
 // establish constants
@@ -45,14 +45,15 @@ export default class ControlPanel extends React.Component {
     console.log(this.state.weight, this.state.feet, this.state.inches, this.state.age )
     var BMR = Math.floor((655.1 + ( 4.35 * Number(this.state.weight) ) + ( 4.7 * Number(this.state.feet) * 12 + Number(this.state.inches) ) - ( 4.7 * Number(this.state.age) ) ) * 7)
     console.log(BMR)
-    this.setState({calories: BMR})
+      this.setState({calories: BMR})
   } // end Calculate
 
   // for setting/updating recommended weekly calories consumption
   changeGlobalCalories() {
     global._globalCaloriesCount = parseInt(this.state.calories);
-    this.props.updateCalories();
-    console.log('global calories: ', global._globalCaloriesCount);
+    AsyncStorage.setItem(this.props.userId, JSON.stringify(global._globalCaloriesCount),() => {
+      this.props.updateCalories();
+    })
   } // end changeGlobalCalories
 
   render() {
@@ -74,7 +75,7 @@ export default class ControlPanel extends React.Component {
         underlineColorAndroid='gray'
         onChangeText={weight => this.setState({weight: weight})}
         />
-        <Text> Enter Height</Text>
+        <Text>Height</Text>
         <TextInput
         placeholder='Feet'    
         style={{height: 40, width: width * .2, color: 'black'}}

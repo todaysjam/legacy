@@ -9,6 +9,7 @@ import { Components, Font } from 'exponent';
 import MealList from './MealList';
 
 // establish constants
+var userId;
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const loginUrl = 'https://mealdotlegacy.herokuapp.com/api/user/authenticate';
@@ -60,6 +61,7 @@ export default class Login extends React.Component {
     this.props.navigator.push({
       component: MealList,
       passProps: {
+        userId: userId
       },
     });
   } // end of function definftion: gotoNext
@@ -83,7 +85,7 @@ export default class Login extends React.Component {
       .then(response => response.json())
       .then((responseData) => {
         const token = responseData.token;
-        const userId = responseData.userId;
+        userId = responseData.userId;
         onValueChange('token', token);
         onValueChange('userId', userId);
         this.props.updateToken(token);

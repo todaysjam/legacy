@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import packages
-import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView,Text, Dimensions, ActivityIndicator, Platform, AsyncStorage } from 'react-native';
 import { Container, Content, Button } from 'native-base';
 import Drawer from 'react-native-drawer';
 
@@ -46,34 +46,40 @@ export default class MealList extends React.Component {
     this.props.getMealList().forEach((meal) => {
       calor += meal.recipe.calories
     })
-    global._count = Math.round(calor)
-    global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._globalCaloriesCount || 14000));
-    if(calor > (global._globalCaloriesCount || 14000)){
-      this.setState({
-        view: {
-          backgroundColor: 'red',
-          borderRadius: 20,
-          width: width * .8,
-          height: 50,
-          //for ios phone, overflow needs to be set as 'hidden'
-          overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
-        },
-      })
-    } else{
-      this.setState({
-        view: {
-          backgroundColor: '#1e90ff',
-          borderRadius: 20,
-          width: width * .8,
-          height: 50,
-          //
-          overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
-        },
-      })
-    }
-    if(this.state.animating){
-      this.setToggleTimeout();
-    }
+    AsyncStorage.getItem(this.props.userId, (err,value) => {
+      if(value !== null){
+        console.log(value, 'aysnch function value')
+        global._count = JSON.parse(value);
+      }
+      global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._count || 14000));
+    
+      if(calor > (global._globalCaloriesCount || 14000)){
+        this.setState({
+          view: {
+            backgroundColor: 'red',
+            borderRadius: 20,
+            width: width * .8,
+            height: 50,
+            //for ios phone, overflow needs to be set as 'hidden'
+            overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
+          },
+        })
+      } else{
+        this.setState({
+          view: {
+            backgroundColor: '#1e90ff',
+            borderRadius: 20,
+            width: width * .8,
+            height: 50,
+            //
+            overflow: (Platform.OS === 'ios' ) ? 'hidden' : undefined
+          },
+        })
+      }
+      if(this.state.animating){
+        this.setToggleTimeout();
+      }
+    })
   } // end CalorieCounter
 
   // populates users individual meal list view with saved meals/recipes
@@ -160,7 +166,7 @@ export default class MealList extends React.Component {
         ref="drawer"
         type="overlay"
         content={
-          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} updateCalories={this.CalorieCounter.bind(this)}/>
+          <ControlPanel userId={this.props.userId} closeDrawer={this.closeDrawer.bind(this)} updateCalories={this.CalorieCounter.bind(this)}/>
         }
         //need to think what is the best way to close it;
         acceptTap={true}
