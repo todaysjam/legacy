@@ -5,9 +5,11 @@ import InfoDisplay from './InfoDisplay';
 import LogoDisplay from './LogoDisplay';
 import HeadBuffer from './HeadBuffer';
 import Button from './Button';
-import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator';
-// import CustomedDrawer from './CustomedDrawer';
-// import Drawer from 'react-native-drawer';
+import ToggleAnimatingActivityIndicator from './ToggleAnimatingActivityIndicator'
+
+//Drawer Related Import
+import Drawer from 'react-native-drawer';
+import ControlPanel from './ControlPanel';
 
 var calor = 0;
 const userUrl = 'https://mealdotlegacy.herokuapp.com/api/user/';
@@ -37,10 +39,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     textAlign: 'center',
-  },
-  drawerStyles: {
+  }, 
+  //Drawer Related Styles
+  drawer: {
     shadowColor: '#000000', 
-    shadowOpacity: 0.8, shadowRadius: 3
+    shadowOpacity: 0.3, 
+    shadowRadius: 15
   }
 });
 
@@ -59,7 +63,9 @@ export default class MealList extends React.Component {
         shadowColor: 'white',
       },
       animating: true,
-      showDrawer: false,
+      //Drawer Related States
+      drawerOpen: false,
+      drawerDisabled: false,
     }
   }
 
@@ -161,71 +167,85 @@ export default class MealList extends React.Component {
     })
   }
 
-  menuClicked() {
-    this.setState({showDrawer: !this.state.showDrawer});
-    console.log('menuClicked', this.state.showDrawer);
+  //Drawer Related Functions
+  closeDrawer() {
+    this.refs.drawer.close()
   }
 
-  // {
-  //   <Drawer
-  //         ref="navigation"
-  //         type="displace"
-  //         content={<Text>meals</Text>}
-  //         tapToClose={true}
-  //         open={this.state.showDrawer}
-  //         openDrawerOffset={0.2}
-  //         panCloseMask={0.2}
-  //         negotiatePan
-  //         style={styles.drawerStyles}
-  //         tweenHandler={(ratio) => ({
-  //           main: { opacity: Math.max(0.54, 1 - ratio) },
-  //         })}
-  //         >
-  //         <Text>haha</Text>
-  //       </Drawer>
-  // }
+  openDrawer() {
+    this.refs.drawer.open()
+  }
 
   render() {
     return (
-      <View style={styles.container}>
-        <HeadBuffer />
-        <LogoDisplay menuClicked={this.menuClicked.bind(this)}/>
-        <Text style={styles.Title}>Weekly Meals!</Text>
-        <ActivityIndicator
-          animating={this.state.animating}
-          size="large"
-          />
-        <View
-          style={this.state.container1}
-          >
-          <View
-            style={this.state.view}
-            elevation={3}
-            >
-              <Text style={styles.text}> {global._cals} </Text>
-          </View>
-        </View>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-          alwaysBounceVertical
+      <Drawer
+        ref="drawer"
+        type="displace"
+        content={
+          <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
+        }
+        //need to think what is the best way to close it;
+        acceptTap={true}
+        tapToClose={true}
+        captureGestures={true}
+        style={styles.drawer}
+        onOpen={() => {
+          console.log('onopen')
+          this.setState({drawerOpen: true})
+        }}
+        onClose={() => {
+          console.log('onclose')
+          this.setState({drawerOpen: false})
+        }}
+        
+        tweenDuration={100}
+        panThreshold={0.08}
+        disabled={this.state.drawerDisabled}
+        openDrawerOffset={() => 150}
+        closedDrawerOffset={() => 0}
+        panOpenMask={0.2}
+        panCloseMask={0.2}
+        negotiatePan
         >
-          {this.props.getMealList().map((meal, i) => (
-            <View style={styles.searchItemBorder} key={i}>
-              <LoggedMeal
-                recipe={meal.recipe}
-                showInfo={this.gotoNext}
-                token={this.props.getToken()}
-                updateMeals={this.updateMeals.bind(this)}
-                key={i}
-                mealId={meal._id} // eslint-disable-line no-underscore-dangle
-                textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
+          <View style={styles.container}>
+            <HeadBuffer />
+            <LogoDisplay />
+            <Text style={styles.Title}>Weekly Meals!</Text>
+            <ActivityIndicator
+              animating={this.state.animating}
+              size="large"
               />
+            <View
+              style={this.state.container1}
+              >
+              <View
+                style={this.state.view}
+                elevation={3}
+                >
+                  <Text style={styles.text}> {global._cals} </Text>
+              </View>
             </View>
-          ))}
-        </ScrollView>
-      </View>
+            <ScrollView
+              contentContainerStyle={styles.contentContainer}
+              showsVerticalScrollIndicator={false}
+              alwaysBounceVertical
+            >
+              {this.props.getMealList().map((meal, i) => (
+                <View style={styles.searchItemBorder} key={i}>
+                  <LoggedMeal
+                    recipe={meal.recipe}
+                    showInfo={this.gotoNext}
+                    token={this.props.getToken()}
+                    updateMeals={this.updateMeals.bind(this)}
+                    key={i}
+                    mealId={meal._id} // eslint-disable-line no-underscore-dangle
+                    textStyle={{color: 'white',fontWeight: 'bold', fontSize: 20}}
+                  />
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+      </Drawer>
     );
   }
 }
-
