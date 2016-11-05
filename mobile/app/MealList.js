@@ -55,13 +55,6 @@ export default class MealList extends React.Component {
     this.postMeal = this.postMeal.bind(this);
     this.gotoNext = this.gotoNext.bind(this);
     this.state = {
-      view: {
-        backgroundColor: 'white',
-        borderRadius: 20,
-      },
-      container1: {
-        shadowColor: 'white',
-      },
       animating: true,
       //Drawer Related States
       drawerOpen: false,
@@ -99,6 +92,7 @@ export default class MealList extends React.Component {
           borderRadius: 20,
           width: width * .8,
           height: 50,
+          borderRadius: 20,
         },
       })
     } else{
@@ -108,6 +102,7 @@ export default class MealList extends React.Component {
           borderRadius: 20,
           width: width * .8,
           height: 50,
+          borderRadius: 20,
         },
       })
     }
@@ -211,16 +206,12 @@ export default class MealList extends React.Component {
               animating={this.state.animating}
               size="large"
               />
-            <View
-              style={this.state.container1}
-              >
               <View
                 style={this.state.view}
                 elevation={3}
                 >
                   <Text style={styles.text}> {global._cals} </Text>
               </View>
-            </View>
             <ScrollView
               contentContainerStyle={styles.contentContainer}
               showsVerticalScrollIndicator={false}

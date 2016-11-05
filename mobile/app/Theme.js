@@ -12,7 +12,7 @@ export default {
 
   // Button
   btnFontFamily: (Platform.OS === 'ios' ) ? 'HelveticaNeue' : 'Roboto_medium',
-  btnDisabledBg: '#b5b5b5',
+  btnDisabledBg: 'gray',
   btnDisabledClr: '#f1f1f1',
 
   get btnPrimaryBg () {
@@ -110,7 +110,7 @@ export default {
 
   //FooterTab
   tabBarTextColor: (Platform.OS === 'ios' ) ? '#F8F8F8' : '#F8F8F8',
-  tabBarActiveTextColor: (Platform.OS === 'ios' ) ? '#EE82EE' : '#EE82EE',
+  tabBarActiveTextColor: (Platform.OS === 'ios' ) ? 'gray' : 'gray',
   tabActiveBgColor: (Platform.OS=='ios') ? undefined : undefined,
 
 
