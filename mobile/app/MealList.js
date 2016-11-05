@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   drawer: {
     shadowColor: '#000000', 
     shadowOpacity: 0.3, 
-    shadowRadius: 15
+    shadowRadius: 15,
   }
 });
 
@@ -176,7 +176,7 @@ export default class MealList extends React.Component {
     return (
       <Drawer
         ref="drawer"
-        type="displace"
+        type="overlay"
         content={
           <ControlPanel closeDrawer={this.closeDrawer.bind(this)} />
         }
@@ -197,7 +197,7 @@ export default class MealList extends React.Component {
         tweenDuration={100}
         panThreshold={0.08}
         disabled={this.state.drawerDisabled}
-        openDrawerOffset={() => 150}
+        openDrawerOffset={() => width *.5}
         closedDrawerOffset={() => 0}
         panOpenMask={0.2}
         panCloseMask={0.2}
