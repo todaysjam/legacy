@@ -1,36 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+// import packages
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
-/**
- * Optional Flowtype state and timer types definition
- */
-
-
-export default class ToggleAnimatingActivityIndicator extends Component {
-  /**
-   * Optional Flowtype state and timer types
-   */
-
+// ToggleAnimatingActivityIndicator Component
+export default class ToggleAnimatingActivityIndicator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       animating: true,
     };
-  } // end of constructor
-
-  componentDidRender(){
-    this.setToggleTimeout();
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timer);
-  }
+  } // end constructor
 
   setToggleTimeout() {
     this._timer = setTimeout(() => {
       this.setState({animating: !this.state.animating});
     });
-  }
+  } // end setToggleTimeout
+
+  componentDidRender(){
+    this.setToggleTimeout();
+  } // end componentDidRender
+
+  componentWillUnmount() {
+    clearTimeout(this._timer);
+  } // end componentWillUnmount
 
   render() {
     return (
@@ -39,5 +33,5 @@ export default class ToggleAnimatingActivityIndicator extends Component {
         size="large"
       />
     );
-  } // end of component ToggleAnimatingActivityIndicator definition and export
-}
+  } // end render 
+} // end oggleAnimatingActivityIndicator Component

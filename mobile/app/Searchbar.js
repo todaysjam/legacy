@@ -1,33 +1,18 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Dimensions,
-} from 'react-native';
-import Buttony from './Button'
-const width = Dimensions.get('window').width;
+
+// import packages
+import { View, StyleSheet, TextInput, Dimensions } from 'react-native';
 import { Container, Content, FooterTab, Button, Title } from 'native-base';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    borderBottomWidth: 2,
-    borderColor: 'gray',
-    width: width * 0.9,
-    marginBottom: 5
-  },
-  Button: {
-    backgroundColor: '#1e90ff',
-    marginBottom: 5,
-  }
-});
+// establish constants
+const width = Dimensions.get('window').width;
 
+// Searchbar Component
 export default class Searchbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
-  }
+  } // end constructor
 
   render() {
     return (
@@ -38,7 +23,6 @@ export default class Searchbar extends React.Component {
             underlineColorAndroid="transparent"
             onChangeText={text => this.setState({ text })}
             placeholder="Search..."
-            // value={this.state.text}
           />
         </View>
         <Container >
@@ -56,5 +40,20 @@ export default class Searchbar extends React.Component {
         </Container>
       </View>
     );
+  } // end render
+} // end Searchbar Component
+
+// stylesheet
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderColor: 'gray',
+    width: width * 0.9,
+    marginBottom: 5
+  },
+  Button: {
+    backgroundColor: '#1e90ff',
+    marginBottom: 5,
   }
-}
+}); //end styles

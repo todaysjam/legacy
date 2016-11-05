@@ -1,25 +1,23 @@
-// https://github.com/facebook/react-native/blob/b998e5a7b74905b30b1137a02e14cd5e6f97fccc/Libraries/CustomComponents/Navigator/Navigator.js
 import React from 'react';
+
+// import packages
 import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { Button, Container, Content, Footer, FooterTab, Icon, Header } from 'native-base';
+
+// import components
 import MealList from './MealList';
 import ShoppingList from './ShoppingList';
 import AddMeal from './AddMeal';
 
-import { Button, Container, Content, Footer, FooterTab, Icon, Header } from 'native-base';
 //the css property of the components within Footer FooterTab can't be 
 //set by the props of each single item
 //they are all set throught a Theme file, which is the value of the props.theme of Footer, FooterTab
 import Theme from './Theme';
 
+// establish constants
 const width = Dimensions.get('window').width;
 
-const styles = StyleSheet.create({
-  nothing: {
-    flex: 0,
-    backgroundColor: '#1e90ff'
-  }
-});
-
+// NavBar Component
 export default class NavBar extends React.Component { 
   constructor(props) {
     super(props);
@@ -28,6 +26,7 @@ export default class NavBar extends React.Component {
     };
   } // end constructor
 
+  // for navigation within navBar
   moveTo(navigator, component, index) {
     if (index === 0 ) {
       this.setState({buttonState: [true, false, false]});
@@ -37,7 +36,7 @@ export default class NavBar extends React.Component {
       this.setState({buttonState: [false, false, true]});
     }
     navigator.replace({ component });
-  }
+  } // end moveTo
 
   render() {
     if (this.props.navigator.getCurrentRoutes().length > 1) {
@@ -63,5 +62,13 @@ export default class NavBar extends React.Component {
       );
     }
     return null;
+  } // end render
+} // end NavBar Component
+
+// stylesheet
+const styles = StyleSheet.create({
+  nothing: {
+    flex: 0,
+    backgroundColor: '#1e90ff'
   }
-}
+}); //end styles

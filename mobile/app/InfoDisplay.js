@@ -1,111 +1,27 @@
 import React from 'react';
-import {
-  ScrollView,
-  View,
-  Image,
-  Dimensions,
-  StyleSheet,
-  Text
-} from 'react-native';
+
+// import packages
+import { ScrollView, View, Image, Dimensions, StyleSheet, Text } from 'react-native';
+import Chart from 'react-native-chart';
+
+// import components
 import HeaderDisplay from './HeaderDisplay';
 import Button from './Button';
 import Column from './Column';
 import HeadBuffer from './HeadBuffer';
-import Chart from 'react-native-chart';
 
+// establish constants
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    width: width * 0.9,
-    marginTop: 10,
-  },
-  container: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  picture: {
-    width: width * 0.9,
-    height: 250,
-    opacity: 1,
-    borderRadius: 5,
-    marginTop: 10,
-  },
-  click: { fontSize: 30 },
-  table: {
-    width: width * 0.9,
-    flexDirection: 'column',
-    borderWidth: 2,
-    borderColor: '#1e90ff',
-    borderRadius: 5,
-    padding: 5,
-    marginTop: 10,
-  },
-  nutrition: {
-    width: width * 0.9,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderWidth: 2,
-    borderColor: '#1e90ff',
-    borderRadius: 5,
-    padding: 5,
-    marginTop: 10,
-  },
-  scroller: {
-    marginBottom: 50,
-  },
-  calorieRow: {
-    justifyContent: 'space-between',
-    flexDirection: 'row'
-  },
-  caloriesText: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-  calories: {
-    fontSize: 20,
-  },
-  protein: {
-    color: '#ff6666'
-  },
-  proteinText: {
-    color: '#ff6666',
-    fontWeight: 'bold'
-  },
-  fat: {
-    color: '#669900'
-  },
-  fatText: {
-    color: '#669900',
-    fontWeight: 'bold'
-  },
-  carbs: {
-    color: '#ff9933'
-  },
-  carbsText: {
-    color: '#ff9933',
-    fontWeight: 'bold',
-  },
-  chart: {
-    width: width * 0.7,
-    height: height * 0.35,
-    justifyContent: 'center',
-    padding: 10,
-    marginRight: 25,
-    paddingRight: 25
-  },
-});
-
+// InfoDisplay Component
 export default class InfoDisplay extends React.Component {
   constructor(props) {
     super(props);
-  }
+  } // end constructor
 
   /* eslint-disable no-param-reassign */
+  // grabs nutrition data and compiles into human friendly format
   compileNutrition(data) {
     const result = [];
     data.forEach((item, i) => {
@@ -126,7 +42,7 @@ export default class InfoDisplay extends React.Component {
       item.dailyPercent = dailyPercent;
     });
     return result;
-  }
+  } // end compileNutrition
 
 /* eslint-enable no-param-reassign */
   render() {
@@ -230,8 +146,90 @@ export default class InfoDisplay extends React.Component {
         </ScrollView>
       </View>
     );
-  }
-}
+  } // end render
+} // end InfoDisplay
 
-
-
+// stylesheet
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    width: width * 0.9,
+    marginTop: 10,
+  },
+  container: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  picture: {
+    width: width * 0.9,
+    height: 250,
+    opacity: 1,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  click: { fontSize: 30 },
+  table: {
+    width: width * 0.9,
+    flexDirection: 'column',
+    borderWidth: 2,
+    borderColor: '#1e90ff',
+    borderRadius: 5,
+    padding: 5,
+    marginTop: 10,
+  },
+  nutrition: {
+    width: width * 0.9,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderWidth: 2,
+    borderColor: '#1e90ff',
+    borderRadius: 5,
+    padding: 5,
+    marginTop: 10,
+  },
+  scroller: {
+    marginBottom: 50,
+  },
+  calorieRow: {
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
+  caloriesText: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  calories: {
+    fontSize: 20,
+  },
+  protein: {
+    color: '#ff6666'
+  },
+  proteinText: {
+    color: '#ff6666',
+    fontWeight: 'bold'
+  },
+  fat: {
+    color: '#669900'
+  },
+  fatText: {
+    color: '#669900',
+    fontWeight: 'bold'
+  },
+  carbs: {
+    color: '#ff9933'
+  },
+  carbsText: {
+    color: '#ff9933',
+    fontWeight: 'bold',
+  },
+  chart: {
+    width: width * 0.7,
+    height: height * 0.35,
+    justifyContent: 'center',
+    padding: 10,
+    marginRight: 25,
+    paddingRight: 25
+  },
+}); //end styles

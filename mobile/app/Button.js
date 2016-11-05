@@ -1,8 +1,36 @@
 import React from 'react';
+
+// import packages
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@exponent/vector-icons';
 
-// stylesheet definition
+// Button Component
+const Button = ({ text, icon, onclick }) => { 
+  if(text !== undefined) {
+    return (
+      <TouchableHighlight
+        style={styles.container}
+        onPress={onclick}
+      >
+        <View
+          style={styles.container2}
+          elevation={3}
+        >
+          <Text style={styles.text}> {text} </Text>
+        </View>
+      </TouchableHighlight>
+    )
+  }
+  return (
+      <TouchableHighlight
+        onPress={onclick}
+      >
+       <Ionicons name={icon} size={39} color="white" onPress={onclick} /> 
+      </TouchableHighlight>
+  )
+}; // end Button Component 
+
+// stylesheet
 const styles = StyleSheet.create({
   container: {
     width: 105,
@@ -37,30 +65,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 }); // end styles
-
-const Button = ({ text, icon, onclick }) => { 
-  if(text !== undefined) {
-    return (
-      <TouchableHighlight
-        style={styles.container}
-        onPress={onclick}
-      >
-        <View
-          style={styles.container2}
-          elevation={3}
-        >
-          <Text style={styles.text}> {text} </Text>
-        </View>
-      </TouchableHighlight>
-    )
-  }
-  return (
-      <TouchableHighlight
-        onPress={onclick}
-      >
-       <Ionicons name={icon} size={39} color="white" onPress={onclick} /> 
-      </TouchableHighlight>
-  )
-};
 
 export default Button;
