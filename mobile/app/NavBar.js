@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import packages
-import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, AsyncStorage } from 'react-native';
 import { Button, Container, Content, Footer, FooterTab, Icon, Header } from 'native-base';
 
 // import components
@@ -26,6 +26,18 @@ export default class NavBar extends React.Component {
     };
   } // end constructor
 
+  calorieCounter() {
+    var calor = 0;
+    AsyncStorage.getItem('userId', (err,value) => {
+      AsyncStorage.getItem(value, (err, calorie) => {
+        if(calorie !== null){
+        global._count = JSON.parse(calorie);
+      }
+      global._cals = ('Weekly Calories Consumed: ' + Math.round(calor) + '/' + (global._count || 14000));
+      });
+    });
+  } // end CalorieCounter
+
   // for navigation within navBar
   moveTo(navigator, component, index) {
     if (index === 0 ) {
@@ -35,7 +47,16 @@ export default class NavBar extends React.Component {
     } else if (index === 2 ) {
       this.setState({buttonState: [false, false, true]});
     }
-    navigator.replace({ component });
+    const self = this;
+    AsyncStorage.getItem('userId', (error, userId) => {
+      navigator.replace({ 
+        component: component,
+        passProps: {
+          userId: userId,
+          updateCalories: self.calorieCounter
+        }
+      });
+    });
   } // end moveTo
 
   render() {
